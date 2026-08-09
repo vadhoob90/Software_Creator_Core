@@ -10,11 +10,12 @@ The architecture separates durable Core mechanisms from product-specific policy 
 
 ## Architecture documents
 
-1. [Core and product repository responsibility model](core-product-responsibility-model.md)
-2. [Versioned Core and product repositories](versioned-core-and-product-repositories.md)
-3. [Runtime job-context composition](runtime-job-context-composition.md)
-4. [Persisted job and evidence artifact model](job-and-evidence-artifact-model.md)
-5. [Product repository lifecycle](product-repository-lifecycle.md)
+1. [Supported consumption modes](consumption-modes.md)
+2. [Core and product repository responsibility model](core-product-responsibility-model.md)
+3. [Versioned Core and product repositories](versioned-core-and-product-repositories.md)
+4. [Runtime job-context composition](runtime-job-context-composition.md)
+5. [Persisted job and evidence artifact model](job-and-evidence-artifact-model.md)
+6. [Product repository lifecycle](product-repository-lifecycle.md)
 
 These documents are normative architectural constraints. Commands, file layouts, and schemas labelled **conceptual** describe intended future interfaces; their presence here does not claim that an implementation exists.
 
