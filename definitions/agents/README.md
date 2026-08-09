@@ -7,11 +7,17 @@ PDLC Core agent definitions are versioned, platform-neutral professional baselin
 
 No resolver, router, package, or PDLC Core runtime is required. Consuming a definition establishes provenance for that definition only; it does not show that agent composition, Core controls, lifecycle routing, or the reference harness ran.
 
+## Admission gate
+
+A proposed role must pass the [agent qualification gate](../../docs/agents/agent-qualification-gate.md) before it becomes a canonical PDLC Core agent. The gate requires a recurring accountable outcome, distinguishable expertise, measurable success, explicit boundaries, and retained competence evidence.
+
+Experimental artifacts may be used to learn, but they must not be represented as qualified roles until their qualification record passes every mandatory gate.
+
 ## Available definitions
 
-| Role | Recommended version | Status | Purpose |
+| Role | Published version | Qualification status | Purpose |
 | --- | --- | --- | --- |
-| Implementer | [0.1.0](implementer/v0.1.0.md) | Experimental | Produce understandable, verified changes within explicitly granted authority |
+| Implementer | [0.1.0](implementer/v0.1.0.md) | Experimental; reshape required | Historical first slice that exposed the need to separate the professional baseline from a specific accountable role |
 
 ## Direct consumption
 

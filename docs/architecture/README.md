@@ -79,11 +79,13 @@ Higher-authority layers cannot be replaced by lower-authority layers. Conflicts,
 
 Definitions-only consumption does not imply that this resolution occurred. It establishes the provenance of the consumed definition and nothing broader.
 
-## First consumable vertical slice
+## First qualified agent vertical slice
 
-The first implementation should prove the smallest supported consumption mode: one versioned, platform-neutral `implementer` baseline definition.
+The first canonical agent must prove the smallest supported consumption mode with a role that passes the [agent qualification gate](../agents/agent-qualification-gate.md).
 
-It must state its purpose, responsibilities, boundaries, authority, expected inputs and outputs, evidence expectations, and applicable standards references. It must carry an immutable version and provenance, and a downstream product must be able to consume it without installing a resolver or harness. Its use may claim provenance for that definition only; it must not imply that agent composition, controls, routing, or lifecycle execution occurred.
+The experimental `implementer` version `0.1.0` is retained as a learning artifact, not a qualified role. It showed that generic professional behaviour, a workflow phase, and a specific team responsibility must not be collapsed into one agent definition.
+
+A qualifying replacement must own a recurring, bounded outcome; require distinguishable expertise; define measurable success and independent evaluation; carry immutable version and provenance; and remain consumable without installing a resolver or harness. Its use may claim provenance for that definition only and must not imply that composition, controls, routing, or lifecycle execution occurred.
 
 ## Non-goals
 
