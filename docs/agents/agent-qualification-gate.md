@@ -100,6 +100,8 @@ Generic qualities such as being careful, secure, readable, evidence-led, or coll
 
 Words such as “expert,” “senior,” or “experienced” are not evidence. A definition may claim only the competence supported by its evaluations.
 
+The evidence must be produced under the [agent evaluation and qualification protocol](agent-evaluation-and-qualification-protocol.md).
+
 ### AQ-07: Measurable-success test
 
 **Question:** Can the role's success be assessed through observable outcome quality and boundary compliance?
@@ -143,6 +145,8 @@ An agent must not gain authority to approve its own elevated or critical work me
 ## Demonstrable experience
 
 For an agent, experience is an evidence claim rather than a biography. A resolved agent demonstrates experience when it repeatedly succeeds on representative, versioned cases that exercise the role's real decisions, boundaries, and failure modes.
+
+The [agent evaluation and qualification protocol](agent-evaluation-and-qualification-protocol.md) defines how those cases are separated, executed, assessed, compared, and published.
 
 Competence evidence must identify:
 

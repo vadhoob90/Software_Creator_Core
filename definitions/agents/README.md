@@ -9,7 +9,7 @@ No resolver, router, package, or PDLC Core runtime is required. Consuming a defi
 
 ## Admission gate
 
-A proposed role must pass the [agent qualification gate](../../docs/agents/agent-qualification-gate.md) before it becomes a canonical PDLC Core agent. The gate requires a recurring accountable outcome, distinguishable expertise, measurable success, explicit boundaries, and retained competence evidence.
+A proposed role must pass the [agent qualification gate](../../docs/agents/agent-qualification-gate.md) before it becomes a canonical PDLC Core agent. The gate requires a recurring accountable outcome, distinguishable expertise, measurable success, explicit boundaries, and retained competence evidence. Any competence or experience claim must then be demonstrated for an exact agent build under the [agent evaluation and qualification protocol](../../docs/agents/agent-evaluation-and-qualification-protocol.md).
 
 Experimental artifacts may be used to learn, but they must not be represented as qualified roles until their qualification record passes every mandatory gate.
 
