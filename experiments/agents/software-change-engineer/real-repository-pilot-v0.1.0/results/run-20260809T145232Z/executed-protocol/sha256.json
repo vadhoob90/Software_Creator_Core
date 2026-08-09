@@ -1,0 +1,9 @@
+{
+  "condition-a.md": "d85985127ea62f46052bcede268fe60cbf2e71610d8dcfda2dcbab487ff06c92",
+  "condition-b.md": "274bdc5cf3d956d30d64303a80a758ebf9f323bcaca712cfd7822f01e94f638a",
+  "evaluate_pilot.py": "325a8c6d26158f1db8679dc1838326aed1b9332712f04e70d3362ebe54c88d43",
+  "experiment.json": "196e79a21a5ce33f8872ff9dcfbd33b64d9179fc469d5921dc0bf74f19a68ebf",
+  "handoff.schema.json": "75f4fe7e41186f46e9b38d1a74f7425943f1ef0bbcbe845b7c1d34f51b36c9e5",
+  "run_pilot.py": "9dd7537877358fda19033533598a7110b7837f5514662abbfb62255f4ebd9583",
+  "task.md": "0c44c1cd14328b442dd24217ada25ce5c9bebf160410809ac54e2e7b106b8c63"
+}

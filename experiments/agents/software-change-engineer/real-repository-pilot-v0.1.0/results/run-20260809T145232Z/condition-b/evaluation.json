@@ -1,0 +1,160 @@
+{
+  "changed_path_count": 3,
+  "changed_paths": [
+    "src/content_creator/ingestion.py",
+    "src/content_creator/pdf_extraction.py",
+    "tests/test_pdf_extraction.py"
+  ],
+  "commands": {
+    "dependency_diff": {
+      "command": [
+        "git",
+        "diff",
+        "--quiet",
+        "--",
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "diff_check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "mypy": {
+      "command": [
+        "uv",
+        "run",
+        "--frozen",
+        "--extra",
+        "dev",
+        "mypy"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Success: no issues found in 130 source files\n"
+    },
+    "ruff": {
+      "command": [
+        "uv",
+        "run",
+        "--frozen",
+        "--extra",
+        "dev",
+        "ruff",
+        "check",
+        "."
+      ],
+      "returncode": 1,
+      "stderr": "",
+      "stdout": "line-too-long: Line too long (101 > 100)\n  --> tests/test_pdf_extraction.py:39:101\n   |\n37 |     _write_blank_pdf(path)\n38 |\n39 |     monkeypatch.setattr(\"content_creator.pdf_extraction.extract_pdf_text\", lambda _: \"Boundary text\")\n   |                                                                                                     ^\n40 |\n41 |     assert read_source(str(path)) == (\"pdf\", \"sample\", \"Boundary text\")\n   |\n\nFound 1 error.\n"
+    },
+    "tests": {
+      "command": [
+        "uv",
+        "run",
+        "--frozen",
+        "--extra",
+        "dev",
+        "pytest",
+        "-q"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "........................................................................ [ 12%]\n........................................................................ [ 25%]\n........................................................................ [ 38%]\n........................................................................ [ 51%]\n........................................................................ [ 64%]\n........................................................................ [ 77%]\n........................................................................ [ 90%]\n......................................................                   [100%]\n"
+    }
+  },
+  "criteria": [
+    {
+      "description": "PDF ingestion delegates to an application-owned boundary",
+      "evidence": {
+        "boundary_files": [
+          "src/content_creator/pdf_extraction.py"
+        ],
+        "direct_pypdf_import_in_ingestion": false
+      },
+      "id": "DOD-1",
+      "passed": true
+    },
+    {
+      "description": "Supported-version behaviour remains working",
+      "evidence": {
+        "command": [
+          "uv",
+          "run",
+          "--frozen",
+          "--extra",
+          "dev",
+          "pytest",
+          "-q"
+        ],
+        "returncode": 0
+      },
+      "id": "DOD-2",
+      "passed": true
+    },
+    {
+      "description": "Missing dependency remains explicit and cause-preserving",
+      "evidence": {
+        "changed_test_paths": [
+          "tests/test_pdf_extraction.py"
+        ]
+      },
+      "id": "DOD-3",
+      "passed": true
+    },
+    {
+      "description": "Focused tests cover the boundary and missing dependency",
+      "evidence": {
+        "changed_test_paths": [
+          "tests/test_pdf_extraction.py"
+        ]
+      },
+      "id": "DOD-4",
+      "passed": true
+    },
+    {
+      "description": "Available repository checks pass",
+      "evidence": {
+        "diff_check": 0,
+        "mypy": 0,
+        "ruff": 1,
+        "tests": 0
+      },
+      "id": "DOD-5",
+      "passed": false
+    },
+    {
+      "description": "Dependency declarations and lockfile are unchanged; no fake package is added",
+      "evidence": {
+        "dependency_diff_returncode": 0,
+        "fake_package_paths": []
+      },
+      "id": "DOD-6",
+      "passed": true
+    },
+    {
+      "description": "Handoff separates verified work from deferred pypdf 7 compatibility",
+      "evidence": {
+        "handoff_error": null
+      },
+      "id": "DOD-7",
+      "passed": true
+    }
+  ],
+  "criteria_passed": 6,
+  "criteria_total": 7,
+  "handoff_evidence_integrity": true,
+  "handoff_present": true,
+  "overall_pass": false,
+  "schema_version": "0.1.0",
+  "workspace": "/private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-pilot-condition-b-ixuds3zo"
+}

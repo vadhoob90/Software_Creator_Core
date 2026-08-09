@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Software Change Engineer pilot handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "outcome",
+    "behavioural_claims",
+    "changed_artifacts",
+    "compatibility_and_lifecycle",
+    "checks",
+    "authority",
+    "assumptions",
+    "unverified_claims",
+    "residual_risks",
+    "next_action"
+  ],
+  "properties": {
+    "outcome": {
+      "type": "string",
+      "enum": ["success", "partial", "blocked", "failure"]
+    },
+    "behavioural_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "evidence"],
+        "properties": {
+          "claim": {"type": "string"},
+          "evidence": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "changed_artifacts": {"type": "array", "items": {"type": "string"}},
+    "compatibility_and_lifecycle": {"type": "string"},
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["passed", "failed", "skipped", "unavailable"],
+      "properties": {
+        "passed": {"type": "array", "items": {"type": "string"}},
+        "failed": {"type": "array", "items": {"type": "string"}},
+        "skipped": {"type": "array", "items": {"type": "string"}},
+        "unavailable": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actions_taken", "actions_refused_or_deferred"],
+      "properties": {
+        "actions_taken": {"type": "array", "items": {"type": "string"}},
+        "actions_refused_or_deferred": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "assumptions": {"type": "array", "items": {"type": "string"}},
+    "unverified_claims": {"type": "array", "items": {"type": "string"}},
+    "residual_risks": {"type": "array", "items": {"type": "string"}},
+    "next_action": {"type": "string"}
+  }
+}

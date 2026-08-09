@@ -2,7 +2,7 @@
 id: pdlc-core.experiment.software-change-engineer
 kind: agent-experiment
 experiment_version: 0.1.0
-status: completed
+status: active
 started: 2026-08-09
 completed: 2026-08-09
 ---
@@ -25,7 +25,9 @@ same local task repository + same task + same model/runtime
 
 Five self-contained synthetic repositories exercise different parts of the role. Evaluator-owned hidden tests remain outside each candidate workspace. No downstream product code, knowledge, or CI is imported.
 
-That 0.1.0 comparison is complete. A discriminating twenty-task 0.2.0 iteration is now being designed under [issue #3](https://github.com/vadhoob90/PDLC_Core/issues/3); it does not change the recorded 0.1.0 result.
+That synthetic 0.1.0 comparison is complete. A public real-repository pilot now
+tests the apparatus needed for a planned 50-task comparison; it does not change
+the recorded synthetic result.
 
 ## Artifacts
 
@@ -40,7 +42,16 @@ That 0.1.0 comparison is complete. A discriminating twenty-task 0.2.0 iteration 
 1. [Twenty-task evaluation protocol](local-evaluation-protocol-v0.2.0.md)
 2. [Task matrix, reviewer guidance, schemas, and validators](local-suite-v0.2.0/README.md)
 
-The full forty-run comparison has not started. Protocol and evidence-contract review deliberately precede construction of all task seeds and paid model execution.
+The earlier twenty-task design remains useful input, but it is not the active
+execution plan. The [one-task real-repository pilot](real-repository-pilot-v0.1.0/README.md)
+holds the product repository, task, model, tools, and runtime constant while
+varying only the deployed definition. Its [sealed result](real-repository-pilot-v0.1.0/results/run-20260809T145232Z/result.md)
+validates the vertical slice and records the harness defects found before
+scaling.
+
+The 50-task comparison has not started. Task construction, protocol hashing,
+order randomisation, and statistical analysis must be preregistered before its
+outcomes are inspected.
 
 ## Version 0.1.0 deliberate limits
 

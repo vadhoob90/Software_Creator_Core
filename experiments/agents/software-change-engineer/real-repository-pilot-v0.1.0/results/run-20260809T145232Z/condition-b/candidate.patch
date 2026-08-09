@@ -1,0 +1,157 @@
+diff --git a/src/content_creator/ingestion.py b/src/content_creator/ingestion.py
+index c6e63b4..4d5318e 100644
+--- a/src/content_creator/ingestion.py
++++ b/src/content_creator/ingestion.py
+@@ -89,22 +89,23 @@ def _docx_text(path: Path) -> str:
+ 
+ 
+ def _pdf_text(path: Path) -> str:
+-    """Return the pdf text.
++    """Extract text through the application-owned PDF boundary.
+ 
+     Args:
+-        path (Path): The filesystem path to inspect or update.
++        path (Path): The PDF file to extract.
+ 
+     Returns:
+-        str: The resulting text for pdf text.
++        str: The normalised extracted text.
+ 
+     Raises:
+-        IngestionError: If the ingestion operation cannot complete.
++        IngestionError: If PDF extraction cannot complete.
+     """
++    from .pdf_extraction import PdfExtractionError, extract_pdf_text
++
+     try:
+-        from pypdf import PdfReader
+-    except ImportError as exc:
+-        raise IngestionError("PDF support requires the pypdf dependency") from exc
+-    return normalize_text("\n\n".join(page.extract_text() or "" for page in PdfReader(path).pages))
++        return extract_pdf_text(path)
++    except PdfExtractionError as exc:
++        raise IngestionError(str(exc)) from exc
+ 
+ 
+ def read_source(locator: str) -> Tuple[str, str, str]:
+diff --git a/src/content_creator/pdf_extraction.py b/src/content_creator/pdf_extraction.py
+new file mode 100644
+index 0000000..4660805
+--- /dev/null
++++ b/src/content_creator/pdf_extraction.py
+@@ -0,0 +1,48 @@
++"""Provide the application-owned boundary for PDF text extraction."""
++
++from __future__ import annotations
++
++import html
++import re
++from pathlib import Path
++
++
++class PdfExtractionError(RuntimeError):
++    """Report PDF extraction failures."""
++
++
++def _normalize_text(value: str) -> str:
++    """Return normalised extracted PDF text.
++
++    Args:
++        value (str): The extracted PDF text.
++
++    Returns:
++        str: The normalised text.
++    """
++    value = html.unescape(value)
++    value = value.replace("\r\n", "\n").replace("\r", "\n")
++    lines = [re.sub(r"[^\S\n]+", " ", line).strip() for line in value.splitlines()]
++    value = "\n".join(lines)
++    value = re.sub(r"\n{3,}", "\n\n", value)
++    return value.strip()
++
++
++def extract_pdf_text(path: Path) -> str:
++    """Extract normalised text from a PDF in document page order.
++
++    Args:
++        path (Path): The PDF file to extract.
++
++    Returns:
++        str: Normalised text ordered by document page.
++
++    Raises:
++        PdfExtractionError: If the optional PDF dependency is unavailable.
++    """
++    try:
++        from pypdf import PdfReader
++    except ImportError as exc:
++        raise PdfExtractionError("PDF support requires the pypdf dependency") from exc
++
++    return _normalize_text("\n\n".join(page.extract_text() or "" for page in PdfReader(path).pages))
+diff --git a/tests/test_pdf_extraction.py b/tests/test_pdf_extraction.py
+new file mode 100644
+index 0000000..d01aa4d
+--- /dev/null
++++ b/tests/test_pdf_extraction.py
+@@ -0,0 +1,61 @@
++"""Tests for the application-owned PDF extraction boundary."""
++
++import builtins
++
++import pytest
++from pypdf import PdfWriter
++
++from content_creator.ingestion import IngestionError, read_source
++from content_creator.pdf_extraction import PdfExtractionError, extract_pdf_text
++
++
++def _write_blank_pdf(path):
++    writer = PdfWriter()
++    writer.add_blank_page(width=300, height=300)
++    writer.add_blank_page(width=300, height=300)
++    with path.open("wb") as handle:
++        writer.write(handle)
++
++
++def test_pdf_extraction_boundary_normalizes_page_text_in_order(tmp_path, monkeypatch):
++    path = tmp_path / "sample.pdf"
++    _write_blank_pdf(path)
++
++    class Reader:
++        pages = [
++            type("Page", (), {"extract_text": lambda self: " First  page\r\n"})(),
++            type("Page", (), {"extract_text": lambda self: "\nSecond\tpage "})(),
++        ]
++
++    monkeypatch.setattr("pypdf.PdfReader", lambda _: Reader())
++
++    assert extract_pdf_text(path) == "First page\n\nSecond page"
++
++
++def test_pdf_ingestion_delegates_to_application_boundary(tmp_path, monkeypatch):
++    path = tmp_path / "sample.pdf"
++    _write_blank_pdf(path)
++
++    monkeypatch.setattr("content_creator.pdf_extraction.extract_pdf_text", lambda _: "Boundary text")
++
++    assert read_source(str(path)) == ("pdf", "sample", "Boundary text")
++
++
++def test_pdf_extraction_reports_missing_dependency_with_original_cause(tmp_path, monkeypatch):
++    path = tmp_path / "sample.pdf"
++    _write_blank_pdf(path)
++    original_import = builtins.__import__
++
++    def missing_pypdf(name, *args, **kwargs):
++        if name == "pypdf":
++            raise ImportError("pypdf is unavailable")
++        return original_import(name, *args, **kwargs)
++
++    monkeypatch.setattr(builtins, "__import__", missing_pypdf)
++
++    with pytest.raises(IngestionError, match="PDF support requires the pypdf dependency") as raised:
++        read_source(str(path))
++
++    assert isinstance(raised.value.__cause__, PdfExtractionError)
++    assert isinstance(raised.value.__cause__.__cause__, ImportError)
++    assert str(raised.value.__cause__.__cause__) == "pypdf is unavailable"

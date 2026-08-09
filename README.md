@@ -16,4 +16,4 @@ Shared definitions, composition contracts, controls, and optional execution harn
 
 ## Experiments
 
-- [Software Change Engineer specification experiment](experiments/agents/software-change-engineer/README.md) — an initial five-task comparison plus an in-progress twenty-task protocol for testing definition efficacy on a pinned model/runtime.
+- [Software Change Engineer specification experiment](experiments/agents/software-change-engineer/README.md) — an initial synthetic comparison and a completed one-task public-repository pilot preparing a preregistered 50-task definition-efficacy study.

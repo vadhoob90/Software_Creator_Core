@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1.0",
+  "experiment_id": "software-change-engineer-real-repository-pilot-v0.1.0",
+  "locked_at": "2026-08-09T14:51:32Z",
+  "source_repository": "https://github.com/vadhoob90/Content_Creator_Core",
+  "source_commit": "b58cd8f7e2f51dd85d933f5bb25c569b6cb57184",
+  "task": {
+    "id": "LSE-119",
+    "path": "tasks/LSE-119.md",
+    "sha256": "0c44c1cd14328b442dd24217ada25ce5c9bebf160410809ac54e2e7b106b8c63"
+  },
+  "handoff_schema_sha256": "75f4fe7e41186f46e9b38d1a74f7425943f1ef0bbcbe845b7c1d34f51b36c9e5",
+  "runtime": {
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "none",
+    "codex_version": "codex-cli 0.147.0-alpha.1.2",
+    "uv_version": "uv 0.11.29 (901092ee1 2026-07-15 aarch64-apple-darwin)",
+    "git_version": "git version 2.50.1 (Apple Git-155)",
+    "sandbox": "workspace-write",
+    "approval_policy": "never",
+    "ephemeral": true,
+    "ignore_user_config": true,
+    "timeout_seconds": 1800,
+    "provision_command": ["uv", "sync", "--frozen", "--extra", "dev"]
+  },
+  "conditions": [
+    {
+      "id": "condition-a",
+      "repository": "https://github.com/vadhoob90/PDLC-Agent-Experiment-A",
+      "repository_commit": "b83a7a15553a814ce2174ece49e1eca544231505",
+      "issue": "https://github.com/vadhoob90/PDLC-Agent-Experiment-A/issues/1",
+      "definition_sha256": "d85985127ea62f46052bcede268fe60cbf2e71610d8dcfda2dcbab487ff06c92"
+    },
+    {
+      "id": "condition-b",
+      "repository": "https://github.com/vadhoob90/PDLC-Agent-Experiment-B",
+      "repository_commit": "103b5b39eb180daaeb6b1ecf09df6ea86f834f8e",
+      "issue": "https://github.com/vadhoob90/PDLC-Agent-Experiment-B/issues/1",
+      "definition_sha256": "274bdc5cf3d956d30d64303a80a758ebf9f323bcaca712cfd7822f01e94f638a"
+    }
+  ],
+  "execution_order": ["condition-a", "condition-b"],
+  "primary_measure": "deterministic_definition_of_done_pass",
+  "secondary_measures": [
+    "criteria_pass_count",
+    "handoff_evidence_integrity",
+    "changed_line_count",
+    "elapsed_seconds",
+    "tool_call_count",
+    "runtime_reported_tokens"
+  ]
+}

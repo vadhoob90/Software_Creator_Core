@@ -1,0 +1,2 @@
+# Patch evidence intentionally contains diff markers on otherwise blank lines.
+*.patch -whitespace
