@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/branding/pdlc-core-banner-v2.png" alt="PDLC Core — conversation forged into production-grade software" width="100%">
+</p>
+
 # PDLC Core
 
 Shared definitions, composition contracts, controls, and optional execution harnesses for building trustworthy products.
