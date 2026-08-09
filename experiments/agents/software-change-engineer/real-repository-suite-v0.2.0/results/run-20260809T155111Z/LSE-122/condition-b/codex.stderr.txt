@@ -1,4 +1,0 @@
-2026-08-09T15:59:12.464128Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
-2026-08-09T15:59:12.464351Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
-2026-08-09T15:59:12.464558Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
-2026-08-09T15:59:52.969112Z ERROR codex_core::tools::router: error=patch rejected: writing outside of the project; rejected by user approval settings

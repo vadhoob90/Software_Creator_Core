@@ -1,3 +1,0 @@
-9	8	src/content_creator/ingestion.py
-48	0	src/content_creator/pdf_extraction.py
-61	0	tests/test_pdf_extraction.py

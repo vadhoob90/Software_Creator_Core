@@ -240,14 +240,3 @@ Requalification is required when a change materially alters:
 Editorial clarification that cannot change interpretation may retain the existing qualification decision. The rationale must be recorded.
 
 When a role no longer qualifies, stop recommending it for new adoption. Preserve its historical version and evidence, identify the replacement or reshaping decision, and follow [ES-004](../standards/ES-004-deliberate-compatible-reversible-evolution.md) for deprecation and removal.
-
-## Application to `implementer` 0.1.0
-
-The experimental [`implementer` 0.1.0](../../definitions/agents/implementer/v0.1.0.md) receives **reshape**.
-
-- Much of its authority, evidence, safety, failure, and lifecycle content applies to every engineering agent and belongs in a professional baseline.
-- “Implementing” describes a broad lifecycle activity rather than one sufficiently bounded accountable outcome.
-- The definition does not yet identify distinguishable role expertise or a role-specific evaluation suite demonstrating competence.
-- Success cannot be isolated cleanly from architecture, product decisions, independent verification, approval, and release responsibilities.
-
-The artifact remains available as historical evidence of the learning. It must not be silently rewritten or represented as a qualified canonical role. A future candidate must pass this gate on its own evidence.

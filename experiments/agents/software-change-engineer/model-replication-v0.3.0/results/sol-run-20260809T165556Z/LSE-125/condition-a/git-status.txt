@@ -1,2 +1,0 @@
- M rich/measure.py
- M tests/test_measure.py

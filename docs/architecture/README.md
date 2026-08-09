@@ -83,9 +83,15 @@ Definitions-only consumption does not imply that this resolution occurred. It es
 
 The first canonical agent must prove the smallest supported consumption mode with a role that passes the [agent qualification gate](../agents/agent-qualification-gate.md) and an exact build evaluated under the [agent evaluation and qualification protocol](../agents/agent-evaluation-and-qualification-protocol.md).
 
-The experimental `implementer` version `0.1.0` is retained as a learning artifact, not a qualified role. It showed that generic professional behaviour, a workflow phase, and a specific team responsibility must not be collapsed into one agent definition.
-
-A qualifying replacement must own a recurring, bounded outcome; require distinguishable expertise; define measurable success and independent evaluation; carry immutable version and provenance; and remain consumable without installing a resolver or harness. Any published competence result belongs to the exact evaluated build and does not transfer to a definitions-only consumer. Use of the definition may claim its provenance only and must not imply that composition, controls, routing, lifecycle execution, or reference-build qualification occurred.
+PDLC Core does not yet publish a qualified agent definition. The first
+candidate must own a recurring, bounded outcome; require distinguishable
+expertise; define measurable success and independent evaluation; carry
+immutable version and provenance; and remain consumable without installing a
+resolver or harness. Any published competence result belongs to the exact
+evaluated build and does not transfer to a definitions-only consumer. Use of
+the definition may claim its provenance only and must not imply that
+composition, controls, routing, lifecycle execution, or reference-build
+qualification occurred.
 
 ## Non-goals
 

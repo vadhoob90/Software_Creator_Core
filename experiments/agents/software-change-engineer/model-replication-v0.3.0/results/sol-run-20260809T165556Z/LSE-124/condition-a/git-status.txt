@@ -1,2 +1,0 @@
- M rich/filesize.py
- M tests/test_filesize.py

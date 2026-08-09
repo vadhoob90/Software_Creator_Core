@@ -1,5 +1,0 @@
-2026-08-09T16:07:08.316699Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
-2026-08-09T16:07:08.316880Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
-2026-08-09T16:07:08.317102Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
-2026-08-09T16:07:49.185775Z ERROR codex_core::tools::router: error=patch rejected: writing outside of the project; rejected by user approval settings
-2026-08-09T16:08:13.638704Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (1/5 in 218ms)... turn_id=019fe747-2942-7972-a0ce-fe8ae7ba3e66 retries=1 max_retries=5 sampling_error=stream disconnected before completion: WebSocket protocol error: Connection reset without closing handshake

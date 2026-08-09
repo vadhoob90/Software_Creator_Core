@@ -1,4 +1,0 @@
-4	12	src/content_creator/ingestion.py
-9	0	src/content_creator/ingestion_errors.py
-29	0	src/content_creator/pdf_extraction.py
-28	0	tests/test_ingestion_attribution.py
