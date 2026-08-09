@@ -16,4 +16,4 @@ Shared definitions, composition contracts, controls, and optional execution harn
 
 ## Experiments
 
-- [Software Change Engineer specification experiment](experiments/agents/software-change-engineer/README.md) — five controlled local tasks comparing a credible basic definition with the detailed role on one pinned model/runtime.
+- [Software Change Engineer specification experiment](experiments/agents/software-change-engineer/README.md) — an initial five-task comparison plus an in-progress twenty-task protocol for testing definition efficacy on a pinned model/runtime.
