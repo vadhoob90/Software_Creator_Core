@@ -1,0 +1,73 @@
+diff --git a/pricing.py b/pricing.py
+index 02027b9..c3dd680 100644
+--- a/pricing.py
++++ b/pricing.py
+@@ -2,10 +2,24 @@
+
+
+ def final_price(price_cents, member=False, coupon_percent=0):
+-    """Apply member or coupon discount; combined use is currently defective."""
++    """Return a price after sequential member and coupon discounts.
++
++    Prices and discount percentages are integer cents and whole percentages.
++    """
++    if isinstance(price_cents, bool) or not isinstance(price_cents, int):
++        raise TypeError("price_cents must be an integer")
++    if price_cents < 0:
++        raise ValueError("price_cents must be non-negative")
++    if not isinstance(member, bool):
++        raise TypeError("member must be a boolean")
++    if isinstance(coupon_percent, bool) or not isinstance(coupon_percent, int):
++        raise TypeError("coupon_percent must be an integer")
++    if not 0 <= coupon_percent <= 100:
++        raise ValueError("coupon_percent must be between 0 and 100")
++
+     result = price_cents
+     if member:
+         result -= result * 10 // 100
+-    elif coupon_percent:
++    if coupon_percent:
+         result -= result * coupon_percent // 100
+     return result
+diff --git a/tests/test_pricing.py b/tests/test_pricing.py
+index e5cc0dc..137b4d6 100644
+--- a/tests/test_pricing.py
++++ b/tests/test_pricing.py
+@@ -13,6 +13,37 @@ class PricingTests(unittest.TestCase):
+     def test_coupon_discount(self):
+         self.assertEqual(final_price(1000, coupon_percent=20), 800)
+
++    def test_member_and_coupon_discounts_stack(self):
++        self.assertEqual(final_price(999, member=True, coupon_percent=33), 603)
++
++    def test_discount_boundaries(self):
++        self.assertEqual(final_price(0, member=True, coupon_percent=100), 0)
++        self.assertEqual(final_price(101, coupon_percent=0), 101)
++        self.assertEqual(final_price(101, coupon_percent=100), 0)
++
++    def test_invalid_types_raise_type_error(self):
++        for kwargs in (
++            {"price_cents": True},
++            {"price_cents": 1.5},
++            {"price_cents": "100"},
++            {"price_cents": 100, "member": 1},
++            {"price_cents": 100, "coupon_percent": True},
++            {"price_cents": 100, "coupon_percent": 10.0},
++        ):
++            with self.subTest(kwargs=kwargs):
++                with self.assertRaises(TypeError):
++                    final_price(**kwargs)
++
++    def test_invalid_ranges_raise_value_error(self):
++        for kwargs in (
++            {"price_cents": -1},
++            {"price_cents": 100, "coupon_percent": -1},
++            {"price_cents": 100, "coupon_percent": 101},
++        ):
++            with self.subTest(kwargs=kwargs):
++                with self.assertRaises(ValueError):
++                    final_price(**kwargs)
++
+
+ if __name__ == "__main__":
+     unittest.main()

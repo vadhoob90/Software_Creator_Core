@@ -1,0 +1,67 @@
+diff --git a/priority.py b/priority.py
+index c9677c7..b4727c1 100644
+--- a/priority.py
++++ b/priority.py
+@@ -2,8 +2,27 @@
+
+
+ def parse_priority(record):
+-    """Return a priority, currently defaulting malformed data silently."""
+-    try:
+-        return int(record.get("priority", 0))
+-    except (TypeError, ValueError):
++    """Return a validated priority, defaulting only when it is absent."""
++    if "priority" not in record:
+         return 0
++
++    value = record["priority"]
++    if isinstance(value, bool):
++        raise ValueError("priority must be an integer from 0 through 5")
++
++    if isinstance(value, int):
++        priority = value
++    elif isinstance(value, str):
++        try:
++            priority = int(value, 10)
++        except ValueError as exc:
++            raise ValueError(
++                "priority must be an integer from 0 through 5"
++            ) from exc
++    else:
++        raise ValueError("priority must be an integer from 0 through 5")
++
++    if not 0 <= priority <= 5:
++        raise ValueError("priority must be an integer from 0 through 5")
++
++    return priority
+diff --git a/tests/test_priority.py b/tests/test_priority.py
+index 8cd8749..9c4f667 100644
+--- a/tests/test_priority.py
++++ b/tests/test_priority.py
+@@ -10,6 +10,26 @@ class PriorityTests(unittest.TestCase):
+     def test_integer_string_is_accepted(self):
+         self.assertEqual(parse_priority({"priority": "3"}), 3)
+
++    def test_integer_values_at_bounds_are_accepted(self):
++        self.assertEqual(parse_priority({"priority": 0}), 0)
++        self.assertEqual(parse_priority({"priority": 5}), 5)
++
++    def test_decimal_integer_strings_at_bounds_are_accepted(self):
++        self.assertEqual(parse_priority({"priority": "0"}), 0)
++        self.assertEqual(parse_priority({"priority": "5"}), 5)
++
++    def test_present_invalid_values_raise_value_error(self):
++        for value in (True, False, "", " ", "3.5", 3.5, None, -1, 6, "-1", "6"):
++            with self.subTest(value=value):
++                with self.assertRaises(ValueError):
++                    parse_priority({"priority": value})
++
++    def test_conversion_error_is_preserved_as_cause(self):
++        with self.assertRaises(ValueError) as raised:
++            parse_priority({"priority": "not-a-number"})
++
++        self.assertIsInstance(raised.exception.__cause__, ValueError)
++
+
+ if __name__ == "__main__":
+     unittest.main()

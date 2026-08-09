@@ -1,0 +1,102 @@
+diff --git a/profile_store.py b/profile_store.py
+index a8362cd..25061c5 100644
+--- a/profile_store.py
++++ b/profile_store.py
+@@ -22,3 +22,24 @@ class ProfileStore:
+             return self._profiles[profile_id].copy()
+         except KeyError:
+             raise KeyError(f"unknown profile: {profile_id}") from None
++
++    def update_profile(self, profile_id, **changes):
++        """Update a profile's mutable fields and return a copy of it."""
++        allowed_fields = {"name", "email"}
++        if not changes:
++            raise ValueError("at least one change is required")
++
++        unknown_fields = set(changes) - allowed_fields
++        if unknown_fields:
++            raise ValueError("unknown profile fields")
++
++        if any(not isinstance(value, str) or not value.strip() for value in changes.values()):
++            raise ValueError("profile fields must be non-empty strings")
++
++        try:
++            profile = self._profiles[profile_id]
++        except KeyError:
++            raise KeyError(f"unknown profile: {profile_id}") from None
++
++        profile.update(changes)
++        return profile.copy()
+diff --git a/tests/test_profile_store.py b/tests/test_profile_store.py
+index 8be06cd..0d31e91 100644
+--- a/tests/test_profile_store.py
++++ b/tests/test_profile_store.py
+@@ -10,6 +10,68 @@ class ProfileStoreTests(unittest.TestCase):
+         created["name"] = "mutated"
+         self.assertEqual(store.get_profile("p-1")["name"], "Ada")
+
++    def test_update_allows_independent_partial_updates(self):
++        store = ProfileStore()
++        store.create_profile("p-1", "Ada", "ada@example.test", "2026-01-02T03:04:05Z")
++
++        updated_name = store.update_profile("p-1", name="Grace")
++        self.assertEqual(updated_name["name"], "Grace")
++        self.assertEqual(updated_name["email"], "ada@example.test")
++
++        updated_email = store.update_profile("p-1", email="grace@example.test")
++        self.assertEqual(updated_email["name"], "Grace")
++        self.assertEqual(updated_email["email"], "grace@example.test")
++
++    def test_update_preserves_identity_and_returns_a_copy(self):
++        store = ProfileStore()
++        created = store.create_profile("p-1", "Ada", "ada@example.test", "2026-01-02T03:04:05Z")
++
++        updated = store.update_profile("p-1", name="Grace")
++
++        self.assertEqual(updated["profile_id"], created["profile_id"])
++        self.assertEqual(updated["created_at"], created["created_at"])
++        updated["email"] = "mutated@example.test"
++        self.assertEqual(store.get_profile("p-1")["email"], "ada@example.test")
++
++    def test_update_unknown_profile_raises_key_error(self):
++        store = ProfileStore()
++
++        with self.assertRaisesRegex(KeyError, "unknown profile: missing"):
++            store.update_profile("missing", name="Ada")
++
++    def test_update_rejects_invalid_changes(self):
++        store = ProfileStore()
++        store.create_profile("p-1", "Ada", "ada@example.test", "2026-01-02T03:04:05Z")
++
++        invalid_changes = (
++            {},
++            {"nickname": "A"},
++            {"name": ""},
++            {"name": "   "},
++            {"email": None},
++        )
++        for changes in invalid_changes:
++            with self.subTest(changes=changes):
++                with self.assertRaises(ValueError):
++                    store.update_profile("p-1", **changes)
++
++    def test_invalid_update_is_atomic(self):
++        store = ProfileStore()
++        store.create_profile("p-1", "Ada", "ada@example.test", "2026-01-02T03:04:05Z")
++
++        with self.assertRaises(ValueError):
++            store.update_profile("p-1", name="Grace", email="")
++
++        self.assertEqual(
++            store.get_profile("p-1"),
++            {
++                "profile_id": "p-1",
++                "name": "Ada",
++                "email": "ada@example.test",
++                "created_at": "2026-01-02T03:04:05Z",
++            },
++        )
++
+
+ if __name__ == "__main__":
+     unittest.main()

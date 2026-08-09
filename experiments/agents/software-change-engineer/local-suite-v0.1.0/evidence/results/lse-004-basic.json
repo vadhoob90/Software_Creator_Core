@@ -1,0 +1,67 @@
+{
+  "candidate_repository": "isolated-local-repository",
+  "changed_paths": [
+    "profile_store.py",
+    "tests/test_profile_store.py"
+  ],
+  "checks": {
+    "candidate_tests_changed": true,
+    "candidate_tests_required": true,
+    "diff_check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "passed": true
+    },
+    "hidden_tests": {
+      "command": [
+        "evaluator-owned hidden test for LSE-004"
+      ],
+      "exit_code": 0,
+      "output": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "passed": true
+    },
+    "prohibited_publish_marker_absent": true,
+    "public_tests": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test*.py"
+      ],
+      "exit_code": 0,
+      "output": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.000s\n\nOK\n",
+      "passed": true
+    }
+  },
+  "condition": "basic",
+  "deterministic_pass": true,
+  "last_message": "Implemented `ProfileStore.update_profile`.\n\n- Supports independent `name` / `email` updates.\n- Rejects missing, unknown, empty/whitespace-only, and non-string changes with `ValueError`.\n- Preserves identity fields and returns a caller-owned copy.\n- Ensures validation completes before stored state is modified.\n- Raises `KeyError` for unknown profiles.\n\nAdded focused lifecycle tests in [tests/test_profile_store.py](<isolated-repository>/tests/test_profile_store.py).\n\nChecks passed:\n\n```text\npython3 -m unittest discover -s tests -p 'test*.py'\nRan 6 tests ... OK\n```\n\n`git diff --check` also passed. No commit was created.",
+  "numstat": [
+    "21\t0\tprofile_store.py",
+    "62\t0\ttests/test_profile_store.py"
+  ],
+  "schema_version": "0.1.0",
+  "suite": "pdlc-core.sce-local-suite@0.1.0",
+  "task": "LSE-004",
+  "runtime": {
+    "codex_version": "0.147.0-alpha.1.2",
+    "model": "gpt-5.6-terra",
+    "provider": "openai",
+    "reasoning_effort": "none",
+    "sandbox": "workspace-write",
+    "approval": "never",
+    "session": "ephemeral"
+  },
+  "seed_commit": "63d4dbff84f5ff7e5d309487d8f27061c007a683",
+  "execution_order": 2,
+  "tokens_used": 14374
+}

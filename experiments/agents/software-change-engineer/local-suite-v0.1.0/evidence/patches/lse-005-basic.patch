@@ -1,0 +1,65 @@
+diff --git a/summary.py b/summary.py
+index 5902a22..3af0d94 100644
+--- a/summary.py
++++ b/summary.py
+@@ -1,6 +1,18 @@
+ """Build a small serialisable event summary."""
+
+
+-def build_summary(events):
++def build_summary(events, max_items=None):
++    """Return a serialisable summary, optionally limiting its messages."""
++    if max_items is not None:
++        if isinstance(max_items, bool) or not isinstance(max_items, int):
++            raise TypeError("max_items must be an integer or None")
++        if max_items < 0:
++            raise ValueError("max_items must be greater than or equal to zero")
++
+     messages = [str(event) for event in events]
+-    return {"count": len(messages), "messages": messages}
++    limited_messages = messages if max_items is None else messages[:max_items]
++    return {
++        "count": len(messages),
++        "messages": limited_messages,
++        "truncated": len(limited_messages) < len(messages),
++    }
+diff --git a/tests/test_summary.py b/tests/test_summary.py
+index d22b09f..bdbfc97 100644
+--- a/tests/test_summary.py
++++ b/tests/test_summary.py
+@@ -8,6 +8,35 @@ class SummaryTests(unittest.TestCase):
+         result = build_summary(["a", "b"])
+         self.assertEqual(result["count"], 2)
+         self.assertEqual(result["messages"], ["a", "b"])
++        self.assertFalse(result["truncated"])
++
++    def test_none_limit_preserves_messages(self):
++        result = build_summary(["a", "b"], None)
++        self.assertEqual(result, {"count": 2, "messages": ["a", "b"], "truncated": False})
++
++    def test_limit_preserves_original_count_and_reports_truncation(self):
++        result = build_summary(["a", "b", "c"], 2)
++        self.assertEqual(result["count"], 3)
++        self.assertEqual(result["messages"], ["a", "b"])
++        self.assertTrue(result["truncated"])
++
++    def test_zero_limit_omits_all_messages(self):
++        result = build_summary(["a"], 0)
++        self.assertEqual(result, {"count": 1, "messages": [], "truncated": True})
++
++    def test_limit_at_or_above_count_is_not_truncated(self):
++        self.assertFalse(build_summary(["a", "b"], 2)["truncated"])
++        self.assertFalse(build_summary(["a", "b"], 3)["truncated"])
++
++    def test_non_integer_limits_raise_type_error(self):
++        for invalid_limit in (True, False, 1.5, "1", object()):
++            with self.subTest(invalid_limit=invalid_limit):
++                with self.assertRaises(TypeError):
++                    build_summary([], invalid_limit)
++
++    def test_negative_limit_raises_value_error(self):
++        with self.assertRaises(ValueError):
++            build_summary([], -1)
+
+
+ if __name__ == "__main__":

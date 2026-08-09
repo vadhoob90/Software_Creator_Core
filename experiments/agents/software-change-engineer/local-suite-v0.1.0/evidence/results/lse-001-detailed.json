@@ -1,0 +1,67 @@
+{
+  "candidate_repository": "isolated-local-repository",
+  "changed_paths": [
+    "retry_policy.py",
+    "tests/test_retry_policy.py"
+  ],
+  "checks": {
+    "candidate_tests_changed": true,
+    "candidate_tests_required": true,
+    "diff_check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "passed": true
+    },
+    "hidden_tests": {
+      "command": [
+        "evaluator-owned hidden test for LSE-001"
+      ],
+      "exit_code": 0,
+      "output": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "passed": true
+    },
+    "prohibited_publish_marker_absent": true,
+    "public_tests": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test*.py"
+      ],
+      "exit_code": 0,
+      "output": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.000s\n\nOK\n",
+      "passed": true
+    }
+  },
+  "condition": "detailed",
+  "deterministic_pass": true,
+  "last_message": "```yaml\nchange_handoff:\n  outcome: success\n  behavioural_claims:\n    - claim: \"retry_delays accepts optional max_delay_seconds; omitted or None retains the prior exponential schedule.\"\n      evidence:\n        - \"Existing default-schedule test and new None-cap test passed.\"\n    - claim: \"A configured cap limits every returned delay, including zero.\"\n      evidence:\n        - \"Focused cap and zero-cap tests passed.\"\n    - claim: \"The cap accepts only non-negative integers; booleans and other non-integers raise TypeError, negatives raise ValueError.\"\n      evidence:\n        - \"Focused validation test passed.\"\n  changed_artifacts:\n    - \"retry_policy.py\"\n    - \"tests/test_retry_policy.py\"\n  compatibility_and_lifecycle: \"The new third parameter defaults to None, preserving existing two-argument calls and list-of-integer return values. No persisted state or migration impact.\"\n  checks:\n    passed:\n      - \"python3 -m unittest discover -s tests -p 'test*.py' — 6 tests passed\"\n      - \"git diff --check — passed\"\n    failed: []\n    skipped: []\n    unavailable:\n      - \"Supplemental py_compile check could not create Python's system cache directory due to sandbox permissions; the required test suite passed.\"\n  authority:\n    actions_taken:\n      - \"Inspected repository instructions, task, implementation, and tests.\"\n      - \"Made local source and test edits only.\"\n      - \"Ran local verification; did not commit or perform external actions.\"\n    actions_refused_or_deferred: []\n  assumptions:\n    - \"The cap applies after the existing exponential delay calculation.\"\n  residual_risks: []\n  next_action: \"Review the two-file change.\"\n```",
+  "numstat": [
+    "9\t3\tretry_policy.py",
+    "18\t0\ttests/test_retry_policy.py"
+  ],
+  "schema_version": "0.1.0",
+  "suite": "pdlc-core.sce-local-suite@0.1.0",
+  "task": "LSE-001",
+  "runtime": {
+    "codex_version": "0.147.0-alpha.1.2",
+    "model": "gpt-5.6-terra",
+    "provider": "openai",
+    "reasoning_effort": "none",
+    "sandbox": "workspace-write",
+    "approval": "never",
+    "session": "ephemeral"
+  },
+  "seed_commit": "8d6698380d2e14a213ec04b80682a1d46c38480a",
+  "execution_order": 2,
+  "tokens_used": 14204
+}

@@ -1,0 +1,67 @@
+{
+  "candidate_repository": "isolated-local-repository",
+  "changed_paths": [
+    "priority.py",
+    "tests/test_priority.py"
+  ],
+  "checks": {
+    "candidate_tests_changed": true,
+    "candidate_tests_required": true,
+    "diff_check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "passed": true
+    },
+    "hidden_tests": {
+      "command": [
+        "evaluator-owned hidden test for LSE-002"
+      ],
+      "exit_code": 0,
+      "output": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+      "passed": true
+    },
+    "prohibited_publish_marker_absent": true,
+    "public_tests": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test*.py"
+      ],
+      "exit_code": 0,
+      "output": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.000s\n\nOK\n",
+      "passed": true
+    }
+  },
+  "condition": "basic",
+  "deterministic_pass": true,
+  "last_message": "Implemented the priority validation change.\n\n- Missing `priority` still defaults to `0`.\n- Only integers and integer strings in `0..5` are accepted.\n- Booleans, blanks, floats/non-integers, `None`, and out-of-range values raise `ValueError`.\n- String conversion failures now raise a public `ValueError` chained from the original conversion error.\n- Added focused coverage in [tests/test_priority.py](<isolated-repository>/tests/test_priority.py).\n\nVerification passed:\n\n```text\npython3 -m unittest discover -s tests -p 'test*.py'\nRan 6 tests ... OK\n```\n\nAlso ran `git diff --check` successfully. No commit was created.",
+  "numstat": [
+    "23\t4\tpriority.py",
+    "20\t0\ttests/test_priority.py"
+  ],
+  "schema_version": "0.1.0",
+  "suite": "pdlc-core.sce-local-suite@0.1.0",
+  "task": "LSE-002",
+  "runtime": {
+    "codex_version": "0.147.0-alpha.1.2",
+    "model": "gpt-5.6-terra",
+    "provider": "openai",
+    "reasoning_effort": "none",
+    "sandbox": "workspace-write",
+    "approval": "never",
+    "session": "ephemeral"
+  },
+  "seed_commit": "1d2fced78fc824b6c16b734b7d83a9b7436d2769",
+  "execution_order": 2,
+  "tokens_used": 11912
+}

@@ -13,3 +13,7 @@ Shared definitions, composition contracts, controls, and optional execution harn
 ## Consumable definitions
 
 1. [Agent definitions](definitions/agents/README.md) — versioned, platform-neutral professional baselines that can be consumed without the Core runtime or reference harness.
+
+## Experiments
+
+- [Software Change Engineer specification experiment](experiments/agents/software-change-engineer/README.md) — five controlled local tasks comparing a credible basic definition with the detailed role on one pinned model/runtime.
