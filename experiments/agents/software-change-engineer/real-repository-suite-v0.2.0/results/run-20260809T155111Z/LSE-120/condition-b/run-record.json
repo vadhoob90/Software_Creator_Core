@@ -1,0 +1,177 @@
+{
+  "candidate_elapsed_seconds": 109.521,
+  "candidate_returncode": 0,
+  "candidate_timed_out": false,
+  "condition_id": "condition-b",
+  "definition_sha256": "274bdc5cf3d956d30d64303a80a758ebf9f323bcaca712cfd7822f01e94f638a",
+  "evaluation": {
+    "changed_lines": 57,
+    "changed_paths": [
+      "src/requests/structures.py",
+      "tests/test_structures.py"
+    ],
+    "commands": {
+      "dependency": {
+        "command": [
+          "git",
+          "diff",
+          "--quiet",
+          "HEAD",
+          "--",
+          "pyproject.toml",
+          "requirements-dev.txt",
+          "setup.cfg",
+          "setup.py",
+          "uv.lock"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "hidden": {
+        "command": [
+          ".venv/bin/pytest",
+          "-q",
+          "--confcutdir=/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests",
+          "/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-120.py"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "....                                                                     [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:469\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-120-condition-b-uxngvoa0/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:469: PytestCacheWarning: could not create cache path /private/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/private/pytest-cache-files-q9zzx0_8'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n4 passed, 1 warning in 0.02s\n"
+      },
+      "quality": [
+        {
+          "command": [
+            "git",
+            "diff",
+            "--check",
+            "HEAD"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        {
+          "command": [
+            ".venv/bin/ruff",
+            "check",
+            "."
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "All checks passed!\n"
+        }
+      ],
+      "regressions": [
+        {
+          "command": [
+            ".venv/bin/pytest",
+            "-q",
+            "tests/test_structures.py"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "..............................                                           [100%]\n30 passed in 0.01s\n"
+        }
+      ]
+    },
+    "criteria": [
+      {
+        "evidence": {
+          "returncode": 0
+        },
+        "id": "C1",
+        "name": "hidden_acceptance_tests",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncodes": [
+            0
+          ]
+        },
+        "id": "C2",
+        "name": "focused_upstream_regressions",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "changed_test_paths": [
+            "tests/test_structures.py"
+          ]
+        },
+        "id": "C3",
+        "name": "candidate_authored_tests",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncodes": [
+            0,
+            0
+          ]
+        },
+        "id": "C4",
+        "name": "repository_quality_checks",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncode": 0
+        },
+        "id": "C5",
+        "name": "dependency_integrity",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "changed_lines": 57,
+          "changed_path_count": 2,
+          "max_changed_lines": 400,
+          "max_changed_paths": 6,
+          "prohibited_paths": []
+        },
+        "id": "C6",
+        "name": "bounded_scope",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "claimed_paths": [
+            "src/requests/structures.py",
+            "tests/test_structures.py"
+          ],
+          "evidence_item_count": 8,
+          "load_error": null,
+          "success_with_known_failure": false,
+          "unknown_claims": []
+        },
+        "id": "C7",
+        "name": "handoff_evidence_integrity",
+        "passed": true
+      }
+    ],
+    "overall_pass": true,
+    "schema_version": "0.2.0",
+    "score": 7,
+    "score_total": 7,
+    "task_id": "LSE-120"
+  },
+  "finished_at": "2026-08-09T15:54:35.492587+00:00",
+  "runtime_telemetry": {
+    "event_count": 31,
+    "tool_call_count": 13,
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 389632,
+      "input_tokens": 439228,
+      "output_tokens": 4244,
+      "reasoning_output_tokens": 0
+    }
+  },
+  "started_at": "2026-08-09T15:52:45.336142+00:00",
+  "target_commit": "1f6589ec3a1ee910f9a65cc3ceac60b26677bc0e",
+  "target_repository": "https://github.com/psf/requests",
+  "task_id": "LSE-120",
+  "workspace_retained_at": "/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-120-condition-b-uxngvoa0"
+}

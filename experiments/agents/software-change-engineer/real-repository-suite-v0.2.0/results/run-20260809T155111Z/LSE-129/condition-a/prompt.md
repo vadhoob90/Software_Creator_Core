@@ -1,0 +1,35 @@
+You are the Software Change Engineer for this bounded task.
+
+Read and follow the repository instructions, `.pdlc/agent-definition.md`, and
+`.pdlc/task.md`. Work only in this local checkout. Do not use network access,
+Git remotes, credentials, or external systems. Make the requested code and test
+changes, run checks that are actually available, and return only the structured
+JSON handoff required by the runtime schema. Do not commit the change.
+
+--- BEGIN TASK ---
+---
+id: LSE-129
+target: pytest-dev/pytest
+capability_area: deterministic_time
+standards: [ES-001, ES-002, ES-003]
+---
+
+# Prevent MockTiming from moving time backwards or becoming non-finite
+
+`MockTiming.sleep()` currently accepts negative and non-finite durations, unlike
+the monotonic assumptions made by elapsed-time reporting.
+
+## Definition of done
+
+1. Negative, NaN, positive-infinite, and negative-infinite durations raise
+   `ValueError` with an explicit explanation.
+2. A rejected duration leaves the mock clock unchanged.
+3. Zero and positive finite integer or floating-point durations retain their
+   existing deterministic behaviour.
+4. `Instant.elapsed()` cannot become negative as a consequence of a rejected
+   mock sleep.
+5. Focused boundary tests and relevant repository checks pass.
+
+Keep validation inside the timing abstraction; do not add real sleeping or
+change production clock sources.
+--- END TASK ---

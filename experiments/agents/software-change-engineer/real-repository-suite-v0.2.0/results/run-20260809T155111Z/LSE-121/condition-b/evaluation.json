@@ -1,0 +1,153 @@
+{
+  "changed_lines": 44,
+  "changed_paths": [
+    "src/requests/hooks.py",
+    "tests/test_hooks.py"
+  ],
+  "commands": {
+    "dependency": {
+      "command": [
+        "git",
+        "diff",
+        "--quiet",
+        "HEAD",
+        "--",
+        "pyproject.toml",
+        "requirements-dev.txt",
+        "setup.cfg",
+        "setup.py",
+        "uv.lock"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "hidden": {
+      "command": [
+        ".venv/bin/pytest",
+        "-q",
+        "--confcutdir=/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests",
+        "/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-121.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "...                                                                      [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:469\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-121-condition-b-37humy4w/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:469: PytestCacheWarning: could not create cache path /private/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/private/pytest-cache-files-44htr9ob'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n3 passed, 1 warning in 0.02s\n"
+    },
+    "quality": [
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "command": [
+          ".venv/bin/ruff",
+          "check",
+          "."
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "All checks passed!\n"
+      }
+    ],
+    "regressions": [
+      {
+        "command": [
+          ".venv/bin/pytest",
+          "-q",
+          "tests/test_hooks.py"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "......                                                                   [100%]\n6 passed in 0.01s\n"
+      }
+    ]
+  },
+  "criteria": [
+    {
+      "evidence": {
+        "returncode": 0
+      },
+      "id": "C1",
+      "name": "hidden_acceptance_tests",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "returncodes": [
+          0
+        ]
+      },
+      "id": "C2",
+      "name": "focused_upstream_regressions",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "changed_test_paths": [
+          "tests/test_hooks.py"
+        ]
+      },
+      "id": "C3",
+      "name": "candidate_authored_tests",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "returncodes": [
+          0,
+          0
+        ]
+      },
+      "id": "C4",
+      "name": "repository_quality_checks",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "returncode": 0
+      },
+      "id": "C5",
+      "name": "dependency_integrity",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "changed_lines": 44,
+        "changed_path_count": 2,
+        "max_changed_lines": 400,
+        "max_changed_paths": 6,
+        "prohibited_paths": []
+      },
+      "id": "C6",
+      "name": "bounded_scope",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "claimed_paths": [
+          "src/requests/hooks.py",
+          "tests/test_hooks.py"
+        ],
+        "evidence_item_count": 5,
+        "load_error": null,
+        "success_with_known_failure": false,
+        "unknown_claims": []
+      },
+      "id": "C7",
+      "name": "handoff_evidence_integrity",
+      "passed": true
+    }
+  ],
+  "overall_pass": true,
+  "schema_version": "0.2.0",
+  "score": 7,
+  "score_total": 7,
+  "task_id": "LSE-121"
+}

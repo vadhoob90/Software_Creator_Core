@@ -1,0 +1,65 @@
+diff --git a/src/requests/hooks.py b/src/requests/hooks.py
+index 11ff9e9..f2837e6 100644
+--- a/src/requests/hooks.py
++++ b/src/requests/hooks.py
+@@ -41,6 +41,13 @@ def dispatch_hook(
+     if hook_list:
+         if isinstance(hook_list, Callable):
+             hook_list = [hook_list]
++        else:
++            hook_list = list(hook_list)
++        for position, hook in enumerate(hook_list):
++            if not isinstance(hook, Callable):
++                raise TypeError(
++                    f"Hook for event {key!r} at position {position} is not callable"
++                )
+         for hook in hook_list:
+             _hook_data = hook(hook_data, **kwargs)
+             if _hook_data is not None:
+diff --git a/tests/test_hooks.py b/tests/test_hooks.py
+index 7445525..20523c7 100644
+--- a/tests/test_hooks.py
++++ b/tests/test_hooks.py
+@@ -18,5 +18,42 @@ def test_hooks(hooks_list, result):
+     assert hooks.dispatch_hook("response", {"response": hooks_list}, "Data") == result
+ 
+ 
++@pytest.mark.parametrize("hooks_list", ([hook, object()], (hook, object())))
++def test_invalid_hook_prevents_dispatch(hooks_list):
++    calls = []
++
++    def side_effect(value):
++        calls.append(value)
++        return value
++
++    hooks_list = (side_effect, *hooks_list[1:])
++
++    with pytest.raises(
++        TypeError, match=r"Hook for event 'response' at position 1 is not callable"
++    ):
++        hooks.dispatch_hook("response", {"response": hooks_list}, "Data")
++
++    assert calls == []
++
++
++def test_invalid_hook_in_generator_prevents_dispatch():
++    calls = []
++
++    def side_effect(value):
++        calls.append(value)
++        return value
++
++    def hook_generator():
++        yield side_effect
++        yield object()
++
++    with pytest.raises(
++        TypeError, match=r"Hook for event 'response' at position 1 is not callable"
++    ):
++        hooks.dispatch_hook("response", {"response": hook_generator()}, "Data")
++
++    assert calls == []
++
++
+ def test_default_hooks():
+     assert hooks.default_hooks() == {"response": []}

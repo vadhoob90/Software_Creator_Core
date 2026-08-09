@@ -1,0 +1,79 @@
+diff --git a/src/_pytest/stash.py b/src/_pytest/stash.py
+index 6a9ff88..486c09b 100644
+--- a/src/_pytest/stash.py
++++ b/src/_pytest/stash.py
+@@ -4,6 +4,7 @@ from typing import Any
+ from typing import cast
+ from typing import Generic
+ from typing import TypeVar
++from typing import overload
+ 
+ 
+ __all__ = ["Stash", "StashKey"]
+@@ -91,6 +92,27 @@ class Stash:
+         except KeyError:
+             return default
+ 
++    @overload
++    def pop(self, key: StashKey[T]) -> T: ...
++
++    @overload
++    def pop(self, key: StashKey[T], default: D) -> T | D: ...
++
++    def pop(self, key: StashKey[T], default: D | object = ...) -> T | D:
++        """Return the value for key and remove it from the stash.
++
++        If key is not set, return default if provided, otherwise raise
++        ``KeyError``.
++        """
++        try:
++            value = self[key]
++        except KeyError:
++            if default is ...:
++                raise
++            return cast(D, default)
++        del self[key]
++        return value
++
+     def setdefault(self, key: StashKey[T], default: T) -> T:
+         """Return the value of key if already set, otherwise set the value
+         of key to default and return default."""
+diff --git a/testing/test_stash.py b/testing/test_stash.py
+index c7f6f4f..e83579a 100644
+--- a/testing/test_stash.py
++++ b/testing/test_stash.py
+@@ -1,5 +1,7 @@
+ from __future__ import annotations
+ 
++from typing_extensions import assert_type
++
+ from _pytest.stash import Stash
+ from _pytest.stash import StashKey
+ import pytest
+@@ -44,6 +46,26 @@ def test_stash() -> None:
+     with pytest.raises(KeyError):
+         stash[key1]
+ 
++    # pop
++    stash[key1] = "existing"
++    assert stash.pop(key1) == "existing"
++    assert key1 not in stash
++    # Has correct type (no mypy error).
++    stash[key1] = "value"
++    value = stash.pop(key1)
++    assert_type(value, str)
++    assert value + "string" == "valuestring"
++    with pytest.raises(KeyError):
++        stash.pop(key1)
++    assert stash.pop(key1, "default") == "default"
++    assert key1 not in stash
++    assert stash.pop(key1, None) is None
++    assert key1 not in stash
++    # A default may have a different type than the value associated with the key.
++    default = stash.pop(key2, "default")
++    assert_type(default, int | str)
++    assert default == "default"
++
+     # setdefault
+     stash[key1] = "existing"
+     assert stash.setdefault(key1, "default") == "existing"

@@ -1,0 +1,179 @@
+{
+  "candidate_elapsed_seconds": 105.438,
+  "candidate_returncode": 0,
+  "candidate_timed_out": false,
+  "condition_id": "condition-a",
+  "definition_sha256": "d85985127ea62f46052bcede268fe60cbf2e71610d8dcfda2dcbab487ff06c92",
+  "evaluation": {
+    "changed_lines": 46,
+    "changed_paths": [
+      "src/_pytest/timing.py",
+      "testing/test_timing.py"
+    ],
+    "commands": {
+      "dependency": {
+        "command": [
+          "git",
+          "diff",
+          "--quiet",
+          "HEAD",
+          "--",
+          "pyproject.toml",
+          "uv.lock"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "hidden": {
+        "command": [
+          ".venv/bin/pytest",
+          "-c",
+          "/dev/null",
+          "-q",
+          "/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-129.py"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ".........                                                                [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/_hypothesis_pytestplugin.py:84\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-129-condition-a-yymuozss/.venv/lib/python3.12/site-packages/_hypothesis_pytestplugin.py:84: UserWarning: \n          You are using pytest version 0.1.dev2+g22b71bf92. Hypothesis tests work with any test\n          runner, but our pytest plugin requires pytest 4.6 or newer.\n          Note that the pytest developers no longer support your version either!\n          Disabling the Hypothesis pytest plugin...\n      \n    warnings.warn(PYTEST_TOO_OLD_MESSAGE % (pytest.__version__,), stacklevel=1)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n9 passed, 1 warning in 0.01s\n"
+      },
+      "quality": [
+        {
+          "command": [
+            "git",
+            "diff",
+            "--check",
+            "HEAD"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        {
+          "command": [
+            ".venv/bin/python",
+            "-m",
+            "compileall",
+            "-q",
+            "src/_pytest/timing.py"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        }
+      ],
+      "regressions": [
+        {
+          "command": [
+            ".venv/bin/python",
+            "-m",
+            "compileall",
+            "-q",
+            "src/_pytest/timing.py"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        }
+      ]
+    },
+    "criteria": [
+      {
+        "evidence": {
+          "returncode": 0
+        },
+        "id": "C1",
+        "name": "hidden_acceptance_tests",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncodes": [
+            0
+          ]
+        },
+        "id": "C2",
+        "name": "focused_upstream_regressions",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "changed_test_paths": [
+            "testing/test_timing.py"
+          ]
+        },
+        "id": "C3",
+        "name": "candidate_authored_tests",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncodes": [
+            0,
+            0
+          ]
+        },
+        "id": "C4",
+        "name": "repository_quality_checks",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncode": 0
+        },
+        "id": "C5",
+        "name": "dependency_integrity",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "changed_lines": 46,
+          "changed_path_count": 2,
+          "max_changed_lines": 400,
+          "max_changed_paths": 6,
+          "prohibited_paths": []
+        },
+        "id": "C6",
+        "name": "bounded_scope",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "claimed_paths": [
+            "src/_pytest/timing.py",
+            "testing/test_timing.py"
+          ],
+          "evidence_item_count": 5,
+          "load_error": null,
+          "success_with_known_failure": false,
+          "unknown_claims": []
+        },
+        "id": "C7",
+        "name": "handoff_evidence_integrity",
+        "passed": true
+      }
+    ],
+    "overall_pass": true,
+    "schema_version": "0.2.0",
+    "score": 7,
+    "score_total": 7,
+    "task_id": "LSE-129"
+  },
+  "finished_at": "2026-08-09T16:24:04.171246+00:00",
+  "runtime_telemetry": {
+    "event_count": 35,
+    "tool_call_count": 14,
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 351232,
+      "input_tokens": 378141,
+      "output_tokens": 4304,
+      "reasoning_output_tokens": 0
+    }
+  },
+  "started_at": "2026-08-09T16:22:18.134126+00:00",
+  "target_commit": "006884bac1cff49d2e2908c20fbbb0f0bc8e671b",
+  "target_repository": "https://github.com/pytest-dev/pytest",
+  "task_id": "LSE-129",
+  "workspace_retained_at": "/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-129-condition-a-yymuozss"
+}

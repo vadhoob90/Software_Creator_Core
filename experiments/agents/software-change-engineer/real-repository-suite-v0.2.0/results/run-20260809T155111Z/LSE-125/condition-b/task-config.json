@@ -1,0 +1,69 @@
+{
+  "dependency_paths": [
+    "pyproject.toml",
+    "poetry.lock",
+    "uv.lock"
+  ],
+  "hidden_command": [
+    ".venv/bin/pytest",
+    "-q",
+    "--confcutdir={hidden_parent}",
+    "{hidden_test}"
+  ],
+  "hidden_test": "hidden_tests/LSE-125.py",
+  "hidden_test_sha256": "da7af490f17230260db91482b250d3981a58ebdb2e603201b2499b1633192a11",
+  "id": "LSE-125",
+  "max_changed_lines": 400,
+  "max_changed_paths": 6,
+  "path": "tasks/LSE-125.md",
+  "prohibited_path_prefixes": [
+    ".github/",
+    "docs/"
+  ],
+  "provision_commands": [
+    [
+      "uv",
+      "venv",
+      "--python",
+      "3.12"
+    ],
+    [
+      "uv",
+      "pip",
+      "install",
+      "--python",
+      ".venv/bin/python",
+      "-e",
+      ".",
+      "pytest==7.4.4",
+      "black==22.12.0",
+      "mypy==1.11.2",
+      "attrs==25.4.0"
+    ]
+  ],
+  "quality_commands": [
+    [
+      ".venv/bin/black",
+      "--check",
+      "rich",
+      "tests"
+    ]
+  ],
+  "regression_commands": [
+    [
+      ".venv/bin/pytest",
+      "-q",
+      "tests/test_measure.py"
+    ]
+  ],
+  "target": {
+    "commit": "9d8f9a372cc5916fd4781fec207ced7ddac2f08f",
+    "repository": "https://github.com/Textualize/rich",
+    "stars_observed": "57.0k",
+    "stars_observed_on": "2026-08-09"
+  },
+  "task_sha256": "db7939a507b837152d769e850bcaf234e33071aa6eba87326e08912c89593f18",
+  "test_path_prefixes": [
+    "tests/"
+  ]
+}

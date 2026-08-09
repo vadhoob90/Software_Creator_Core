@@ -1,0 +1,85 @@
+diff --git a/rich/filesize.py b/rich/filesize.py
+index 83bc911..da89689 100644
+--- a/rich/filesize.py
++++ b/rich/filesize.py
+@@ -10,7 +10,7 @@ See Also:
+ 
+ """
+ 
+-__all__ = ["decimal"]
++__all__ = ["binary", "decimal"]
+ 
+ from typing import Iterable, List, Optional, Tuple
+ 
+@@ -23,6 +23,8 @@ def _to_str(
+     precision: Optional[int] = 1,
+     separator: Optional[str] = " ",
+ ) -> str:
++    if size < 0:
++        raise ValueError("size must be non-negative")
+     if size == 1:
+         return "1 byte"
+     elif size < base:
+@@ -86,3 +88,31 @@ def decimal(
+         precision=precision,
+         separator=separator,
+     )
++
++
++def binary(
++    size: int,
++    *,
++    precision: Optional[int] = 1,
++    separator: Optional[str] = " ",
++) -> str:
++    """Convert a filesize in to a string (powers of 1024, IEC prefixes).
++
++    In this convention, ``1024 B = 1 KiB``.
++
++    Arguments:
++        int (size): A file size.
++        int (precision): The number of decimal places to include (default = 1).
++        str (separator): The string to separate the value from the units (default = " ").
++
++    Returns:
++        `str`: A string containing a abbreviated file size and units.
++
++    """
++    return _to_str(
++        size,
++        ("KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"),
++        1024,
++        precision=precision,
++        separator=separator,
++    )
+diff --git a/tests/test_filesize.py b/tests/test_filesize.py
+index b8f9163..e3893b6 100644
+--- a/tests/test_filesize.py
++++ b/tests/test_filesize.py
+@@ -1,4 +1,5 @@
+ from rich import filesize
++import pytest
+ 
+ 
+ def test_traditional():
+@@ -18,3 +19,20 @@ def test_pick_unit_and_suffix():
+     units = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+     assert filesize.pick_unit_and_suffix(50, units, 1024) == (1, "bytes")
+     assert filesize.pick_unit_and_suffix(2048, units, 1024) == (1024, "KB")
++
++
++def test_binary():
++    assert filesize.binary(0) == "0 bytes"
++    assert filesize.binary(1) == "1 byte"
++    assert filesize.binary(1023) == "1,023 bytes"
++    assert filesize.binary(1024) == "1.0 KiB"
++    assert filesize.binary(1.5 * 1024 * 1024) == "1.5 MiB"
++    assert filesize.binary(1111, precision=0) == "1 KiB"
++    assert filesize.binary(1111, precision=2, separator="") == "1.08KiB"
++    assert filesize.binary(1024**8) == "1.0 YiB"
++
++
++@pytest.mark.parametrize("formatter", [filesize.decimal, filesize.binary])
++def test_negative_size_raises_value_error(formatter):
++    with pytest.raises(ValueError, match="size must be non-negative"):
++        formatter(-1)

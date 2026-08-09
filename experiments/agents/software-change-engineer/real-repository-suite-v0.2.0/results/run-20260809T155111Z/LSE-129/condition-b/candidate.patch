@@ -1,0 +1,57 @@
+diff --git a/src/_pytest/timing.py b/src/_pytest/timing.py
+index 639bd99..6394cab 100644
+--- a/src/_pytest/timing.py
++++ b/src/_pytest/timing.py
+@@ -11,6 +11,7 @@ from __future__ import annotations
+ import dataclasses
+ from datetime import datetime
+ from datetime import timezone
++from math import isfinite
+ from time import perf_counter
+ from time import sleep
+ from time import time
+@@ -80,6 +81,8 @@ class MockTiming:
+     _current_time: float = datetime(2020, 5, 22, 14, 20, 50).timestamp()
+ 
+     def sleep(self, seconds: float) -> None:
++        if seconds < 0 or not isfinite(seconds):
++            raise ValueError("MockTiming.sleep() requires a finite, non-negative duration")
+         self._current_time += seconds
+ 
+     def time(self) -> float:
+diff --git a/testing/test_pytester.py b/testing/test_pytester.py
+index f641e9e..0aa330b 100644
+--- a/testing/test_pytester.py
++++ b/testing/test_pytester.py
+@@ -461,6 +461,31 @@ def test_pytester_run_with_timeout(pytester: Pytester) -> None:
+     assert duration.seconds < timeout
+ 
+ 
++@pytest.mark.parametrize("seconds", (0, 1, 1.5))
++def test_mock_timing_sleep_advances_for_finite_non_negative_durations(
++    mock_timing: _pytest.timing.MockTiming, seconds: float
++) -> None:
++    start = mock_timing.time()
++
++    mock_timing.sleep(seconds)
++
++    assert mock_timing.time() == start + seconds
++
++
++@pytest.mark.parametrize("seconds", (-1, float("nan"), float("inf"), float("-inf")))
++def test_mock_timing_sleep_rejects_invalid_durations_without_changing_time(
++    mock_timing: _pytest.timing.MockTiming, seconds: float
++) -> None:
++    instant = _pytest.timing.Instant()
++    start = mock_timing.time()
++
++    with pytest.raises(ValueError, match="finite, non-negative duration"):
++        mock_timing.sleep(seconds)
++
++    assert mock_timing.time() == start
++    assert instant.elapsed().seconds == 0
++
++
+ def test_pytester_run_timeout_expires(pytester: Pytester) -> None:
+     testfile = pytester.makepyfile(
+         """

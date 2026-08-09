@@ -1,0 +1,2 @@
+ M src/_pytest/stash.py
+ M testing/test_stash.py

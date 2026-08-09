@@ -1,0 +1,80 @@
+diff --git a/httpx/_urls.py b/httpx/_urls.py
+index 301d087..4969ae6 100644
+--- a/httpx/_urls.py
++++ b/httpx/_urls.py
+@@ -579,6 +579,38 @@ class QueryParams(typing.Mapping[str, str]):
+         q._dict.pop(str(key), None)
+         return q
+ 
++    def remove_value(self, key: str, value: typing.Any = None) -> QueryParams:
++        """
++        Return a new QueryParams instance, removing the first matching value for a key.
++
++        Usage:
++
++        q = httpx.QueryParams("a=123&a=456")
++        q = q.remove_value("a", "123")
++        assert q == httpx.QueryParams("a=456")
++        """
++        key = str(key)
++        value = primitive_value_to_str(value)
++        q = QueryParams()
++        q._dict = dict(self._dict)
++
++        values = q._dict.get(key)
++        if values is None:
++            return q
++
++        try:
++            index = values.index(value)
++        except ValueError:
++            return q
++
++        values = list(values)
++        values.pop(index)
++        if values:
++            q._dict[key] = values
++        else:
++            del q._dict[key]
++        return q
++
+     def merge(self, params: QueryParamTypes | None = None) -> QueryParams:
+         """
+         Return a new QueryParams instance, updated with.
+diff --git a/tests/models/test_queryparams.py b/tests/models/test_queryparams.py
+index 29b2ca6..05280e2 100644
+--- a/tests/models/test_queryparams.py
++++ b/tests/models/test_queryparams.py
+@@ -117,6 +117,32 @@ def test_queryparam_remove():
+     assert q == httpx.QueryParams("")
+ 
+ 
++def test_queryparam_remove_value():
++    original = httpx.QueryParams("a=123&a=456&a=123&b=789")
++
++    q = original.remove_value("a", "123")
++
++    assert q is not original
++    assert list(q.multi_items()) == [("a", "456"), ("a", "123"), ("b", "789")]
++    assert str(q) == "a=456&a=123&b=789"
++    assert str(original) == "a=123&a=456&a=123&b=789"
++
++
++def test_queryparam_remove_value_coercion_and_noop():
++    original = httpx.QueryParams({"a": [1, True, None], "b": "2"})
++
++    q = original.remove_value("a", True)
++    assert list(q.multi_items()) == [("a", "1"), ("a", ""), ("b", "2")]
++
++    missing_value = original.remove_value("a", 3)
++    missing_key = original.remove_value("missing", 1)
++    assert missing_value is not original
++    assert missing_key is not original
++    assert missing_value == original
++    assert missing_key == original
++    assert str(original) == "a=1&a=true&a=&b=2"
++
++
+ def test_queryparam_merge():
+     q = httpx.QueryParams("a=123")
+     q = q.merge({"b": "456"})

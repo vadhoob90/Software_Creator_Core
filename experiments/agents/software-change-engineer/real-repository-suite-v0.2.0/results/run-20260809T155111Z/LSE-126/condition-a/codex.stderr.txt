@@ -1,0 +1,6 @@
+2026-08-09T16:08:52.345712Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-08-09T16:08:52.345967Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-08-09T16:08:52.346220Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-08-09T16:09:43.593091Z ERROR codex_core::tools::router: error=apply_patch verification failed: Failed to find expected lines in /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-126-condition-a-cop2r8at/tests/models/test_headers.py:
+        ([('content-type', 'text/html')], [('content-type', 'text/html')]),
+2026-08-09T16:09:58.414104Z ERROR codex_core::tools::router: error=patch rejected: writing outside of the project; rejected by user approval settings

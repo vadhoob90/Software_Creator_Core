@@ -1,0 +1,152 @@
+{
+  "changed_lines": 32,
+  "changed_paths": [
+    "rich/measure.py",
+    "tests/test_measure.py"
+  ],
+  "commands": {
+    "dependency": {
+      "command": [
+        "git",
+        "diff",
+        "--quiet",
+        "HEAD",
+        "--",
+        "pyproject.toml",
+        "poetry.lock",
+        "uv.lock"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "hidden": {
+      "command": [
+        ".venv/bin/pytest",
+        "-q",
+        "--confcutdir=/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests",
+        "/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-125.py"
+      ],
+      "returncode": 1,
+      "stderr": "",
+      "stdout": "FF..                                                                     [100%]\n=================================== FAILURES ===================================\n________ test_negative_bound_is_rejected_without_mutation[with_minimum] ________\n\nmethod = 'with_minimum'\n\n    @pytest.mark.parametrize(\"method\", [\"with_minimum\", \"with_maximum\"])\n    def test_negative_bound_is_rejected_without_mutation(method: str) -> None:\n        measurement = Measurement(20, 100)\n    \n        with pytest.raises(ValueError, match=r\"(?i)(minimum|maximum|width).*-1\"):\n>           getattr(measurement, method)(-1)\n\n/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-125.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = Measurement(minimum=20, maximum=100), width = -1\n\n    def with_minimum(self, width: int) -> \"Measurement\":\n        \"\"\"Get a RenderableWith where the widths are >= width.\n    \n        Args:\n            width (int): Minimum desired width.\n    \n        Returns:\n            Measurement: New Measurement object.\n        \"\"\"\n        if width < 0:\n>           raise ValueError(\"minimum width must be non-negative\")\nE           ValueError: minimum width must be non-negative\n\nrich/measure.py:58: ValueError\n\nDuring handling of the above exception, another exception occurred:\n\nmethod = 'with_minimum'\n\n    @pytest.mark.parametrize(\"method\", [\"with_minimum\", \"with_maximum\"])\n    def test_negative_bound_is_rejected_without_mutation(method: str) -> None:\n        measurement = Measurement(20, 100)\n    \n>       with pytest.raises(ValueError, match=r\"(?i)(minimum|maximum|width).*-1\"):\nE       AssertionError: Regex pattern did not match.\nE        Regex: '(?i)(minimum|maximum|width).*-1'\nE        Input: 'minimum width must be non-negative'\n\n/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-125.py:12: AssertionError\n________ test_negative_bound_is_rejected_without_mutation[with_maximum] ________\n\nmethod = 'with_maximum'\n\n    @pytest.mark.parametrize(\"method\", [\"with_minimum\", \"with_maximum\"])\n    def test_negative_bound_is_rejected_without_mutation(method: str) -> None:\n        measurement = Measurement(20, 100)\n    \n        with pytest.raises(ValueError, match=r\"(?i)(minimum|maximum|width).*-1\"):\n>           getattr(measurement, method)(-1)\n\n/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-125.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = Measurement(minimum=20, maximum=100), width = -1\n\n    def with_maximum(self, width: int) -> \"Measurement\":\n        \"\"\"Get a RenderableWith where the widths are <= width.\n    \n        Args:\n            width (int): Maximum desired width.\n    \n        Returns:\n            Measurement: New Measurement object.\n        \"\"\"\n        if width < 0:\n>           raise ValueError(\"maximum width must be non-negative\")\nE           ValueError: maximum width must be non-negative\n\nrich/measure.py:44: ValueError\n\nDuring handling of the above exception, another exception occurred:\n\nmethod = 'with_maximum'\n\n    @pytest.mark.parametrize(\"method\", [\"with_minimum\", \"with_maximum\"])\n    def test_negative_bound_is_rejected_without_mutation(method: str) -> None:\n        measurement = Measurement(20, 100)\n    \n>       with pytest.raises(ValueError, match=r\"(?i)(minimum|maximum|width).*-1\"):\nE       AssertionError: Regex pattern did not match.\nE        Regex: '(?i)(minimum|maximum|width).*-1'\nE        Input: 'maximum width must be non-negative'\n\n/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-125.py:12: AssertionError\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:451\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-125-condition-b-k__0t7lh/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:451: PytestCacheWarning: could not create cache path /private/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/private/.pytest_cache'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:405\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-125-condition-b-k__0t7lh/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:405: PytestCacheWarning: could not create cache path /private/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/private/.pytest_cache'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n.venv/lib/python3.12/site-packages/_pytest/stepwise.py:56\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-125-condition-b-k__0t7lh/.venv/lib/python3.12/site-packages/_pytest/stepwise.py:56: PytestCacheWarning: could not create cache path /private/.pytest_cache/v/cache/stepwise: [Errno 13] Permission denied: '/private/.pytest_cache'\n    session.config.cache.set(STEPWISE_CACHE_DIR, [])\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-125.py::test_negative_bound_is_rejected_without_mutation[with_minimum]\nFAILED ../../../../../../tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-125.py::test_negative_bound_is_rejected_without_mutation[with_maximum]\n2 failed, 2 passed, 3 warnings in 0.01s\n"
+    },
+    "quality": [
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "command": [
+          ".venv/bin/black",
+          "--check",
+          "rich",
+          "tests"
+        ],
+        "returncode": 0,
+        "stderr": "All done! \u2728 \ud83c\udf70 \u2728\n167 files would be left unchanged.\n",
+        "stdout": ""
+      }
+    ],
+    "regressions": [
+      {
+        "command": [
+          ".venv/bin/pytest",
+          "-q",
+          "tests/test_measure.py"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ".......                                                                  [100%]\n7 passed in 0.04s\n"
+      }
+    ]
+  },
+  "criteria": [
+    {
+      "evidence": {
+        "returncode": 1
+      },
+      "id": "C1",
+      "name": "hidden_acceptance_tests",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "returncodes": [
+          0
+        ]
+      },
+      "id": "C2",
+      "name": "focused_upstream_regressions",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "changed_test_paths": [
+          "tests/test_measure.py"
+        ]
+      },
+      "id": "C3",
+      "name": "candidate_authored_tests",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "returncodes": [
+          0,
+          0
+        ]
+      },
+      "id": "C4",
+      "name": "repository_quality_checks",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "returncode": 0
+      },
+      "id": "C5",
+      "name": "dependency_integrity",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "changed_lines": 32,
+        "changed_path_count": 2,
+        "max_changed_lines": 400,
+        "max_changed_paths": 6,
+        "prohibited_paths": []
+      },
+      "id": "C6",
+      "name": "bounded_scope",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "claimed_paths": [
+          "rich/measure.py",
+          "tests/test_measure.py"
+        ],
+        "evidence_item_count": 7,
+        "load_error": null,
+        "success_with_known_failure": false,
+        "unknown_claims": []
+      },
+      "id": "C7",
+      "name": "handoff_evidence_integrity",
+      "passed": true
+    }
+  ],
+  "overall_pass": false,
+  "schema_version": "0.2.0",
+  "score": 6,
+  "score_total": 7,
+  "task_id": "LSE-125"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "command": [
+      "uv",
+      "venv",
+      "--python",
+      "3.12"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "Using CPython 3.12.12\nCreating virtual environment at: .venv\nActivate with: source .venv/bin/activate\n"
+  },
+  {
+    "command": [
+      "uv",
+      "pip",
+      "install",
+      "--python",
+      ".venv/bin/python",
+      "-e",
+      ".",
+      "pytest==8.4.1",
+      "ruff==0.12.11",
+      "mypy==1.17.1",
+      "trio==0.31.0",
+      "trustme==1.2.1"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "Resolved 25 packages in 270ms\n   Building httpx @ file:///private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-127-condition-a-h28f0tpk\n      Built httpx @ file:///private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-127-condition-a-h28f0tpk\nPrepared 1 package in 56ms\nInstalled 25 packages in 28ms\n + anyio==4.14.2\n + attrs==26.1.0\n + certifi==2026.7.22\n + cffi==2.1.1\n + cryptography==50.0.0\n + h11==0.16.0\n + httpcore==1.0.9\n + httpx==0.28.1 (from file:///private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-127-condition-a-h28f0tpk)\n + idna==3.18\n + iniconfig==2.3.0\n + mypy==1.17.1\n + mypy-extensions==1.1.0\n + outcome==1.3.0.post0\n + packaging==26.3\n + pathspec==1.1.1\n + pluggy==1.6.0\n + pycparser==3.0\n + pygments==2.20.0\n + pytest==8.4.1\n + ruff==0.12.11\n + sniffio==1.3.1\n + sortedcontainers==2.4.0\n + trio==0.31.0\n + trustme==1.2.1\n + typing-extensions==4.16.0\n"
+  }
+]

@@ -1,0 +1,66 @@
+diff --git a/rich/measure.py b/rich/measure.py
+index a508ffa..42db649 100644
+--- a/rich/measure.py
++++ b/rich/measure.py
+@@ -40,6 +40,8 @@ class Measurement(NamedTuple):
+         Returns:
+             Measurement: New Measurement object.
+         """
++        if width < 0:
++            raise ValueError("maximum width must be non-negative")
+         minimum, maximum = self
+         return Measurement(min(minimum, width), min(maximum, width))
+ 
+@@ -52,8 +54,9 @@ class Measurement(NamedTuple):
+         Returns:
+             Measurement: New Measurement object.
+         """
++        if width < 0:
++            raise ValueError("minimum width must be non-negative")
+         minimum, maximum = self
+-        width = max(0, width)
+         return Measurement(max(minimum, width), max(maximum, width))
+ 
+     def clamp(
+@@ -68,6 +71,8 @@ class Measurement(NamedTuple):
+         Returns:
+             Measurement: New Measurement object.
+         """
++        if min_width is not None and max_width is not None and min_width > max_width:
++            raise ValueError("minimum width cannot be greater than maximum width")
+         measurement = self
+         if min_width is not None:
+             measurement = measurement.with_minimum(min_width)
+diff --git a/tests/test_measure.py b/tests/test_measure.py
+index 6155922..7baadea 100644
+--- a/tests/test_measure.py
++++ b/tests/test_measure.py
+@@ -34,3 +34,28 @@ def test_clamp():
+     assert measurement.clamp(None, 50) == Measurement(20, 50)
+     assert measurement.clamp(30, None) == Measurement(30, 100)
+     assert measurement.clamp(None, None) == Measurement(20, 100)
++
++
++@pytest.mark.parametrize(
++    ("method", "width", "message"),
++    [
++        ("with_minimum", -1, "minimum width"),
++        ("with_maximum", -1, "maximum width"),
++    ],
++)
++def test_measurement_rejects_negative_bound(method, width, message):
++    measurement = Measurement(20, 100)
++
++    with pytest.raises(ValueError, match=message):
++        getattr(measurement, method)(width)
++
++    assert measurement == Measurement(20, 100)
++
++
++def test_clamp_rejects_inverted_bounds_without_changing_measurement():
++    measurement = Measurement(20, 100)
++
++    with pytest.raises(ValueError, match="minimum width.*maximum width"):
++        measurement.clamp(50, 40)
++
++    assert measurement == Measurement(20, 100)
