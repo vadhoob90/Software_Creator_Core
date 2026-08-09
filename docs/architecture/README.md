@@ -4,9 +4,9 @@
 **Effective:** 9 August 2026  
 **Governed by:** [Development principles](../core/development-principles.md) and [Engineering standards](../standards/README.md)
 
-PDLC Core is a reusable product-development execution kernel. A downstream product repository consumes an immutable Core release and owns its domain decisions, product artifacts, specialist behaviour, and learning.
+PDLC Core is a modular product-development foundation. A downstream product repository may consume one or more immutable Core definitions, composed agents, controls and evidence contracts, or the optional reference harness. It owns its domain decisions, product artifacts, specialist behaviour, and learning.
 
-The architecture separates durable Core mechanisms from product-specific policy so that Core can evolve without copying its implementation into every product repository.
+The architecture separates durable Core capabilities from product-specific policy. Consumers select only the capabilities they need through supported public contracts; adopting one capability does not activate or imply conformance with the others.
 
 ## Architecture documents
 
@@ -23,35 +23,45 @@ These documents are normative architectural constraints. Commands, file layouts,
 
 ```mermaid
 flowchart LR
-    C["PDLC Core<br/>contracts, controls, patterns,<br/>resolvers and harnesses"]
+    C["PDLC Core<br/>versioned definitions, composition,<br/>controls and reference harness"]
     P["Product repository<br/>domain policy, specialist agents,<br/>learning and product artifacts"]
-    R["Resolved job context<br/>applicable controls, role,<br/>authority and task inputs"]
-    E["Execution<br/>human or agent contributor"]
-    A["Persisted artifacts<br/>decisions, evidence, reviews,<br/>outcome and provenance"]
+    S["Explicit capability selection<br/>pinned versions and scope"]
+    D["Definitions only"]
+    A["Composed agents"]
+    E["Controls and evidence<br/>product-owned harness"]
+    H["Reference harness"]
+    O["Scoped provenance<br/>and conformance claim"]
 
-    C --> R
-    P --> R
-    R --> E
-    E --> A
-    A --> P
-    A -. "generic learning candidate" .-> C
+    C --> S
+    P --> S
+    S --> D
+    S --> A
+    S --> E
+    S --> H
+    D --> O
+    A --> O
+    E --> O
+    H --> O
 ```
 
 ## Architectural decisions
 
-- Core owns reusable mechanisms and non-negotiable contracts.
+- Core publishes independently consumable, versioned capabilities through stable public contracts.
 - Product repositories own domain policy, product behaviour, local learning, and delivery artifacts.
+- Products explicitly select the capabilities they consume; the complete reference harness is optional.
+- The reference harness uses the same public contracts available to a product-owned or third-party harness.
 - Product specialisation may extend or tighten Core requirements but may not silently weaken them.
-- A product repository pins an immutable Core release; it does not copy Core, use a submodule, or track a moving branch.
-- Core resolves the job context and records every loaded and skipped source.
-- Agents are specialised contributors. Core owns workflow state, transition validation, evidence collection, and outcome classification.
-- Persisted artifacts—not conversation history—hold durable development state.
+- A product repository pins every consumed Core release or artifact; it does not track a moving branch.
+- When agent composition is selected, Core resolution records every loaded, skipped, and conflicting source.
+- When the reference harness is selected, it owns workflow state, transition validation, evidence collection, and outcome classification. A custom harness retains those responsibilities itself.
+- Execution modes persist durable development state in artifacts rather than relying on conversation history.
+- Conformance claims are scoped to the capability, version, product workflow, executor, and evidence involved.
 - Upgrades preview compatibility, preserve product-owned files, validate downstream behaviour, and roll back transactionally on failure.
 - Product learning remains local until evidence shows that it is generic enough for Core.
 
 ## Composition layers
 
-The effective behaviour for a job is composed from:
+When a product selects composed agents or the reference harness, the effective behaviour for a job is composed from:
 
 ```text
 Core invariant contracts
@@ -67,30 +77,13 @@ Core invariant contracts
 
 Higher-authority layers cannot be replaced by lower-authority layers. Conflicts, exclusions, and missing inputs are explicit outcomes.
 
-## Reference vertical slice
+Definitions-only consumption does not imply that this resolution occurred. It establishes the provenance of the consumed definition and nothing broader.
 
-The first implementation should prove one narrow workflow end to end:
+## First consumable vertical slice
 
-```text
-change request
-→ architecture decision
-→ implementation plan
-→ implementation
-→ automated evidence
-→ independent review
-→ human approval where required
-→ explicit outcome
-```
+The first implementation should prove the smallest supported consumption mode: one versioned, platform-neutral `implementer` baseline definition.
 
-A suitable first control is ES-001 cyclomatic complexity:
-
-1. Core defines the default maximum.
-2. A product repository pins Core and tightens the threshold.
-3. Resolution produces one effective value with provenance.
-4. A harness evaluates representative code.
-5. The evidence artifact records the result.
-6. An exception is visible, owned, and expiring.
-7. A Core upgrade previews its effect without overwriting product configuration.
+It must state its purpose, responsibilities, boundaries, authority, expected inputs and outputs, evidence expectations, and applicable standards references. It must carry an immutable version and provenance, and a downstream product must be able to consume it without installing a resolver or harness. Its use may claim provenance for that definition only; it must not imply that agent composition, controls, routing, or lifecycle execution occurred.
 
 ## Non-goals
 
@@ -102,15 +95,20 @@ This architecture does not yet:
 - Permit product repositories to replace Core safety or authority contracts.
 - Promote local learning into Core automatically.
 - Require all product repositories to use every available capability.
+- Make the reference harness mandatory or give it privileged interfaces unavailable to custom harnesses.
 
 ## Acceptance criteria for the architecture
 
 A future implementation conforms when:
 
-- A thin product repository can pin and validate a Core release.
+- A thin product repository can pin and consume one Core definition without adopting a resolver or harness.
+- Each supported consumption mode can be selected independently or combined explicitly.
+- A product-owned harness can use the same Core contracts as the reference harness.
+- Every consumed Core release or artifact is pinned and attributable.
 - Core and product ownership are mechanically distinguishable.
-- The effective context for a job is explainable before and after execution.
+- Where composition is selected, the effective context for a job is explainable before and after execution.
 - Product-owned files survive creation, reruns, and upgrades.
-- Applicable standards, authority, inputs, and versions appear in the evidence.
+- Applicable standards, authority, inputs, and versions appear in the evidence for execution modes.
 - Historical job records remain attributable after Core evolves.
 - An interrupted or failed upgrade returns the product repository to its previous valid dependency state.
+- No partial adoption can be mistaken for conformance with unselected capabilities.
