@@ -17,3 +17,12 @@ Shared definitions, composition contracts, controls, and optional execution harn
 ## Consumable definitions
 
 1. [Agent definitions](definitions/agents/README.md) — versioned, platform-neutral professional baselines that can be consumed without the Core runtime or reference harness.
+
+## Licence
+
+PDLC Core is free and open-source software licensed under the
+[GNU Affero General Public License, version 3 or later](LICENSE.md)
+(`AGPL-3.0-or-later`). Commercial use is permitted subject to the licence
+terms. See [Licensing](LICENSING.md) for a plain-language overview.
+
+Copyright © 2026 Bharath Vadhoola
