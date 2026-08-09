@@ -1,0 +1,90 @@
+diff --git a/rich/measure.py b/rich/measure.py
+index a508ffa..2bfa2a1 100644
+--- a/rich/measure.py
++++ b/rich/measure.py
+@@ -39,7 +39,12 @@ class Measurement(NamedTuple):
+ 
+         Returns:
+             Measurement: New Measurement object.
++
++        Raises:
++            ValueError: If ``width`` is negative.
+         """
++        if width < 0:
++            raise ValueError(f"maximum width must be non-negative (got {width})")
+         minimum, maximum = self
+         return Measurement(min(minimum, width), min(maximum, width))
+ 
+@@ -51,9 +56,13 @@ class Measurement(NamedTuple):
+ 
+         Returns:
+             Measurement: New Measurement object.
++
++        Raises:
++            ValueError: If ``width`` is negative.
+         """
++        if width < 0:
++            raise ValueError(f"minimum width must be non-negative (got {width})")
+         minimum, maximum = self
+-        width = max(0, width)
+         return Measurement(max(minimum, width), max(maximum, width))
+ 
+     def clamp(
+@@ -67,7 +76,15 @@ class Measurement(NamedTuple):
+ 
+         Returns:
+             Measurement: New Measurement object.
++
++        Raises:
++            ValueError: If ``min_width`` is greater than ``max_width`` or either
++                provided bound is negative.
+         """
++        if min_width is not None and max_width is not None and min_width > max_width:
++            raise ValueError(
++                f"minimum width {min_width} must not exceed maximum width {max_width}"
++            )
+         measurement = self
+         if min_width is not None:
+             measurement = measurement.with_minimum(min_width)
+diff --git a/tests/test_measure.py b/tests/test_measure.py
+index 6155922..c3e3b85 100644
+--- a/tests/test_measure.py
++++ b/tests/test_measure.py
+@@ -34,3 +34,37 @@ def test_clamp():
+     assert measurement.clamp(None, 50) == Measurement(20, 50)
+     assert measurement.clamp(30, None) == Measurement(30, 100)
+     assert measurement.clamp(None, None) == Measurement(20, 100)
++    assert measurement == Measurement(20, 100)
++
++
++@pytest.mark.parametrize(
++    ("method_name", "invalid_width", "bound_name"),
++    [
++        ("with_minimum", -1, "minimum"),
++        ("with_maximum", -2, "maximum"),
++    ],
++)
++def test_negative_bounds(method_name, invalid_width, bound_name):
++    measurement = Measurement(20, 100)
++
++    with pytest.raises(ValueError, match=rf"{bound_name}.*{invalid_width}"):
++        getattr(measurement, method_name)(invalid_width)
++
++    assert measurement == Measurement(20, 100)
++
++
++def test_clamp_rejects_inverted_bounds():
++    measurement = Measurement(20, 100)
++
++    with pytest.raises(ValueError, match=r"minimum width 60.*maximum width 50"):
++        measurement.clamp(60, 50)
++
++    assert measurement == Measurement(20, 100)
++
++
++def test_bound_operations_are_immutable():
++    measurement = Measurement(20, 100)
++
++    assert measurement.with_minimum(30) == Measurement(30, 100)
++    assert measurement.with_maximum(50) == Measurement(20, 50)
++    assert measurement == Measurement(20, 100)

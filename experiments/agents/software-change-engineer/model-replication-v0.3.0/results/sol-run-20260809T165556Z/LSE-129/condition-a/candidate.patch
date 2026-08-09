@@ -1,0 +1,60 @@
+diff --git a/src/_pytest/timing.py b/src/_pytest/timing.py
+index 639bd99..2e9feae 100644
+--- a/src/_pytest/timing.py
++++ b/src/_pytest/timing.py
+@@ -11,6 +11,7 @@ from __future__ import annotations
+ import dataclasses
+ from datetime import datetime
+ from datetime import timezone
++import math
+ from time import perf_counter
+ from time import sleep
+ from time import time
+@@ -80,6 +81,8 @@ class MockTiming:
+     _current_time: float = datetime(2020, 5, 22, 14, 20, 50).timestamp()
+ 
+     def sleep(self, seconds: float) -> None:
++        if seconds < 0 or not math.isfinite(seconds):
++            raise ValueError("sleep duration must be a non-negative finite number")
+         self._current_time += seconds
+ 
+     def time(self) -> float:
+diff --git a/testing/test_pytester.py b/testing/test_pytester.py
+index f641e9e..3354884 100644
+--- a/testing/test_pytester.py
++++ b/testing/test_pytester.py
+@@ -19,6 +19,34 @@ import _pytest.timing
+ import pytest
+ 
+ 
++@pytest.mark.parametrize("seconds", [-1, -0.5, float("nan"), float("inf"), float("-inf")])
++def test_mock_timing_rejects_invalid_sleep(
++    seconds: float, monkeypatch: MonkeyPatch
++) -> None:
++    mock_timing = _pytest.timing.MockTiming()
++    mock_timing.patch(monkeypatch)
++    before = mock_timing.time()
++    instant = _pytest.timing.Instant()
++
++    with pytest.raises(
++        ValueError, match="sleep duration must be a non-negative finite number"
++    ):
++        mock_timing.sleep(seconds)
++
++    assert mock_timing.time() == before
++    assert instant.elapsed().seconds >= 0
++
++
++@pytest.mark.parametrize("seconds", [0, 1, 0.5])
++def test_mock_timing_accepts_non_negative_finite_sleep(seconds: float) -> None:
++    mock_timing = _pytest.timing.MockTiming()
++    before = mock_timing.time()
++
++    mock_timing.sleep(seconds)
++
++    assert mock_timing.time() == before + seconds
++
++
+ def test_make_hook_recorder(pytester: Pytester) -> None:
+     item = pytester.getitem("def test_func(): pass")
+     recorder = pytester.make_hook_recorder(item.config.pluginmanager)

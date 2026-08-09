@@ -1,0 +1,4 @@
+2026-08-09T17:19:03.457545Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-08-09T17:19:03.457792Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-08-09T17:19:03.458129Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-08-09T17:20:45.076397Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (1/5 in 219ms)... turn_id=019fe789-0147-7e72-bb57-b23c7acc1d9b retries=1 max_retries=5 sampling_error=stream disconnected before completion: WebSocket protocol error: Connection reset without closing handshake

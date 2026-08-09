@@ -1,0 +1,15 @@
+[
+  {
+    "command": [
+      "uv",
+      "sync",
+      "--frozen",
+      "--no-default-groups",
+      "--group",
+      "dev"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "Using CPython 3.12.12\nCreating virtual environment at: .venv\n   Building pytest @ file:///private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-128-condition-a-tq7u4ozu\n      Built pytest @ file:///private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-128-condition-a-tq7u4ozu\nPrepared 1 package in 694ms\nInstalled 25 packages in 40ms\n + argcomplete==3.6.3\n + attrs==25.4.0\n + certifi==2026.1.4\n + charset-normalizer==3.4.4\n + coverage==7.13.1\n + elementpath==5.1.0\n + execnet==2.1.2\n + hypothesis==6.150.0\n + idna==3.11\n + iniconfig==2.3.0\n + mock==5.2.0\n + numpy==2.4.1\n + packaging==25.0\n + pexpect==4.9.0\n + pluggy==1.6.0\n + ptyprocess==0.7.0\n + pygments==2.19.2\n + pytest==0.1.dev2+g548663daf (from file:///private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-128-condition-a-tq7u4ozu)\n + pytest-xdist==3.8.0\n + pyyaml==6.0.3\n + requests==2.32.5\n + setuptools==80.9.0\n + sortedcontainers==2.4.0\n + urllib3==2.6.3\n + xmlschema==4.3.0\n"
+  }
+]

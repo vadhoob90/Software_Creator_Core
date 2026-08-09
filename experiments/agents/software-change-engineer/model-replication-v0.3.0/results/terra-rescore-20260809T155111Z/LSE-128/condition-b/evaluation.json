@@ -1,0 +1,157 @@
+{
+  "changed_lines": 44,
+  "changed_paths": [
+    "src/_pytest/stash.py",
+    "testing/test_stash.py"
+  ],
+  "commands": {
+    "dependency": {
+      "command": [
+        "git",
+        "diff",
+        "--quiet",
+        "HEAD",
+        "--",
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "hidden": {
+      "command": [
+        ".venv/bin/pytest",
+        "-c",
+        "/dev/null",
+        "-q",
+        "/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-128.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "....                                                                     [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/_hypothesis_pytestplugin.py:84\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-128-condition-b-id5dl3g5/.venv/lib/python3.12/site-packages/_hypothesis_pytestplugin.py:84: UserWarning: \n          You are using pytest version 0.1.dev2+g36e3ba076. Hypothesis tests work with any test\n          runner, but our pytest plugin requires pytest 4.6 or newer.\n          Note that the pytest developers no longer support your version either!\n          Disabling the Hypothesis pytest plugin...\n      \n    warnings.warn(PYTEST_TOO_OLD_MESSAGE % (pytest.__version__,), stacklevel=1)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n4 passed, 1 warning in 0.01s\n"
+    },
+    "quality": [
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "compileall",
+          "-q",
+          "src/_pytest/stash.py",
+          "testing/test_stash.py"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      }
+    ],
+    "regressions": [
+      {
+        "command": [
+          ".venv/bin/pytest",
+          "-c",
+          "/dev/null",
+          "-q",
+          "testing/test_stash.py"
+        ],
+        "returncode": 2,
+        "stderr": "",
+        "stdout": "\n==================================== ERRORS ====================================\n________________________ ERROR collecting test_stash.py ________________________\nImportError while importing test module '/private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-128-condition-b-id5dl3g5/testing/test_stash.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/Users/vadhoob90/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/importlib/__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntesting/test_stash.py:3: in <module>\n    from typing_extensions import assert_type\nE   ModuleNotFoundError: No module named 'typing_extensions'\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/_hypothesis_pytestplugin.py:84\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-128-condition-b-id5dl3g5/.venv/lib/python3.12/site-packages/_hypothesis_pytestplugin.py:84: UserWarning: \n          You are using pytest version 0.1.dev2+g36e3ba076. Hypothesis tests work with any test\n          runner, but our pytest plugin requires pytest 4.6 or newer.\n          Note that the pytest developers no longer support your version either!\n          Disabling the Hypothesis pytest plugin...\n      \n    warnings.warn(PYTEST_TOO_OLD_MESSAGE % (pytest.__version__,), stacklevel=1)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nERROR testing/test_stash.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 warning, 1 error in 0.07s\n"
+      }
+    ]
+  },
+  "criteria": [
+    {
+      "evidence": {
+        "returncode": 0
+      },
+      "id": "C1",
+      "name": "hidden_acceptance_tests",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "returncodes": [
+          2
+        ]
+      },
+      "id": "C2",
+      "name": "focused_upstream_regressions",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "changed_test_paths": [
+          "testing/test_stash.py"
+        ]
+      },
+      "id": "C3",
+      "name": "candidate_authored_tests",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "returncodes": [
+          0,
+          0
+        ]
+      },
+      "id": "C4",
+      "name": "repository_quality_checks",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "returncode": 0
+      },
+      "id": "C5",
+      "name": "dependency_integrity",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "changed_lines": 44,
+        "changed_path_count": 2,
+        "max_changed_lines": 400,
+        "max_changed_paths": 6,
+        "prohibited_paths": []
+      },
+      "id": "C6",
+      "name": "bounded_scope",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "claimed_paths": [
+          "src/_pytest/stash.py",
+          "testing/test_stash.py"
+        ],
+        "evidence_item_count": 6,
+        "load_error": null,
+        "outcome": "partial",
+        "reported_failed_check_count": 1,
+        "unknown_claims": []
+      },
+      "id": "C7",
+      "name": "handoff_evidence_integrity",
+      "passed": true
+    }
+  ],
+  "overall_pass": false,
+  "schema_version": "0.2.0",
+  "score": 6,
+  "score_total": 7,
+  "task_id": "LSE-128"
+}

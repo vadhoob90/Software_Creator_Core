@@ -1,0 +1,31 @@
+[
+  {
+    "command": [
+      "uv",
+      "venv",
+      "--python",
+      "3.12"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "Using CPython 3.12.12\nCreating virtual environment at: .venv\nActivate with: source .venv/bin/activate\n"
+  },
+  {
+    "command": [
+      "uv",
+      "pip",
+      "install",
+      "--python",
+      ".venv/bin/python",
+      "-e",
+      ".",
+      "pytest==7.4.4",
+      "black==22.12.0",
+      "mypy==1.11.2",
+      "attrs==25.4.0"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "Resolved 16 packages in 173ms\n   Building rich @ file:///private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-124-condition-b-8e3ci31x\n      Built rich @ file:///private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-124-condition-b-8e3ci31x\nPrepared 1 package in 69ms\nInstalled 16 packages in 32ms\n + attrs==25.4.0\n + black==22.12.0\n + click==8.4.2\n + iniconfig==2.3.0\n + markdown-it-py==4.2.0\n + mdurl==0.1.2\n + mypy==1.11.2\n + mypy-extensions==1.1.0\n + packaging==26.3\n + pathspec==1.1.1\n + platformdirs==4.11.1\n + pluggy==1.6.0\n + pygments==2.20.0\n + pytest==7.4.4\n + rich==15.0.0 (from file:///private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-124-condition-b-8e3ci31x)\n + typing-extensions==4.16.0\n"
+  }
+]

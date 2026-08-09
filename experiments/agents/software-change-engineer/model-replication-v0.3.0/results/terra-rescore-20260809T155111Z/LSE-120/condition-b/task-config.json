@@ -1,0 +1,68 @@
+{
+  "dependency_paths": [
+    "pyproject.toml",
+    "requirements-dev.txt",
+    "setup.cfg",
+    "setup.py",
+    "uv.lock"
+  ],
+  "hidden_command": [
+    ".venv/bin/pytest",
+    "-q",
+    "--confcutdir={hidden_parent}",
+    "{hidden_test}"
+  ],
+  "hidden_test": "../real-repository-suite-v0.2.0/hidden_tests/LSE-120.py",
+  "hidden_test_sha256": "f9b03a1d78f55fa62a9993b17937826061df8ec159bbbb4e017ab3b58567410f",
+  "id": "LSE-120",
+  "max_changed_lines": 400,
+  "max_changed_paths": 6,
+  "path": "../real-repository-suite-v0.2.0/tasks/LSE-120.md",
+  "prohibited_path_prefixes": [
+    ".github/",
+    "docs/"
+  ],
+  "provision_commands": [
+    [
+      "uv",
+      "venv",
+      "--python",
+      "3.12"
+    ],
+    [
+      "uv",
+      "pip",
+      "install",
+      "--python",
+      ".venv/bin/python",
+      "-e",
+      ".",
+      "pytest==9.1.1",
+      "ruff==0.15.9"
+    ]
+  ],
+  "quality_commands": [
+    [
+      ".venv/bin/ruff",
+      "check",
+      "."
+    ]
+  ],
+  "regression_commands": [
+    [
+      ".venv/bin/pytest",
+      "-q",
+      "tests/test_structures.py"
+    ]
+  ],
+  "target": {
+    "commit": "1f6589ec3a1ee910f9a65cc3ceac60b26677bc0e",
+    "repository": "https://github.com/psf/requests",
+    "stars_observed": "54.3k",
+    "stars_observed_on": "2026-08-09"
+  },
+  "task_sha256": "c0f8345e3a38165322b6e7674d1bcf7de891611f4723f98f8da28dd29f142a1c",
+  "test_path_prefixes": [
+    "tests/"
+  ]
+}

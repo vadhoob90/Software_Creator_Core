@@ -1,0 +1,79 @@
+diff --git a/src/_pytest/stash.py b/src/_pytest/stash.py
+index 6a9ff88..d7d994b 100644
+--- a/src/_pytest/stash.py
++++ b/src/_pytest/stash.py
+@@ -3,6 +3,7 @@ from __future__ import annotations
+ from typing import Any
+ from typing import cast
+ from typing import Generic
++from typing import overload
+ from typing import TypeVar
+ 
+ 
+@@ -100,6 +101,22 @@ class Stash:
+             self[key] = default
+             return default
+ 
++    @overload
++    def pop(self, key: StashKey[T]) -> T: ...
++
++    @overload
++    def pop(self, key: StashKey[T], default: D) -> T | D: ...
++
++    def pop(self, key: StashKey[T], default: D | object = NotImplemented) -> T | D:
++        """Return and remove the value for key, or return default if the key
++        wasn't set before.
++
++        Raises ``KeyError`` if the key wasn't set and no default was provided.
++        """
++        if default is NotImplemented:
++            return cast(T, self._storage.pop(key))
++        return cast(T | D, self._storage.pop(key, default))
++
+     def __delitem__(self, key: StashKey[T]) -> None:
+         """Delete the value for key.
+ 
+diff --git a/testing/test_stash.py b/testing/test_stash.py
+index c7f6f4f..396bc7f 100644
+--- a/testing/test_stash.py
++++ b/testing/test_stash.py
+@@ -3,6 +3,7 @@ from __future__ import annotations
+ from _pytest.stash import Stash
+ from _pytest.stash import StashKey
+ import pytest
++from typing_extensions import assert_type
+ 
+ 
+ def test_stash() -> None:
+@@ -67,3 +68,31 @@ def test_stash() -> None:
+     assert stash2[key2] + stash2[key3] == 300
+     assert stash[key2] == 1
+     assert key3 not in stash
++
++
++def test_stash_pop() -> None:
++    stash = Stash()
++    str_key = StashKey[str]()
++    int_key = StashKey[int]()
++
++    stash[str_key] = "value"
++    assert assert_type(stash.pop(str_key), str) == "value"
++    assert str_key not in stash
++    assert len(stash) == 0
++
++    with pytest.raises(KeyError):
++        stash.pop(str_key)
++    assert len(stash) == 0
++
++    assert assert_type(stash.pop(str_key, 42), str | int) == 42
++    assert assert_type(stash.pop(str_key, None), str | None) is None
++    assert str_key not in stash
++    assert len(stash) == 0
++
++    stash[int_key] = 10
++    assert stash.get(int_key, None) == 10
++    assert stash.setdefault(int_key, 20) == 10
++    assert int_key in stash
++    del stash[int_key]
++    assert int_key not in stash
++    assert len(stash) == 0

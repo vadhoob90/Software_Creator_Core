@@ -1,0 +1,63 @@
+diff --git a/src/click/_termui_impl.py b/src/click/_termui_impl.py
+index 03961a8..2b047a0 100644
+--- a/src/click/_termui_impl.py
++++ b/src/click/_termui_impl.py
+@@ -95,6 +95,8 @@ class ProgressBar(t.Generic[V]):
+ 
+         self.file = file
+         self.color = color
++        if update_min_steps < 1:
++            raise ValueError("update_min_steps must be at least 1")
+         self.update_min_steps = update_min_steps
+         self._completed_intervals = 0
+         self.width: int = width
+@@ -348,6 +350,13 @@ class ProgressBar(t.Generic[V]):
+             self._completed_intervals = 0
+ 
+     def finish(self) -> None:
++        if self.finished:
++            return
++
++        if self._completed_intervals:
++            self.make_step(self._completed_intervals)
++            self._completed_intervals = 0
++
+         self.eta_known = False
+         self.current_item = None
+         self.finished = True
+diff --git a/tests/test_termui.py b/tests/test_termui.py
+index 98e2577..7ef780b 100644
+--- a/tests/test_termui.py
++++ b/tests/test_termui.py
+@@ -197,6 +197,9 @@ def test_progressbar_init_exceptions(runner):
+     with pytest.raises(TypeError, match="iterable or length is required"):
+         click.progressbar()
+ 
++    with pytest.raises(ValueError, match="update_min_steps must be at least 1"):
++        click.progressbar(length=1, update_min_steps=0)
++
+ 
+ def test_progressbar_iter_outside_with_exceptions(runner):
+     progress = click.progressbar(length=2)
+@@ -350,6 +353,21 @@ def test_progress_bar_update_min_steps(runner):
+     assert bar.pos == 5
+ 
+ 
++def test_progress_bar_finish_applies_pending_update_once(runner):
++    bar = _create_progress(update_min_steps=5)
++    bar.update(3)
++
++    bar.finish()
++
++    assert bar._completed_intervals == 0
++    assert bar.pos == 3
++    assert bar.finished
++
++    bar.finish()
++
++    assert bar.pos == 3
++
++
+ @pytest.mark.parametrize("key_char", ("h", "H", "é", "À", " ", "字", "àH", "àR"))
+ @pytest.mark.parametrize("echo", [True, False])
+ @pytest.mark.skipif(not WIN, reason="Tests user-input using the msvcrt module.")

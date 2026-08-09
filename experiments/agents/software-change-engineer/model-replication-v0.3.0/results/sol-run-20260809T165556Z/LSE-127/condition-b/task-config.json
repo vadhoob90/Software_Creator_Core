@@ -1,0 +1,70 @@
+{
+  "dependency_paths": [
+    "pyproject.toml",
+    "requirements.txt",
+    "uv.lock"
+  ],
+  "hidden_command": [
+    ".venv/bin/pytest",
+    "-q",
+    "--confcutdir={hidden_parent}",
+    "{hidden_test}"
+  ],
+  "hidden_test": "../real-repository-suite-v0.2.0/hidden_tests/LSE-127.py",
+  "hidden_test_sha256": "3774dac58df823a5df6a5470a23db1affc5a1dfb640d9a3a0d77c9d8595cdcd9",
+  "id": "LSE-127",
+  "max_changed_lines": 400,
+  "max_changed_paths": 6,
+  "path": "../real-repository-suite-v0.2.0/tasks/LSE-127.md",
+  "prohibited_path_prefixes": [
+    ".github/",
+    "docs/"
+  ],
+  "provision_commands": [
+    [
+      "uv",
+      "venv",
+      "--python",
+      "3.12"
+    ],
+    [
+      "uv",
+      "pip",
+      "install",
+      "--python",
+      ".venv/bin/python",
+      "-e",
+      ".",
+      "pytest==8.4.1",
+      "ruff==0.12.11",
+      "mypy==1.17.1",
+      "trio==0.31.0",
+      "trustme==1.2.1"
+    ]
+  ],
+  "quality_commands": [
+    [
+      ".venv/bin/ruff",
+      "check",
+      "."
+    ]
+  ],
+  "regression_commands": [
+    [
+      ".venv/bin/pytest",
+      "-q",
+      "--confcutdir=tests/models",
+      "tests/models/test_queryparams.py"
+    ]
+  ],
+  "target": {
+    "commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+    "repository": "https://github.com/encode/httpx",
+    "stars_observed": "15.4k",
+    "stars_observed_on": "2026-08-09"
+  },
+  "task_sha256": "2464019090cd0b34876a394bcb8f514fbec0dec475740d3ec4e3128cf6d841dd",
+  "test_path_prefixes": [
+    "tests/"
+  ]
+}

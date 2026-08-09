@@ -1,0 +1,187 @@
+{
+  "candidate_elapsed_seconds": 81.053,
+  "candidate_returncode": 0,
+  "candidate_timed_out": false,
+  "condition_id": "condition-b",
+  "definition_sha256": "274bdc5cf3d956d30d64303a80a758ebf9f323bcaca712cfd7822f01e94f638a",
+  "evaluation": {
+    "changed_lines": 30,
+    "changed_paths": [
+      "src/click/utils.py",
+      "tests/test_utils/test_make_default_short_help.py"
+    ],
+    "commands": {
+      "dependency": {
+        "command": [
+          "git",
+          "diff",
+          "--quiet",
+          "HEAD",
+          "--",
+          "pyproject.toml",
+          "uv.lock"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "hidden": {
+        "command": [
+          ".venv/bin/pytest",
+          "-q",
+          "--confcutdir=/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests",
+          "/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-122.py"
+        ],
+        "returncode": 1,
+        "stderr": "",
+        "stdout": "..F                                                                      [100%]\n=================================== FAILURES ===================================\n________________ test_sentence_ending_semantics_survive_styling ________________\n\n    def test_sentence_ending_semantics_survive_styling() -> None:\n        value = f\"{RED}Deploy safely.{RESET} More detail follows\"\n        result = _make_default_short_help(value, 20)\n    \n>       assert strip_ansi(result) == \"Deploy safely.\"\nE       AssertionError: assert 'Deploy safely....' == 'Deploy safely.'\nE         \nE         - Deploy safely.\nE         + Deploy safely....\nE         ?               +++\n\n/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-122.py:30: AssertionError\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-122-condition-b-_tuye9fq/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /private/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/private/pytest-cache-files-4cpx5m59'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-122-condition-b-_tuye9fq/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /private/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/private/pytest-cache-files-g1sgnqp2'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-122.py::test_sentence_ending_semantics_survive_styling\n1 failed, 2 passed, 2 warnings in 0.01s\n"
+      },
+      "quality": [
+        {
+          "command": [
+            "git",
+            "diff",
+            "--check",
+            "HEAD"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        {
+          "command": [
+            ".venv/bin/ruff",
+            "check",
+            "."
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "All checks passed!\n"
+        },
+        {
+          "command": [
+            ".venv/bin/ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "64 files already formatted\n"
+        }
+      ],
+      "regressions": [
+        {
+          "command": [
+            ".venv/bin/pytest",
+            "-q",
+            "tests/test_utils/test_make_default_short_help.py"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "................                                                         [100%]\n16 passed in 0.01s\n"
+        }
+      ]
+    },
+    "criteria": [
+      {
+        "evidence": {
+          "returncode": 1
+        },
+        "id": "C1",
+        "name": "hidden_acceptance_tests",
+        "passed": false
+      },
+      {
+        "evidence": {
+          "returncodes": [
+            0
+          ]
+        },
+        "id": "C2",
+        "name": "focused_upstream_regressions",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "changed_test_paths": [
+            "tests/test_utils/test_make_default_short_help.py"
+          ]
+        },
+        "id": "C3",
+        "name": "candidate_authored_tests",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncodes": [
+            0,
+            0,
+            0
+          ]
+        },
+        "id": "C4",
+        "name": "repository_quality_checks",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncode": 0
+        },
+        "id": "C5",
+        "name": "dependency_integrity",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "changed_lines": 30,
+          "changed_path_count": 2,
+          "max_changed_lines": 400,
+          "max_changed_paths": 6,
+          "prohibited_paths": []
+        },
+        "id": "C6",
+        "name": "bounded_scope",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "claimed_paths": [
+            "src/click/utils.py",
+            "tests/test_utils/test_make_default_short_help.py"
+          ],
+          "evidence_item_count": 8,
+          "load_error": null,
+          "outcome": "success",
+          "reported_failed_check_count": 0,
+          "unknown_claims": []
+        },
+        "id": "C7",
+        "name": "handoff_evidence_integrity",
+        "passed": true
+      }
+    ],
+    "overall_pass": false,
+    "schema_version": "0.2.0",
+    "score": 6,
+    "score_total": 7,
+    "task_id": "LSE-122"
+  },
+  "finished_at": "2026-08-09T17:06:16.342452+00:00",
+  "runtime_telemetry": {
+    "event_count": 24,
+    "tool_call_count": 8,
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 138496,
+      "input_tokens": 181184,
+      "output_tokens": 2940,
+      "reasoning_output_tokens": 0
+    }
+  },
+  "started_at": "2026-08-09T17:04:54.938738+00:00",
+  "target_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+  "target_repository": "https://github.com/pallets/click",
+  "task_id": "LSE-122",
+  "workspace_retained_at": "/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-122-condition-b-_tuye9fq"
+}

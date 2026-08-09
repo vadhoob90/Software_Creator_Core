@@ -1,0 +1,4 @@
+2026-08-09T17:27:19.876481Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-08-09T17:27:19.876722Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-08-09T17:27:19.876968Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-08-09T17:32:30.550338Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (1/5 in 183ms)... turn_id=019fe790-946f-7f13-93d3-7940113d47d1 retries=1 max_retries=5 sampling_error=stream disconnected before completion: IO error: Connection reset by peer (os error 54)

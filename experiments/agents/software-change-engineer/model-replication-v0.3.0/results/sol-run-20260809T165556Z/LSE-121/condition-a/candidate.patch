@@ -1,0 +1,81 @@
+diff --git a/src/requests/hooks.py b/src/requests/hooks.py
+index 11ff9e9..d81a970 100644
+--- a/src/requests/hooks.py
++++ b/src/requests/hooks.py
+@@ -41,6 +41,14 @@ def dispatch_hook(
+     if hook_list:
+         if isinstance(hook_list, Callable):
+             hook_list = [hook_list]
++        else:
++            hook_list = list(hook_list)
++        for position, hook in enumerate(hook_list):
++            if not callable(hook):
++                raise TypeError(
++                    f"Hook event {key!r} contains a non-callable entry "
++                    f"at position {position}"
++                )
+         for hook in hook_list:
+             _hook_data = hook(hook_data, **kwargs)
+             if _hook_data is not None:
+diff --git a/tests/test_hooks.py b/tests/test_hooks.py
+index 7445525..368ca17 100644
+--- a/tests/test_hooks.py
++++ b/tests/test_hooks.py
+@@ -20,3 +20,57 @@ def test_hooks(hooks_list, result):
+ 
+ def test_default_hooks():
+     assert hooks.default_hooks() == {"response": []}
++
++
++@pytest.mark.parametrize(
++    "hooks_list",
++    (
++        (hook, hook),
++        [hook, hook],
++        (item for item in (hook, hook)),
++    ),
++)
++def test_hook_iterables_are_supported(hooks_list):
++    assert hooks.dispatch_hook("response", {"response": hooks_list}, "Data") == "ta"
++
++
++def test_hook_collection_is_validated_before_dispatch():
++    calls = []
++
++    def recording_hook(value):
++        calls.append(value)
++
++    with pytest.raises(TypeError, match=r"response.*position 1"):
++        hooks.dispatch_hook(
++            "response", {"response": (recording_hook, object())}, "Data"
++        )
++
++    assert calls == []
++
++
++def test_hook_order_and_none_return_are_preserved():
++    calls = []
++
++    def first(value):
++        calls.append(("first", value))
++
++    def second(value):
++        calls.append(("second", value))
++        return value.lower()
++
++    assert (
++        hooks.dispatch_hook("response", {"response": (first, second)}, "Data") == "data"
++    )
++    assert calls == [("first", "Data"), ("second", "Data")]
++
++
++def test_hook_exception_is_not_replaced():
++    error = RuntimeError("hook failed")
++
++    def failing_hook(value):
++        raise error
++
++    with pytest.raises(RuntimeError) as exc_info:
++        hooks.dispatch_hook("response", {"response": failing_hook}, "Data")
++
++    assert exc_info.value is error

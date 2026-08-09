@@ -1,0 +1,71 @@
+diff --git a/httpx/_models.py b/httpx/_models.py
+index 2cc8632..ea46db5 100644
+--- a/httpx/_models.py
++++ b/httpx/_models.py
+@@ -50,7 +50,12 @@ from ._utils import to_bytes_or_str, to_str
+ 
+ __all__ = ["Cookies", "Headers", "Request", "Response"]
+ 
+-SENSITIVE_HEADERS = {"authorization", "proxy-authorization"}
++SENSITIVE_HEADERS = {
++    "api-key",
++    "authorization",
++    "proxy-authorization",
++    "x-api-key",
++}
+ 
+ 
+ def _is_known_encoding(encoding: str) -> bool:
+diff --git a/tests/models/test_headers.py b/tests/models/test_headers.py
+index a87a446..ffc1d5b 100644
+--- a/tests/models/test_headers.py
++++ b/tests/models/test_headers.py
+@@ -166,7 +166,10 @@ def test_multiple_headers():
+     assert h.get_list("Vary", split_commas=True) == ["a", "b", "c"]
+ 
+ 
+-@pytest.mark.parametrize("header", ["authorization", "proxy-authorization"])
++@pytest.mark.parametrize(
++    "header",
++    ["authorization", "proxy-authorization", "api-key", "x-api-key"],
++)
+ def test_sensitive_headers(header):
+     """
+     Some headers should be obfuscated because they contain sensitive data.
+@@ -176,6 +179,36 @@ def test_sensitive_headers(header):
+     assert repr(h) == "Headers({'%s': '[secure]'})" % header
+ 
+ 
++@pytest.mark.parametrize("header", ["API-Key", b"X-API-KEY"])
++def test_sensitive_headers_are_case_insensitive_for_str_and_bytes(header):
++    headers = httpx.Headers([(header, b"placeholder")])
++    expected_header = (
++        header.decode().lower() if isinstance(header, bytes) else header.lower()
++    )
++
++    assert repr(headers) == "Headers({'%s': '[secure]'})" % expected_header
++
++
++def test_repeated_sensitive_headers_are_redacted_without_mutating_values():
++    headers = httpx.Headers(
++        [("X-API-Key", "placeholder-one"), ("x-api-key", "placeholder-two")]
++    )
++
++    assert repr(headers) == (
++        "Headers([('x-api-key', '[secure]'), ('x-api-key', '[secure]')])"
++    )
++    assert headers["x-api-key"] == "placeholder-one, placeholder-two"
++    assert headers.raw == [
++        (b"X-API-Key", b"placeholder-one"),
++        (b"x-api-key", b"placeholder-two"),
++    ]
++    assert list(headers.items()) == [("x-api-key", "placeholder-one, placeholder-two")]
++    assert headers.multi_items() == [
++        ("x-api-key", "placeholder-one"),
++        ("x-api-key", "placeholder-two"),
++    ]
++
++
+ @pytest.mark.parametrize(
+     "headers, output",
+     [

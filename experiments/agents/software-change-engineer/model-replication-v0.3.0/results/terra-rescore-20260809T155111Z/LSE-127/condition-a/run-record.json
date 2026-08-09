@@ -1,0 +1,181 @@
+{
+  "candidate_elapsed_seconds": 89.72,
+  "candidate_returncode": 0,
+  "candidate_timed_out": false,
+  "condition_id": "condition-a",
+  "definition_sha256": "d85985127ea62f46052bcede268fe60cbf2e71610d8dcfda2dcbab487ff06c92",
+  "evaluation": {
+    "changed_lines": 58,
+    "changed_paths": [
+      "httpx/_urls.py",
+      "tests/models/test_queryparams.py"
+    ],
+    "commands": {
+      "dependency": {
+        "command": [
+          "git",
+          "diff",
+          "--quiet",
+          "HEAD",
+          "--",
+          "pyproject.toml",
+          "requirements.txt",
+          "uv.lock"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "hidden": {
+        "command": [
+          ".venv/bin/pytest",
+          "-q",
+          "--confcutdir=/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests",
+          "/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-127.py"
+        ],
+        "returncode": 1,
+        "stderr": "",
+        "stdout": "F..                                                                      [100%]\n=================================== FAILURES ===================================\n________ test_remove_value_removes_only_first_match_and_preserves_order ________\n\n    def test_remove_value_removes_only_first_match_and_preserves_order() -> None:\n        original = httpx.QueryParams([(\"a\", 1), (\"b\", 2), (\"a\", 1), (\"a\", 3)])\n    \n        changed = original.remove_value(\"a\", 1)\n    \n>       assert changed.multi_items() == [(\"b\", \"2\"), (\"a\", \"1\"), (\"a\", \"3\")]\nE       AssertionError: assert [('a', '1'), ...), ('b', '2')] == [('b', '2'), ...), ('a', '3')]\nE         \nE         At index 0 diff: ('a', '1') != ('b', '2')\nE         Use -v to get more diff\n\n/private/tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-127.py:11: AssertionError\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:475\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-127-condition-a-xevn__91/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /private/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/private/pytest-cache-files-0l0co6o_'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:429\n  /private/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-127-condition-a-xevn__91/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /private/.pytest_cache/v/cache/lastfailed: [Errno 13] Permission denied: '/private/pytest-cache-files-d85r94du'\n    config.cache.set(\"cache/lastfailed\", self.lastfailed)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED ../../../../../../tmp/pdlc-core-consumption-modes-20260809/experiments/agents/software-change-engineer/real-repository-suite-v0.2.0/hidden_tests/LSE-127.py::test_remove_value_removes_only_first_match_and_preserves_order\n1 failed, 2 passed, 2 warnings in 0.04s\n"
+      },
+      "quality": [
+        {
+          "command": [
+            "git",
+            "diff",
+            "--check",
+            "HEAD"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        {
+          "command": [
+            ".venv/bin/ruff",
+            "check",
+            "."
+          ],
+          "returncode": 0,
+          "stderr": "warning: Invalid `# noqa` directive on httpx/_transports/asgi.py:171: expected a comma-separated list of codes (e.g., `# noqa: F401, F841`).\n",
+          "stdout": "All checks passed!\n"
+        }
+      ],
+      "regressions": [
+        {
+          "command": [
+            ".venv/bin/pytest",
+            "-q",
+            "--confcutdir=tests/models",
+            "tests/models/test_queryparams.py"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "................                                                         [100%]\n16 passed in 0.02s\n"
+        }
+      ]
+    },
+    "criteria": [
+      {
+        "evidence": {
+          "returncode": 1
+        },
+        "id": "C1",
+        "name": "hidden_acceptance_tests",
+        "passed": false
+      },
+      {
+        "evidence": {
+          "returncodes": [
+            0
+          ]
+        },
+        "id": "C2",
+        "name": "focused_upstream_regressions",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "changed_test_paths": [
+            "tests/models/test_queryparams.py"
+          ]
+        },
+        "id": "C3",
+        "name": "candidate_authored_tests",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncodes": [
+            0,
+            0
+          ]
+        },
+        "id": "C4",
+        "name": "repository_quality_checks",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "returncode": 0
+        },
+        "id": "C5",
+        "name": "dependency_integrity",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "changed_lines": 58,
+          "changed_path_count": 2,
+          "max_changed_lines": 400,
+          "max_changed_paths": 6,
+          "prohibited_paths": []
+        },
+        "id": "C6",
+        "name": "bounded_scope",
+        "passed": true
+      },
+      {
+        "evidence": {
+          "claimed_paths": [
+            "httpx/_urls.py",
+            "tests/models/test_queryparams.py"
+          ],
+          "evidence_item_count": 6,
+          "load_error": null,
+          "outcome": "partial",
+          "reported_failed_check_count": 1,
+          "unknown_claims": []
+        },
+        "id": "C7",
+        "name": "handoff_evidence_integrity",
+        "passed": true
+      }
+    ],
+    "overall_pass": false,
+    "schema_version": "0.2.0",
+    "score": 6,
+    "score_total": 7,
+    "task_id": "LSE-127"
+  },
+  "finished_at": "2026-08-09T16:17:30.737225+00:00",
+  "rescored_at": "2026-08-09T16:55:28.739543+00:00",
+  "rescored_with": "model-replication-v0.3.0",
+  "runtime_telemetry": {
+    "event_count": 24,
+    "tool_call_count": 9,
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 240896,
+      "input_tokens": 273978,
+      "output_tokens": 3115,
+      "reasoning_output_tokens": 0
+    }
+  },
+  "source_handoff_sha256": "8ea7097ffd0184f72039c822671d29cbe559877b430966f02f827a85eb013c2a",
+  "source_patch_sha256": "f7da5c5754cb5938565da627c8b3235e63273412cfdce23f28a89ee0d6da66d7",
+  "started_at": "2026-08-09T16:16:00.565922+00:00",
+  "target_commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+  "target_repository": "https://github.com/encode/httpx",
+  "task_id": "LSE-127",
+  "workspace_retained_at": "/var/folders/xr/ncfb35gs30jdqyl808x4lrw00000gn/T/pdlc-LSE-127-condition-a-xevn__91"
+}

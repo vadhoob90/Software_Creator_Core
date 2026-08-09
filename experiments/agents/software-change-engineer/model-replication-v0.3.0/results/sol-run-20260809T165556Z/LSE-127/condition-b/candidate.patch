@@ -1,0 +1,85 @@
+diff --git a/httpx/_urls.py b/httpx/_urls.py
+index 301d087..1c1d824 100644
+--- a/httpx/_urls.py
++++ b/httpx/_urls.py
+@@ -579,6 +579,26 @@ class QueryParams(typing.Mapping[str, str]):
+         q._dict.pop(str(key), None)
+         return q
+ 
++    def remove_value(self, key: str, value: typing.Any = None) -> QueryParams:
++        """
++        Return a new QueryParams instance, removing the first matching value
++        for a key.
++
++        Usage:
++
++        q = httpx.QueryParams("a=123&a=456&a=123")
++        q = q.remove_value("a", "123")
++        assert q == httpx.QueryParams("a=456&a=123")
++        """
++        key = str(key)
++        value = primitive_value_to_str(value)
++        q = QueryParams(self)
++        if key in q._dict and value in q._dict[key]:
++            q._dict[key].remove(value)
++            if not q._dict[key]:
++                q._dict.pop(key)
++        return q
++
+     def merge(self, params: QueryParamTypes | None = None) -> QueryParams:
+         """
+         Return a new QueryParams instance, updated with.
+diff --git a/tests/models/test_queryparams.py b/tests/models/test_queryparams.py
+index 29b2ca6..f6f5fb7 100644
+--- a/tests/models/test_queryparams.py
++++ b/tests/models/test_queryparams.py
+@@ -117,6 +117,49 @@ def test_queryparam_remove():
+     assert q == httpx.QueryParams("")
+ 
+ 
++def test_queryparam_remove_value():
++    q = httpx.QueryParams("a=123&a=456&a=123&b=789")
++    removed = q.remove_value("a", "123")
++
++    assert removed.multi_items() == [("a", "456"), ("a", "123"), ("b", "789")]
++    assert q.multi_items() == [
++        ("a", "123"),
++        ("a", "456"),
++        ("a", "123"),
++        ("b", "789"),
++    ]
++
++
++def test_queryparam_remove_value_coerces_key_and_value():
++    q = httpx.QueryParams([(1, True), (1, None), (2, False)])
++
++    assert q.remove_value(1, True).multi_items() == [
++        ("1", ""),
++        ("2", "false"),
++    ]
++    assert q.remove_value(1, None).multi_items() == [
++        ("1", "true"),
++        ("2", "false"),
++    ]
++
++
++@pytest.mark.parametrize((("key", "value")), [("missing", "123"), ("a", "missing")])
++def test_queryparam_remove_value_missing_match_returns_independent_copy(key, value):
++    q = httpx.QueryParams("a=123&a=456&b=789")
++    unchanged = q.remove_value(key, value)
++
++    assert unchanged == q
++    assert unchanged is not q
++    assert unchanged._dict is not q._dict
++    assert all(unchanged._dict[item] is not q._dict[item] for item in q)
++
++
++def test_queryparam_remove_value_removes_last_value_with_key():
++    q = httpx.QueryParams("a=123&b=456")
++
++    assert q.remove_value("a", "123").multi_items() == [("b", "456")]
++
++
+ def test_queryparam_merge():
+     q = httpx.QueryParams("a=123")
+     q = q.merge({"b": "456"})

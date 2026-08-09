@@ -1,0 +1,310 @@
+{
+  "definition_effect": {
+    "interaction_negative_tasks": 1,
+    "interaction_positive_tasks": 4,
+    "interaction_sign_test_two_sided_p": 0.375,
+    "interaction_tied_tasks": 5,
+    "model_definition_interaction": 4,
+    "sol_concise_only_strict_passes": 0,
+    "sol_detailed_only_strict_passes": 3,
+    "sol_paired_losses": 0,
+    "sol_paired_ties": 6,
+    "sol_paired_wins": 4,
+    "sol_score_difference": 4,
+    "sol_score_sign_test_two_sided_p": 0.125,
+    "sol_strict_pass_exact_mcnemar_p": 0.25,
+    "terra_score_difference": 0
+  },
+  "models": {
+    "gpt-5.6-sol": {
+      "condition-a": {
+        "changed_lines": 520,
+        "criteria": {
+          "bounded_scope": {
+            "passed": 10,
+            "total": 10
+          },
+          "candidate_authored_tests": {
+            "passed": 10,
+            "total": 10
+          },
+          "dependency_integrity": {
+            "passed": 10,
+            "total": 10
+          },
+          "focused_upstream_regressions": {
+            "passed": 7,
+            "total": 10
+          },
+          "handoff_evidence_integrity": {
+            "passed": 10,
+            "total": 10
+          },
+          "hidden_acceptance_tests": {
+            "passed": 7,
+            "total": 10
+          },
+          "repository_quality_checks": {
+            "passed": 10,
+            "total": 10
+          }
+        },
+        "elapsed_seconds": 1099.497,
+        "input_tokens": 2856628,
+        "output_tokens": 36311,
+        "score": 64,
+        "strict_passes": 5,
+        "tool_calls": 116
+      },
+      "condition-b": {
+        "changed_lines": 466,
+        "criteria": {
+          "bounded_scope": {
+            "passed": 10,
+            "total": 10
+          },
+          "candidate_authored_tests": {
+            "passed": 10,
+            "total": 10
+          },
+          "dependency_integrity": {
+            "passed": 10,
+            "total": 10
+          },
+          "focused_upstream_regressions": {
+            "passed": 10,
+            "total": 10
+          },
+          "handoff_evidence_integrity": {
+            "passed": 10,
+            "total": 10
+          },
+          "hidden_acceptance_tests": {
+            "passed": 8,
+            "total": 10
+          },
+          "repository_quality_checks": {
+            "passed": 10,
+            "total": 10
+          }
+        },
+        "elapsed_seconds": 1149.114,
+        "input_tokens": 2949142,
+        "output_tokens": 38404,
+        "score": 68,
+        "strict_passes": 8,
+        "tool_calls": 113
+      }
+    },
+    "gpt-5.6-terra": {
+      "condition-a": {
+        "changed_lines": 423,
+        "criteria": {
+          "bounded_scope": {
+            "passed": 10,
+            "total": 10
+          },
+          "candidate_authored_tests": {
+            "passed": 10,
+            "total": 10
+          },
+          "dependency_integrity": {
+            "passed": 10,
+            "total": 10
+          },
+          "focused_upstream_regressions": {
+            "passed": 8,
+            "total": 10
+          },
+          "handoff_evidence_integrity": {
+            "passed": 10,
+            "total": 10
+          },
+          "hidden_acceptance_tests": {
+            "passed": 8,
+            "total": 10
+          },
+          "repository_quality_checks": {
+            "passed": 9,
+            "total": 10
+          }
+        },
+        "elapsed_seconds": 1001.246,
+        "input_tokens": 2637682,
+        "output_tokens": 34438,
+        "score": 65,
+        "strict_passes": 5,
+        "tool_calls": 96
+      },
+      "condition-b": {
+        "changed_lines": 403,
+        "criteria": {
+          "bounded_scope": {
+            "passed": 10,
+            "total": 10
+          },
+          "candidate_authored_tests": {
+            "passed": 10,
+            "total": 10
+          },
+          "dependency_integrity": {
+            "passed": 10,
+            "total": 10
+          },
+          "focused_upstream_regressions": {
+            "passed": 7,
+            "total": 10
+          },
+          "handoff_evidence_integrity": {
+            "passed": 10,
+            "total": 10
+          },
+          "hidden_acceptance_tests": {
+            "passed": 8,
+            "total": 10
+          },
+          "repository_quality_checks": {
+            "passed": 10,
+            "total": 10
+          }
+        },
+        "elapsed_seconds": 938.09,
+        "input_tokens": 2964944,
+        "output_tokens": 36688,
+        "score": 65,
+        "strict_passes": 5,
+        "tool_calls": 99
+      }
+    }
+  },
+  "schema_version": "0.3.0",
+  "sol_detailed_vs_concise_resource_change_percent": {
+    "changed_lines": -10.385,
+    "elapsed_seconds": 4.513,
+    "input_tokens": 3.239,
+    "output_tokens": 5.764,
+    "tool_calls": -2.586
+  },
+  "tasks": [
+    {
+      "interaction": 0,
+      "sol_a": 7,
+      "sol_a_strict_pass": true,
+      "sol_b": 7,
+      "sol_b_strict_pass": true,
+      "sol_definition_effect": 0,
+      "task_id": "LSE-120",
+      "terra_a": 7,
+      "terra_b": 7,
+      "terra_definition_effect": 0
+    },
+    {
+      "interaction": 0,
+      "sol_a": 7,
+      "sol_a_strict_pass": true,
+      "sol_b": 7,
+      "sol_b_strict_pass": true,
+      "sol_definition_effect": 0,
+      "task_id": "LSE-121",
+      "terra_a": 7,
+      "terra_b": 7,
+      "terra_definition_effect": 0
+    },
+    {
+      "interaction": 0,
+      "sol_a": 6,
+      "sol_a_strict_pass": false,
+      "sol_b": 6,
+      "sol_b_strict_pass": false,
+      "sol_definition_effect": 0,
+      "task_id": "LSE-122",
+      "terra_a": 6,
+      "terra_b": 6,
+      "terra_definition_effect": 0
+    },
+    {
+      "interaction": 0,
+      "sol_a": 7,
+      "sol_a_strict_pass": true,
+      "sol_b": 7,
+      "sol_b_strict_pass": true,
+      "sol_definition_effect": 0,
+      "task_id": "LSE-123",
+      "terra_a": 6,
+      "terra_b": 6,
+      "terra_definition_effect": 0
+    },
+    {
+      "interaction": 1,
+      "sol_a": 6,
+      "sol_a_strict_pass": false,
+      "sol_b": 7,
+      "sol_b_strict_pass": true,
+      "sol_definition_effect": 1,
+      "task_id": "LSE-124",
+      "terra_a": 7,
+      "terra_b": 7,
+      "terra_definition_effect": 0
+    },
+    {
+      "interaction": -1,
+      "sol_a": 7,
+      "sol_a_strict_pass": true,
+      "sol_b": 7,
+      "sol_b_strict_pass": true,
+      "sol_definition_effect": 0,
+      "task_id": "LSE-125",
+      "terra_a": 6,
+      "terra_b": 7,
+      "terra_definition_effect": 1
+    },
+    {
+      "interaction": 1,
+      "sol_a": 6,
+      "sol_a_strict_pass": false,
+      "sol_b": 7,
+      "sol_b_strict_pass": true,
+      "sol_definition_effect": 1,
+      "task_id": "LSE-126",
+      "terra_a": 6,
+      "terra_b": 6,
+      "terra_definition_effect": 0
+    },
+    {
+      "interaction": 1,
+      "sol_a": 5,
+      "sol_a_strict_pass": false,
+      "sol_b": 6,
+      "sol_b_strict_pass": false,
+      "sol_definition_effect": 1,
+      "task_id": "LSE-127",
+      "terra_a": 6,
+      "terra_b": 6,
+      "terra_definition_effect": 0
+    },
+    {
+      "interaction": 2,
+      "sol_a": 6,
+      "sol_a_strict_pass": false,
+      "sol_b": 7,
+      "sol_b_strict_pass": true,
+      "sol_definition_effect": 1,
+      "task_id": "LSE-128",
+      "terra_a": 7,
+      "terra_b": 6,
+      "terra_definition_effect": -1
+    },
+    {
+      "interaction": 0,
+      "sol_a": 7,
+      "sol_a_strict_pass": true,
+      "sol_b": 7,
+      "sol_b_strict_pass": true,
+      "sol_definition_effect": 0,
+      "task_id": "LSE-129",
+      "terra_a": 7,
+      "terra_b": 7,
+      "terra_definition_effect": 0
+    }
+  ]
+}

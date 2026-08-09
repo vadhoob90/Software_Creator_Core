@@ -1,0 +1,60 @@
+diff --git a/src/click/_termui_impl.py b/src/click/_termui_impl.py
+index 03961a8..7f50dcb 100644
+--- a/src/click/_termui_impl.py
++++ b/src/click/_termui_impl.py
+@@ -95,6 +95,8 @@ class ProgressBar(t.Generic[V]):
+ 
+         self.file = file
+         self.color = color
++        if update_min_steps < 1:
++            raise ValueError("update_min_steps must be at least 1")
+         self.update_min_steps = update_min_steps
+         self._completed_intervals = 0
+         self.width: int = width
+@@ -348,6 +350,14 @@ class ProgressBar(t.Generic[V]):
+             self._completed_intervals = 0
+ 
+     def finish(self) -> None:
++        if self.finished:
++            return
++
++        if self._completed_intervals:
++            self.make_step(self._completed_intervals)
++            self.render_progress()
++            self._completed_intervals = 0
++
+         self.eta_known = False
+         self.current_item = None
+         self.finished = True
+diff --git a/tests/test_termui.py b/tests/test_termui.py
+index 98e2577..d6817ce 100644
+--- a/tests/test_termui.py
++++ b/tests/test_termui.py
+@@ -350,6 +350,27 @@ def test_progress_bar_update_min_steps(runner):
+     assert bar.pos == 5
+ 
+ 
++@pytest.mark.parametrize("update_min_steps", (0, -1))
++def test_progress_bar_update_min_steps_must_be_positive(update_min_steps):
++    with pytest.raises(ValueError, match="update_min_steps must be at least 1"):
++        _create_progress(update_min_steps=update_min_steps)
++
++
++def test_progress_bar_finish_flushes_pending_update_once(runner):
++    bar = _create_progress(update_min_steps=5)
++    bar.update(3)
++
++    bar.finish()
++
++    assert bar.finished
++    assert bar.pos == 3
++    assert bar._completed_intervals == 0
++
++    bar.finish()
++
++    assert bar.pos == 3
++
++
+ @pytest.mark.parametrize("key_char", ("h", "H", "é", "À", " ", "字", "àH", "àR"))
+ @pytest.mark.parametrize("echo", [True, False])
+ @pytest.mark.skipif(not WIN, reason="Tests user-input using the msvcrt module.")

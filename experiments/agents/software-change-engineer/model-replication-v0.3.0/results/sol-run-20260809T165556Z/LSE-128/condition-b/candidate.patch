@@ -1,0 +1,93 @@
+diff --git a/src/_pytest/stash.py b/src/_pytest/stash.py
+index 6a9ff88..ab167f2 100644
+--- a/src/_pytest/stash.py
++++ b/src/_pytest/stash.py
+@@ -3,6 +3,7 @@ from __future__ import annotations
+ from typing import Any
+ from typing import cast
+ from typing import Generic
++from typing import overload
+ from typing import TypeVar
+ 
+ 
+@@ -13,6 +14,13 @@ T = TypeVar("T")
+ D = TypeVar("D")
+ 
+ 
++class _NotSet:
++    __slots__ = ()
++
++
++NOT_SET = _NotSet()
++
++
+ class StashKey(Generic[T]):
+     """``StashKey`` is an object used as a key to a :class:`Stash`.
+ 
+@@ -91,6 +99,22 @@ class Stash:
+         except KeyError:
+             return default
+ 
++    @overload
++    def pop(self, key: StashKey[T]) -> T: ...
++
++    @overload
++    def pop(self, key: StashKey[T], default: D) -> T | D: ...
++
++    def pop(self, key: StashKey[T], default: D | _NotSet = NOT_SET) -> T | D:
++        """Return and remove the value for key, or return default if the key
++        wasn't set before.
++
++        Raises ``KeyError`` if the key wasn't set and no default was provided.
++        """
++        if default is NOT_SET:
++            return cast(T, self._storage.pop(key))
++        return cast("T | D", self._storage.pop(key, default))
++
+     def setdefault(self, key: StashKey[T], default: T) -> T:
+         """Return the value of key if already set, otherwise set the value
+         of key to default and return default."""
+diff --git a/testing/test_stash.py b/testing/test_stash.py
+index c7f6f4f..a04f1c0 100644
+--- a/testing/test_stash.py
++++ b/testing/test_stash.py
+@@ -67,3 +67,39 @@ def test_stash() -> None:
+     assert stash2[key2] + stash2[key3] == 300
+     assert stash[key2] == 1
+     assert key3 not in stash
++
++
++def test_pop() -> None:
++    stash = Stash()
++    key = StashKey[str]()
++    other_key = StashKey[int]()
++
++    stash[key] = "value"
++    stash[other_key] = 1
++    assert stash.pop(key) == "value"
++    assert key not in stash
++    assert len(stash) == 1
++    assert stash[other_key] == 1
++
++    with pytest.raises(KeyError):
++        stash.pop(key)
++    assert len(stash) == 1
++
++    assert stash.pop(key, 42) == 42
++    assert stash.pop(key, None) is None
++    assert key not in stash
++    assert len(stash) == 1
++
++    stash[key] = "new value"
++    assert stash.pop(key, 42) == "new value"
++    assert key not in stash
++
++
++def test_pop_typing() -> None:
++    stash = Stash()
++    key = StashKey[str]()
++
++    stash[key] = "value"
++    value: str = stash.pop(key)
++    value_or_int: str | int = stash.pop(key, 42)
++    value_or_none: str | None = stash.pop(key, None)
