@@ -1,16 +1,24 @@
 # ES-004: Deliberate, compatible, and reversible evolution
 
 **Status:** Adopted initial baseline  
-**Governing principle:** [Evolution is deliberate, compatible, and reversible](../core/development-principles.md#4-evolution-is-deliberate-compatible-and-reversible)  
+**Governing principle:** [P-004: Evolves without losing trust](../core/development-principles.md#p-004-we-will-create-software-that-can-evolve-without-losing-trust)
+
 **Default enforcement:** Documented
 
 ## Purpose
 
-Every stateful component and observable contract must have an intentional lifecycle. Changes must preserve downstream value, expose unsupported transitions, and provide migration and rollback proportional to risk without introducing speculative infrastructure.
+Every stateful component, released capability, and observable contract must
+have an intentional lifecycle. Changes must preserve downstream value, expose
+unsupported transitions, and provide operational readiness, migration,
+rollback, feedback, and retirement evidence proportional to risk without
+introducing speculative infrastructure.
 
 ## Applicability
 
-This standard applies to public and internal contracts, schemas, configuration, persisted state, prompts and agent definitions, generated artifacts, packages, commands, APIs, routing policies, models, dependencies, and released components.
+This standard applies to public and internal contracts, schemas, configuration,
+persisted state, prompts and agent definitions, generated artifacts, packages,
+commands, APIs, routing policies, models, dependencies, released components,
+and applicable operational and retirement artifacts.
 
 ## Requirements
 
@@ -112,6 +120,75 @@ Generators and migrations MUST distinguish PDLC-owned state from human- or downs
 
 Deletion and archival MUST be scoped, confirmable, and observable. Material deletion MUST have a declared recovery expectation.
 
+### ES-004-11: Proportionate operational readiness
+
+Software intended for an operational environment MUST identify, in proportion
+to its consequence and delivery model:
+
+- The product owner and operational owner.
+- The supported environment, dependencies, capacity assumptions, and known
+  failure boundaries.
+- Health and user-impact signals required to recognise material degradation.
+- Support, escalation, recovery, rollback or roll-forward, and safe-disablement
+  expectations.
+- Backup, restoration, retention, and integrity-verification needs.
+- The release evidence and human authority required before activation.
+
+Not every artifact is a continuously operated service. Libraries, local tools,
+batch software, agent definitions, and offline artifacts MAY satisfy this
+requirement through support, compatibility, recovery, and consumer guidance
+rather than service-level objectives or continuous monitoring.
+
+PDLC MAY generate or validate operational-readiness artifacts during a bounded
+job. That does not make PDLC the downstream product's monitoring, deployment,
+or incident-management system.
+
+### ES-004-12: Outcome and feedback contract
+
+Before a material release or activation, the product MUST identify the evidence
+that will show whether the affected outcome improved, remained acceptable, or
+regressed. The contract MUST include, where applicable:
+
+- The intended outcome and relevant baseline.
+- Success and guardrail measures.
+- Qualitative or quantitative evidence sources.
+- A review owner and review point or condition.
+- Evidence that would trigger investigation, iteration, rollback, suspension,
+  or retirement.
+
+The evidence method MUST be appropriate to the decision. Statistical
+significance, online experimentation, or continuous telemetry MUST NOT be
+required where qualitative research, operational evidence, compliance review,
+or another method better fits the product and risk.
+
+Feedback MAY be supplied to a later PDLC job manually or through an authorised
+integration. It MUST NOT silently change the context or policy of the job that
+produced it.
+
+### ES-004-13: Retirement and data disposition
+
+Material retirement MUST begin with an impact assessment covering:
+
+- The evidence and authority supporting retirement.
+- Affected people, consumers, integrations, contracts, and dependencies.
+- Notice and support periods appropriate to risk, commitments, available
+  replacements, and urgency.
+- Migration, export, compatibility, redirection, or replacement options.
+- Data retention, deletion, anonymisation, archival, legal hold, and
+  restoration requirements by data category.
+- Release, access, credential, infrastructure, documentation, and support
+  changes.
+- The point of no return, recovery feasibility, retained evidence, and
+  accountable approval.
+
+No universal notice period or data action applies to every product. The chosen
+policy MUST be explicit, justified, and consistent with applicable product,
+legal, contractual, security, and consumer obligations.
+
+An agent MAY assemble evidence, draft communication, or execute bounded,
+reversible retirement steps within authority. Consequential retirement and
+irreversible disposition require the applicable human approval.
+
 ## Required verification
 
 ### Automated controls
@@ -126,6 +203,9 @@ When implementation exists, CI MUST include applicable:
 - Deprecation and version-policy checks.
 - Preservation tests for consumer-owned state.
 - Documentation checks for supported versions and migration paths.
+- Operational-readiness artifact and recovery checks.
+- Outcome-contract and scheduled-review checks where applicable.
+- Retirement-impact, consumer-notice, and data-disposition checks.
 
 ### Review controls
 
@@ -138,10 +218,17 @@ Reviewers MUST be able to answer:
 - What happens to state created by the newer version during rollback?
 - Is each compatibility layer necessary and temporary?
 - Has speculative machinery been avoided?
+- Is the software operable and recoverable in its declared delivery model?
+- How will the team learn whether the released change achieved its outcome?
+- Can the product be retired without abandoning consumers, obligations, data,
+  or required evidence?
 
 ## Evidence
 
-The evidence package must include the contract inventory, lifecycle impact, compatibility results, migration and reversal results, consumer-impact analysis, and active deprecations or exceptions.
+The evidence package must include the contract inventory, lifecycle impact,
+compatibility results, migration and reversal results, consumer-impact
+analysis, applicable operational-readiness and outcome contracts, retirement
+impact where relevant, and active deprecations or exceptions.
 
 ## Further reading
 

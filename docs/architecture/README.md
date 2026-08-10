@@ -104,6 +104,9 @@ This architecture does not yet:
 - Promote local learning into Core automatically.
 - Require all product repositories to use every available capability.
 - Make the reference harness mandatory or give it privileged interfaces unavailable to custom harnesses.
+- Continuously operate, monitor, deploy, reprioritise, or retire downstream
+  products. Integrations with production and product-management systems are
+  bounded, explicitly invoked, and governed by product authority.
 
 ## Acceptance criteria for the architecture
 

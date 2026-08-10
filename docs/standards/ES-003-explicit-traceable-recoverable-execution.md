@@ -1,7 +1,8 @@
 # ES-003: Explicit, traceable, and recoverable execution
 
 **Status:** Adopted initial baseline  
-**Governing principle:** [Every execution is explicit, traceable, and recoverable](../core/development-principles.md#3-every-execution-is-explicit-traceable-and-recoverable)  
+**Governing principles:** [P-002: Works—and we prove it](../core/development-principles.md#p-002-we-will-create-software-that-worksand-we-will-prove-it); [P-004: Evolves without losing trust](../core/development-principles.md#p-004-we-will-create-software-that-can-evolve-without-losing-trust); [P-005: Human responsibility](../core/development-principles.md#p-005-we-will-use-agents-and-automation-to-strengthen-human-judgement-not-replace-human-responsibility)
+
 **Default enforcement:** Documented
 
 ## Purpose

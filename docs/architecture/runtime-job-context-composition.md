@@ -76,7 +76,7 @@ core:
     role: sha256:...
 
 requirements:
-  principles: [P-001, P-002, P-003, P-004, P-005]
+  principles: [P-001, P-002, P-004, P-005, P-006, P-007]
   standards:
     - ES-001-03
     - ES-002-01
@@ -109,6 +109,25 @@ composition_manifest: .pdlc/jobs/JOB_ID/context-composition.json
 This example is a target contract, not an implemented schema.
 
 ## Role-specific resolution
+
+### Product Manager contributor
+
+During intake, receives:
+
+- The authorised request and available initiating context.
+- Applicable need, evidence, comprehension, security, and authority rules.
+- Product goals and constraints that are already approved and relevant.
+- The product-brief and clarification output contract.
+
+It may inspect authorised repository and product evidence and ask targeted
+questions. It does not invent missing product intent, commit delivery, or
+receive implementation or release credentials merely because the request
+proposes a solution.
+
+During feasibility synthesis, it additionally receives the exact product brief
+and specialist assessments. It must preserve material disagreement, uncertainty,
+and residual risk while presenting options and a recommendation for the
+applicable human decision.
 
 ### Architecture contributor
 

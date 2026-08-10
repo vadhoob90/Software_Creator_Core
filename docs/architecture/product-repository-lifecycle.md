@@ -153,15 +153,25 @@ A product repository is not considered ready merely because Core imports success
 
 A product-development job begins with a natural-language or structured request. Core then:
 
-1. Records the authorised request and acceptance criteria.
-2. Classifies artifacts, lifecycle impact, and risk.
-3. Selects an allowed workflow.
-4. Resolves applicable Core and product context.
-5. Previews consequential authority and actions.
-6. Invokes human or agent contributors role by role.
-7. Validates and persists each material artifact.
-8. Enforces independent evidence and approval gates.
-9. Produces an explicit final outcome.
+1. Records the authorised request and initiating human intent.
+2. Invokes the Product Manager to ask targeted questions and produce a
+   versioned product brief.
+3. Validates request readiness or returns an explicit clarification-required
+   outcome.
+4. Classifies artifacts, lifecycle impact, risk, and the specialist
+   perspectives required for feasibility.
+5. Selects an allowed feasibility workflow and resolves its applicable Core and
+   product context.
+6. Invokes bounded human or agent specialists and preserves their evidence,
+   uncertainty, and disagreement.
+7. Invokes the Product Manager to synthesise viable options and trade-offs
+   without silently overruling specialist findings.
+8. Records the applicable human commitment, defer, decline, or further-research
+   decision.
+9. For committed work, selects the allowed delivery workflow, previews
+   consequential authority, and invokes contributors role by role.
+10. Validates and persists each material artifact, enforces independent
+    evidence and approval gates, and produces an explicit final outcome.
 
 Agents do not own workflow state and cannot skip required transitions.
 
