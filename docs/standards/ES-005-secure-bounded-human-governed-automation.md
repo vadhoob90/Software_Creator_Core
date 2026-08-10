@@ -1,7 +1,8 @@
 # ES-005: Secure, bounded, and human-governed automation
 
 **Status:** Adopted initial baseline  
-**Governing principle:** [Automation is secure, bounded, and human-governed](../core/development-principles.md#5-automation-is-secure-bounded-and-human-governed)  
+**Governing principles:** [P-005: Human responsibility](../core/development-principles.md#p-005-we-will-use-agents-and-automation-to-strengthen-human-judgement-not-replace-human-responsibility); [P-007: Secure and respectful software](../core/development-principles.md#p-007-we-will-create-software-that-is-secure-and-respects-the-people-it-serves)
+
 **Default enforcement:** Documented
 
 ## Purpose

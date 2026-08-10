@@ -1,18 +1,49 @@
 # ES-002: Evidence and testing
 
 **Status:** Adopted initial baseline  
-**Governing principle:** [Every claim requires evidence](../core/development-principles.md#2-every-claim-requires-evidence)  
+**Governing principles:** [P-002: Works—and we prove it](../core/development-principles.md#p-002-we-will-create-software-that-worksand-we-will-prove-it); [P-006: Understand the need](../core/development-principles.md#p-006-we-will-understand-the-need-before-we-build)
+
 **Default enforcement:** Documented
 
 ## Purpose
 
-Claims about behaviour, safety, compatibility, performance, accessibility, or readiness must be supported by evidence proportionate to the consequence of being wrong. Coverage measures execution, not test effectiveness, so coverage floors are combined with behavioural, fault-oriented, and risk-based requirements.
+Claims about a product need, feasibility, behaviour, safety, compatibility,
+performance, accessibility, or readiness must be supported by evidence
+proportionate to the consequence of being wrong. Coverage measures execution,
+not test effectiveness, so coverage floors are combined with discovery,
+behavioural, fault-oriented, and risk-based requirements.
 
 ## Applicability
 
-This standard applies to production code, prompts and agent behaviour, schemas, migrations, routing, integrations, generated workspaces, commands, APIs, security controls, and the enforcement harness itself.
+This standard applies to product requests, discovery and feasibility artifacts,
+production code, prompts and agent behaviour, schemas, migrations, routing,
+integrations, generated workspaces, commands, APIs, security controls, and the
+enforcement harness itself.
 
 ## Requirements
+
+### ES-002-00: Request readiness
+
+Before specialist feasibility or substantial delivery commitment, an applicable
+product request MUST have a versioned brief that identifies:
+
+- The initiating request and current authority.
+- The affected people or stakeholders and the problem or opportunity.
+- The desired outcome and proposed success and guardrail evidence.
+- Available evidence and its source.
+- Scope, non-goals, constraints, dependencies, and known risks.
+- Assumptions, unresolved questions, and stopping conditions.
+- The specialist perspectives required for feasibility and why they are
+  relevant.
+
+The Product Manager MAY draft and refine the brief but MUST NOT invent product
+intent. Missing product intent requires clarification. Questions that a
+qualified specialist can investigate MAY remain open when their scope is
+explicit.
+
+Urgent, security, legal, regulatory, or otherwise mandatory work MAY use an
+accelerated path. The path MUST still record its need, authority, risk, accepted
+uncertainty, and reason normal readiness evidence could not be obtained.
 
 ### ES-002-01: Testable claims
 
@@ -127,6 +158,31 @@ Subjective or probabilistic agent behaviour MUST use versioned evaluation cases 
 
 Averages MUST NOT conceal a critical safety failure.
 
+### ES-002-10: Feasibility synthesis and commitment
+
+When a request requires specialist feasibility work, each assessment MUST
+identify its scope, evidence, assumptions, uncertainty, risks, and recommended
+investigations. A specialist MUST NOT claim authority outside its assigned
+responsibility.
+
+Before substantial delivery commitment, the Product Manager MUST produce a
+versioned synthesis that:
+
+- References the product brief and specialist assessments used.
+- Preserves material disagreements and unresolved risks.
+- Presents viable options, including defer, decline, research, prototype, or
+  non-software responses where supported by the evidence.
+- Describes expected value, affected people, duties, safety, cost or effort,
+  opportunity cost, confidence, and material trade-offs without reducing every
+  decision to a single economic score.
+- Recommends a next step and identifies the evidence that could change it.
+- Records the human authority required to proceed and the resulting decision.
+
+The Product Manager MAY synthesise and recommend but MUST NOT silently overrule
+a specialist finding or make a consequential commitment reserved for human
+authority. The orchestrator MUST NOT advance the job past the commitment gate
+until the required decision and accepted residual risk are recorded.
+
 ## Required verification
 
 ### Automated controls
@@ -145,6 +201,12 @@ When implementation exists, CI MUST:
 
 Reviewers MUST be able to answer:
 
+- Does an applicable request brief distinguish human intent, evidence,
+  assumptions, and specialist questions?
+- Can feasibility contributors investigate without inventing the product goal?
+- Does the feasibility synthesis preserve specialist disagreement and present
+  meaningful options and trade-offs?
+- Is the delivery commitment attributable to the required human authority?
 - Would the tests fail for the defect they claim to prevent?
 - Is the chosen boundary appropriate?
 - Are important negative, recovery, and compatibility behaviours covered?
@@ -154,7 +216,11 @@ Reviewers MUST be able to answer:
 
 ## Evidence
 
-The evidence package must include test results, separate line and branch coverage, changed-code coverage, applicable mutation results, declared exclusions, quarantine records, and evaluation configuration.
+The evidence package must include, as applicable, the request brief, specialist
+feasibility evidence, Product Manager synthesis and commitment decision, test
+results, separate line and branch coverage, changed-code coverage, mutation
+results, declared exclusions, quarantine records, and evaluation
+configuration.
 
 ## Further reading
 

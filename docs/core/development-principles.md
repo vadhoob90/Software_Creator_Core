@@ -1,34 +1,107 @@
 # Development principles
 
-**Status:** Adopted  
+**Status:** Adopted
+
 **Adopted:** 9 August 2026
 
-These principles are the foundation of PDLC Core. They guide the design of its
-definitions, agents, execution harnesses, routing logic, public contracts,
-generated products, and development process.
+**Revised:** 10 August 2026
 
-They are decision rules, not slogans. Every principle must influence design,
-implementation, and verification. Objective requirements should become
-automated checks. Requirements that depend on judgement should become explicit
-review questions. Exceptions must never be silent.
+These principles are promises about the software PDLC helps people create and
+the way that work is carried out. They guide the design of PDLC Core, its
+definitions, agents, optional execution harnesses, public contracts, generated
+products, and product-development workflows.
 
-## 1. Comprehension and usability come first
+In these principles, **we** means the people and authorised agents
+participating in a PDLC-governed job. **Machines** includes agents, automation,
+and software systems that consume the interfaces and artifacts created through
+that job.
 
-PDLC Core must minimise the cognitive and operational effort required for
-humans and machines to understand, navigate, change, and correctly use the
-system.
+The promises are deliberately human-readable, but they are not slogans. Every
+principle must influence design, implementation, and verification. Objective
+requirements become automated checks where practical; requirements that
+depend on judgement become explicit review questions. Exceptions are visible,
+owned, justified, and time-bounded.
+
+The principles appear in the order a team is likely to encounter them, not in
+identifier order. Identifiers are stable governance contracts: P-001, P-002,
+P-004, and P-005 retain their initial meaning; P-006 and P-007 are new; and the
+initial P-003 is retired to the still-active ES-003 execution standard.
+
+PDLC is an on-demand, human-directed product-development foundation. It helps
+teams design and verify software that can be operated responsibly; it does not
+silently become the production control plane for downstream products.
+
+## P-006: We will understand the need before we build
+
+Software should begin with a real need, not an assumed solution. We will ask,
+listen, investigate, and make uncertainty visible before committing substantial
+delivery effort.
+
+A request may propose an implementation. The Product Manager may clarify and
+challenge that proposal, but neither it nor another agent may invent product
+intent. Research, prototypes, and technical spikes are legitimate ways to
+reduce uncertainty; the principle prevents premature commitment, not
+exploration.
+
+### Design
+
+- Describe the affected people or stakeholders, their present situation, and
+  the outcome they need before selecting a solution.
+- Record the available evidence, constraints, assumptions, non-goals, risks,
+  and unresolved questions.
+- Define how success will be recognised and what evidence would cause the team
+  to stop, defer, or change direction.
+- Distinguish missing product intent from questions that research or specialist
+  feasibility work can answer.
+- Make discovery and assurance proportionate to novelty, uncertainty, risk,
+  cost, and reversibility.
+
+### Implementation
+
+- Ask targeted questions that respond to the request and known context instead
+  of administering an indiscriminate questionnaire.
+- Produce a versioned product brief containing the request, authority, affected
+  people, problem, desired outcome, evidence, scope, constraints, assumptions,
+  success measures, stopping conditions, and open questions.
+- Identify which specialist perspectives are required for feasibility and why;
+  do not invoke roles that cannot materially improve the decision.
+- Allow urgent, legal, security, and mandatory work to use an accelerated path
+  while keeping its authority, need, risk, and accepted uncertainty explicit.
+- Prevent substantial solution commitment until the request-readiness gate is
+  satisfied or an authorised exception is recorded.
+
+### Verification
+
+Review must establish that the product brief represents the initiating human's
+intent, distinguishes evidence from assumption, and gives feasibility
+contributors enough context to investigate without inventing the product goal.
+Every downstream feasibility or delivery artifact must identify the brief
+version it used. A request is not ready merely because every form field is
+populated.
+
+### Further reading
+
+- [How the discovery phase works](https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works)
+- [Design Council Double Diamond](https://www.designcouncil.org.uk/our-resources/the-double-diamond/)
+- [User research in discovery](https://www.gov.uk/service-manual/user-research/user-research-in-discovery)
+
+## P-001: We will create software that people and machines can understand and use
+
+Software should respect the time, abilities, and circumstances of the people
+and machines that use, operate, maintain, or build upon it.
 
 Code is an interface to maintainers and agents, just as commands, schemas,
 documentation, errors, and generated artifacts are interfaces to consumers.
-Because code is read and changed more often than it is originally written,
-clarity takes precedence over cleverness and premature generality.
+Human-readable and machine-readable interfaces must express consistent meaning.
+Machine usability never implies permission to act.
 
 ### Design
 
 - Use cohesive components with explicit responsibilities and directed
   dependencies.
 - Prefer intention-revealing domain names and visible control flow.
-- Make capabilities, constraints, state, and next actions discoverable.
+- Make capabilities, constraints, state, authority, and next actions
+  discoverable.
 - Design human-readable and machine-readable interfaces together.
 - Introduce abstractions only when current, demonstrated use cases justify
   them.
@@ -43,16 +116,17 @@ clarity takes precedence over cleverness and premature generality.
   semantics, and actionable errors.
 - Keep repository structure and documentation consistent with the conceptual
   model exposed to downstream consumers.
-- Treat accessibility as part of usability whenever PDLC Core produces or
-  governs a user interface.
+- Treat accessibility as part of usability whenever PDLC produces or governs a
+  user interface.
 
 ### Verification
 
-Readability, complexity, documentation, schema, interface, and architecture
-checks should expose avoidable cognitive load. Numeric limits are review
-signals and hard safety boundaries; they are not definitions of good design.
-Representative onboarding and traversal tasks should prove that a new human or
-agent can find and use a capability without hidden knowledge.
+Readability, complexity, documentation, schema, interface, accessibility, and
+architecture checks should expose avoidable cognitive or operational load.
+Numeric limits are review signals and hard safety boundaries, not definitions
+of good design. Representative onboarding and traversal tasks should prove
+that a new person or authorised agent can find and correctly use a capability
+without hidden knowledge.
 
 ### Further reading
 
@@ -61,213 +135,233 @@ agent can find and use a capability without hidden knowledge.
 - [JSON Schema specification](https://json-schema.org/specification)
 - [Web Content Accessibility Guidelines overview](https://www.w3.org/WAI/standards-guidelines/wcag/)
 
-## 2. Every claim requires evidence
+## P-002: We will create software that works—and we will prove it
 
-Claims about behaviour, quality, safety, compatibility, performance, or
-readiness must be supported by proportionate evidence. Automated tests are the
-primary evidence for repeatable behaviour, but a coverage percentage alone is
-not evidence that the right assertions exist.
+We will not ask anyone to rely on an unsupported claim. Claims about a need,
+decision, behaviour, quality, safety, compatibility, performance, or readiness
+must be supported by evidence proportionate to the consequence of being wrong.
 
-An effective automated test suite gives maintainers justified confidence that
-important behaviour works, meaningful breakage will be detected, and the
-system can change safely.
+Software must also tell the truth when it cannot complete its work. Success,
+partial success, degradation, cancellation, and failure must remain
+distinguishable. No component or agent may manufacture success, swallow a
+failure, or silently substitute weaker behaviour.
 
 ### Design
 
-- Define observable behaviour, invariants, failure modes, and acceptance
-  criteria before choosing test mechanics.
-- Make components testable through their public contracts.
-- Separate deterministic offline evaluation from bounded tests that require
-  external providers.
-- Match the test boundary to the risk: unit, integration, contract, generated
-  workspace, command/API, end-to-end, security, performance, accessibility, or
-  agent evaluation.
+- Define observable behaviour, invariants, failure modes, acceptance criteria,
+  and required evidence before choosing test mechanics.
+- Match evidence to the claim and risk: research, analysis, unit, integration,
+  contract, end-to-end, security, performance, accessibility, or agent
+  evaluation.
+- Make components testable through public contracts.
+- Define stable outcome and failure classifications at component and workflow
+  boundaries.
+- Design recovery, retry, cancellation, rollback, and resume behaviour with the
+  primary workflow.
+- Identify the inputs, versions, configuration, route, contributor, decisions,
+  and outputs required to explain a material result.
 
 ### Implementation
 
 - Add focused tests with behavioural changes and characterization tests before
   risky structural changes.
+- Test negative paths, recovery, idempotency, migrations, repeated execution,
+  partial failure, and relevant concurrency.
 - Measure statement and branch coverage independently, using ratcheted floors
-  rather than treating a target as a ceiling.
-- Test negative paths, recovery, idempotency, migrations, repeated generation,
-  and partial failure.
+  rather than treating a target as a definition of quality.
 - Use property or invariant testing where examples cannot adequately describe
-  the input space.
-- Use mutation testing selectively on changed or critical logic to show that
-  tests detect plausible faults.
-- Keep the offline baseline deterministic, isolated from credentials and the
-  network, and intolerant of unexplained flakes.
-- Test the enforcement harness itself.
+  the input space, and mutation testing selectively on changed critical logic.
+- Propagate failures or convert them into explicit typed outcomes; make every
+  fallback visible and record why it was selected.
+- Bound retries, time, recursion, concurrency, and cost; make retried operations
+  idempotent where possible.
+- Use atomic persistence, privacy-safe diagnostics, and provenance appropriate
+  to the result.
+- Keep the offline verification baseline deterministic, isolated from
+  credentials and the network, and intolerant of unexplained flakes.
 
 ### Verification
 
 A change is not complete merely because tests ran. Review must establish that
-the tests would fail for the defect they are intended to prevent, exercise the
-right boundary, make useful assertions, and remain maintainable. Subjective
-agent behaviour requires versioned cases, explicit rubrics, thresholds, and
-retained evaluation evidence.
+the evidence addresses the actual claim, that tests would fail for the defect
+they protect against, and that important failure and recovery paths were
+exercised. Subjective agent behaviour requires versioned cases, explicit
+rubrics, thresholds, and retained results. Release evidence must connect the
+reviewed source and declared build inputs to the resulting artifact.
 
 ### Further reading
 
 - [Testing overview from Software Engineering at Google](https://abseil.io/resources/swe-book/html/ch11.html)
-- [Branch coverage measurement with coverage.py](https://coverage.readthedocs.io/en/7.14.0/branch.html)
 - [Practical mutation testing at scale](https://research.google/pubs/practical-mutation-testing-at-scale-a-view-from-google/)
-
-## 3. Every execution is explicit, traceable, and recoverable
-
-Every operation must produce an honest, inspectable outcome. Success, partial
-success, degradation, cancellation, and failure must be distinguishable. No
-component may swallow a failure, silently substitute weaker behaviour, or
-claim that state was persisted when it was not.
-
-Executions should be reproducible where the underlying system permits it and
-attributable where variation is unavoidable.
-
-### Design
-
-- Define stable outcome and failure classifications at component boundaries.
-- Design recovery, retry, cancellation, rollback, and resume behaviour with the
-  primary workflow.
-- Make important state and transitions observable without exposing secrets or
-  private inputs.
-- Identify the inputs, versions, configuration, route, agent or model,
-  decisions, and outputs needed to explain a result.
-
-### Implementation
-
-- Propagate failures or convert them into explicit typed outcomes.
-- Make fallbacks visible and record why they were selected.
-- Bound retries, time, recursion, concurrency, and cost; make retried operations
-  idempotent where possible.
-- Use atomic persistence and avoid destructive recovery by default.
-- Emit privacy-safe structured diagnostics, correlation identifiers, and
-  actionable remediation.
-- Record provenance and hashes for released artifacts and significant generated
-  outputs.
-- Pin relevant dependencies and inputs so a result can be recreated or its
-  variation explained.
-
-### Verification
-
-Fault-oriented tests should cover exceptions, timeouts, corrupt state,
-interrupted writes, provider failure, retry exhaustion, rollback, and
-diagnostic redaction. Tests should reject false success and silent degradation.
-Release verification should prove that artifacts correspond to reviewed source
-and declared build inputs.
-
-### Further reading
-
-- [Effective troubleshooting from Google SRE](https://sre.google/sre-book/effective-troubleshooting/)
-- [Monitoring distributed systems from Google SRE](https://sre.google/sre-book/monitoring-distributed-systems/)
 - [Definition of reproducible builds](https://reproducible-builds.org/docs/definition/)
 - [SLSA provenance](https://slsa.dev/spec/v1.2/provenance)
 
-## 4. Evolution is deliberate, compatible, and reversible
+## P-007: We will create software that is secure and respects the people it serves
 
-Every stateful component and every observable contract has an intentional
-lifecycle. Change should happen through small, independently verifiable
-increments with clear migration and rollback paths.
+Security, privacy, safety, and human dignity are foundations, not features
+added at the end. We will protect the people, information, systems, and
+relationships entrusted to the software we help create.
 
-The lifecycle considered for a component or artifact is:
-
-create → inspect → validate → update → activate or deactivate → version or
-migrate → recover or roll back → archive or delete
-
-Not every transition must be implemented immediately. Unsupported transitions
-must be explicit, and speculative extension frameworks must not be introduced
-solely because a transition might be needed later.
+Protection must be proportionate to the context and consequence. A product
+repository owns its domain-specific threat model and policy, while PDLC owns
+reusable security requirements, evidence contracts, and safe defaults.
 
 ### Design
 
-- Identify public, persisted, generated, and downstream-consumed contracts.
-- Define supported states, transitions, invariants, ownership, retention, and
-  terminal states.
-- Design compatibility and migration before changing an observable contract.
-- Prefer the smallest seam required by current consumers.
-- Keep each increment releasable and give it one coherent purpose.
+- Identify people affected, trust boundaries, actors, assets, data
+  classifications, threats, abuse cases, and foreseeable misuse.
+- Minimise the data, authority, exposure, and dependency surface required to
+  achieve the intended outcome.
+- Design secure defaults, explicit authorisation, isolation, safe failure, and
+  recovery with the primary workflow.
+- Treat privacy, accessibility, informed control, and protection from avoidable
+  harm as product requirements.
+- Select security and assurance requirements according to the highest
+  applicable product, data, action, and deployment risk.
 
 ### Implementation
 
-- Version public contracts and immutable releases deliberately.
-- Provide deprecation warnings, support windows, compatibility readers, and
-  migration guidance before removal.
-- Preserve user-owned and downstream-owned state during generation and upgrade.
-- Separate substantial refactoring from behavioural change.
-- Avoid permanent forwarding layers and unused abstractions disguised as
-  compatibility.
-- Make rollback possible without corrupting or silently discarding newer state.
+- Validate untrusted inputs and outputs at every trust boundary.
+- Enforce authentication and authorisation independently of interface
+  visibility or client behaviour.
+- Protect secrets and sensitive information in storage, transit, diagnostics,
+  fixtures, generated artifacts, and build or release systems.
+- Inventory, pin where practical, and audit dependencies and build inputs.
+- Collect and retain only the data required for a declared purpose and period,
+  subject to applicable legal, contractual, archival, and safety obligations.
+- Make security-significant failures visible without exposing sensitive
+  details.
 
 ### Verification
 
-Lifecycle tests should cover supported transitions, invalid transitions,
-repeat operations, migrations, rollback, retention, and deletion where
-applicable. Historical fixtures and consumer contract tests should prove
-compatibility. Each change should include its tests and documentation and leave
-the default branch usable.
+Threat models and abuse cases must become proportionate security, permission,
+privacy, isolation, supply-chain, and adversarial tests. CI should scan source,
+dependencies, and secrets; verify locked inputs; and exercise least-authority
+configurations. Review must identify residual risk, accountable acceptance, and
+the product context in which the evidence is valid. Consuming a PDLC definition
+alone is not evidence that downstream software is secure.
+
+### Further reading
+
+- [NIST Secure Software Development Framework](https://csrc.nist.gov/pubs/sp/800/218/final)
+- [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- [OWASP Software Assurance Maturity Model](https://owaspsamm.org/)
+- [Web Content Accessibility Guidelines overview](https://www.w3.org/WAI/standards-guidelines/wcag/)
+
+## P-004: We will create software that can evolve without losing trust
+
+Useful software will change. We will make change deliberate and protect the
+people, machines, and systems that depend on the behaviour already promised.
+
+Software must be designed proportionately for its useful life: creation,
+release, operation, learning, maintenance, recovery, migration, deprecation,
+and retirement. PDLC helps a team define and verify those responsibilities; it
+does not assume continuous operational control of the downstream product.
+
+### Design
+
+- Identify public, persisted, generated, operational, and downstream-consumed
+  contracts.
+- Define supported states, transitions, invariants, ownership, retention,
+  operational expectations, and terminal states.
+- Design compatibility, migration, and reversal before changing an observable
+  contract.
+- Define proportionate operational ownership, health evidence, recovery, and
+  support expectations before release.
+- Define the outcome and guardrail evidence that will show whether released
+  software continues to meet its intended need.
+- Prefer the smallest seam required by current consumers; do not introduce
+  speculative lifecycle frameworks.
+
+### Implementation
+
+- Keep changes small, independently verifiable, and releasable where practical.
+- Version public contracts and immutable releases deliberately.
+- Provide deprecation warnings, context-appropriate support windows,
+  compatibility readers, and migration guidance before removal.
+- Preserve user-owned and downstream-owned state during generation, upgrade,
+  rollback, and recovery.
+- Separate substantial refactoring from behavioural change.
+- Make rollback or roll-forward possible without silently corrupting or
+  discarding newer state.
+- Treat retirement as a planned transition covering consumers, migration,
+  communications, data disposition, retained evidence, and recovery needs.
+
+### Verification
+
+Lifecycle evidence should cover supported and invalid transitions, repeat
+operations, migrations, rollback or roll-forward, historical compatibility,
+operational readiness, retention, and deletion where applicable. Feedback must
+be reviewed against the declared outcome and guardrails rather than treated as
+an automatic mandate. Retirement review must prove that affected consumers,
+obligations, data, and restoration needs have been addressed.
 
 ### Further reading
 
 - [Semantic Versioning](https://semver.org/)
 - [Small changes from Google Engineering Practices](https://google.github.io/eng-practices/review/developer/small-cls.html)
 - [Google AIP-180: Backwards compatibility](https://google.aip.dev/180)
-- [Kubernetes deprecation policy](https://kubernetes.io/docs/reference/using-api/deprecation-policy/)
+- [UK Government guidance on retiring a service](https://www.gov.uk/service-manual/agile-delivery/retiring-your-service)
 
-## 5. Automation is secure, bounded, and human-governed
+## P-005: We will use agents and automation to strengthen human judgement, not replace human responsibility
 
-Agents and automated workflows must operate within explicit authority. The
-ability to perform an action does not imply permission to perform it. Humans
-retain responsibility and control at consequential boundaries.
+Agents and automation should extend human capability without obscuring who has
+authority or who remains accountable. The ability to perform an action does
+not imply permission to perform it.
 
-Security, privacy, and safety are lifecycle concerns and default design
-constraints, not a final hardening phase.
+Humans retain product intent and control at consequential boundaries. Agents
+may clarify, investigate, propose, implement, and verify within bounded roles,
+but they do not acquire ownership merely because they can complete the work.
 
 ### Design
 
-- Define trust boundaries, actors, data classifications, capabilities, and
-  approval points.
+- Assign explicit, qualified responsibilities: the Product Manager clarifies
+  and synthesises; specialists own bounded assessments; the orchestrator owns
+  workflow state; independent contributors verify consequential claims.
+- Define trust boundaries, capabilities, data access, approval points, and
+  escalation paths for every role.
 - Grant the minimum filesystem, network, credential, tool, and data access
-  required for the current task.
-- Separate planning, decision, approval, and execution where consequences
-  justify it.
-- Provide dry runs, previews, interruption, resumption, override, and safe
-  decommissioning.
-- Treat prompts, retrieved content, tool results, dependencies, models, and
-  external services as potentially untrusted inputs.
+  required for the current job.
+- Separate planning, decision, approval, execution, and verification where
+  consequences justify it.
+- Provide previews, interruption, resumption, override, and safe
+  decommissioning proportionate to the work.
 
 ### Implementation
 
-- Validate inputs and outputs at every trust boundary.
+- Validate agent inputs and outputs against explicit contracts.
+- Treat prompts, retrieved content, tool results, dependencies, models,
+  external services, and inter-agent messages as potentially untrusted.
 - Require scoped, risk-proportionate approval for irreversible, externally
   visible, privileged, financial, or sensitive-data actions.
-- Preserve an audit trail of authority, decisions, tool use, and state changes
-  without logging secrets or private content unnecessarily.
-- Isolate tenants, workspaces, memories, and credentials.
-- Pin and audit dependencies, protect the build and release path, and produce
-  supply-chain evidence appropriate to the artifact.
-- Enforce limits on tool chains, recursion, retries, time, tokens, and cost.
+- Preserve disagreements, assumptions, authority, decisions, tool use, and
+  state changes without logging secrets or private content unnecessarily.
+- Prevent an agent from approving its own consequential work or advancing past
+  an independent-verification boundary.
+- Isolate tenants, workspaces, memories, and credentials; bound delegation,
+  retries, time, tokens, concurrency, and cost.
 - Fail safely when authority, validation, or required oversight is absent.
 
 ### Verification
 
-Threat models and abuse cases should become security, permission, isolation,
-prompt-injection, data-exfiltration, adversarial, and approval-boundary tests.
-CI should scan dependencies and source, verify locked inputs, and exercise
-least-authority configurations. Human review remains required where context and
-consequence cannot be reduced to a reliable automated rule.
+Threat models and abuse cases must become permission, isolation,
+prompt-injection, data-exfiltration, confused-deputy, resource-limit, and
+approval-boundary tests. Review must prove that each role was necessary and
+qualified for its responsibility, that conflicting findings remained visible,
+and that a person could understand, interrupt, and recover consequential
+automation.
 
 ### Further reading
 
 - [NIST AI Risk Management Framework Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/)
 - [NIST guidance on AI risk management and human-AI interaction](https://airc.nist.gov/airmf-resources/airmf/appendices/app-c-ai-risk-management-and-human-ai-interaction/)
 - [OWASP AI Agent Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html)
-- [NIST Secure Software Development Framework](https://csrc.nist.gov/pubs/sp/800/218/final)
-- [SLSA build track](https://slsa.dev/spec/v1.2/build-track-basics)
 
 ## Enforcement model
 
-Every future rule derived from these principles should state:
+Every rule derived from these principles must state:
 
-1. The principle and risk it serves.
+1. The promise and risk it protects.
 2. The design and implementation consequence.
 3. The automated evidence, if the requirement is objective.
 4. The human-review evidence, if judgement is required.
@@ -283,14 +377,34 @@ production infrastructure and must itself be tested.
 
 A change is ready only when reviewers can answer:
 
-- Which principle or user outcome does this change advance?
-- Is it easier to understand and use after the change?
-- What evidence proves the intended behaviour?
-- Are every success, degraded, and failure outcome explicit?
-- Is provenance sufficient to explain significant outputs?
-- Have lifecycle, compatibility, migration, and rollback been considered?
-- Is the change small enough to understand and reverse independently?
-- Are agent authority, security, privacy, and human-control boundaries
-  preserved?
+- What human or organisational need does this change serve, and what evidence
+  distinguishes that need from an assumed solution?
+- Can affected people and machines understand and correctly use it?
+- What evidence proves its claims and intended behaviour?
+- Are success, partial, degraded, cancelled, and failure outcomes honest and
+  recoverable?
+- Does it protect the people, information, and systems entrusted to it?
+- Can it be changed, operated, migrated, and retired without silently breaking
+  trust?
+- Are agent responsibilities, authority, specialist disagreements, and human
+  control explicit?
 - Do documentation and examples still match reality?
-- Is every exception explicit, owned, and time-bounded?
+- Is every exception explicit, owned, justified, and time-bounded?
+
+## Transition from the initial principles
+
+This revision changes the voice and organisation of the initial principles
+without weakening their controls:
+
+| Initial principle | Current treatment |
+|---|---|
+| P-001: Comprehension and usability come first | Expanded without changing its identifier |
+| P-002: Every claim requires evidence | Expanded without changing its identifier; request evidence is also governed by new P-006 |
+| P-003: Every execution is explicit, traceable, and recoverable | Principle retired; all controls remain in ES-003 under P-002, P-004, and P-005 |
+| P-004: Evolution is deliberate, compatible, and reversible | Expanded without changing its identifier |
+| P-005: Automation is secure, bounded, and human-governed | Expanded without changing its identifier; product security is separated into new P-007 |
+
+P-006 adds need and request readiness. P-007 adds security and respect for the
+created software. The ES-001 through ES-005 identifiers remain stable.
+Standards may serve more than one principle; there is no requirement for a
+one-to-one mapping.

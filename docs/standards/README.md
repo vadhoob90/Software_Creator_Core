@@ -10,15 +10,19 @@ The standards are intentionally independent of any agent, programming language, 
 
 ## Standards catalogue
 
-| ID | Standard | Governing principle |
+| ID | Standard | Governing principles |
 |---|---|---|
-| ES-001 | [Comprehension and usability](ES-001-comprehension-and-usability.md) | Comprehension and usability come first |
-| ES-002 | [Evidence and testing](ES-002-evidence-and-testing.md) | Every claim requires evidence |
-| ES-003 | [Explicit, traceable, and recoverable execution](ES-003-explicit-traceable-recoverable-execution.md) | Every execution is explicit, traceable, and recoverable |
-| ES-004 | [Deliberate, compatible, and reversible evolution](ES-004-deliberate-compatible-reversible-evolution.md) | Evolution is deliberate, compatible, and reversible |
-| ES-005 | [Secure, bounded, and human-governed automation](ES-005-secure-bounded-human-governed-automation.md) | Automation is secure, bounded, and human-governed |
+| ES-001 | [Comprehension and usability](ES-001-comprehension-and-usability.md) | P-001: People and machines can understand and use |
+| ES-002 | [Evidence and testing](ES-002-evidence-and-testing.md) | P-002: Works—and we prove it; P-006: Understand the need |
+| ES-003 | [Explicit, traceable, and recoverable execution](ES-003-explicit-traceable-recoverable-execution.md) | P-002: Works—and we prove it; P-004: Evolves without losing trust; P-005: Human responsibility |
+| ES-004 | [Deliberate, compatible, and reversible evolution](ES-004-deliberate-compatible-reversible-evolution.md) | P-004: Evolves without losing trust |
+| ES-005 | [Secure, bounded, and human-governed automation](ES-005-secure-bounded-human-governed-automation.md) | P-005: Human responsibility; P-007: Secure and respectful software |
+| ES-006 | [Secure and respectful software](ES-006-secure-and-respectful-software.md) | P-007: Secure and respectful software |
 
-A change can be governed by more than one standard. Applicability is determined by the affected artifacts, lifecycle operations, trust boundaries, and risks—not solely by the role performing the work.
+A principle may govern more than one standard, and a standard may serve more
+than one principle. Applicability is determined by the affected artifacts,
+lifecycle operations, trust boundaries, and risks—not solely by the role
+performing the work.
 
 ## Normative language
 
@@ -45,11 +49,15 @@ A documented control MUST NOT be described as automated, and a measured control 
 
 These standards apply to:
 
+- Product requests, briefs, feasibility assessments, syntheses, and commitment
+  decisions when a PDLC workflow governs them.
 - Hand-authored source code and configuration.
 - Prompts, agent definitions, routing rules, and tool policies.
 - Schemas, commands, APIs, and public contracts.
 - Generated artifacts for which PDLC Core is responsible.
 - Tests, fixtures, migrations, release automation, and enforcement code.
+- Applicable operational-readiness, outcome, deprecation, and retirement
+  artifacts.
 - Documentation that defines expected behaviour.
 
 Vendored, generated, or experimental material may be excluded from a particular metric only when the boundary and reason are explicit. Exclusion from a metric does not exclude the material from security, lifecycle, or behavioural requirements.

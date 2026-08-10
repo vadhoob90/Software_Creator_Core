@@ -1,7 +1,8 @@
 # ES-001: Comprehension and usability
 
 **Status:** Adopted initial baseline  
-**Governing principle:** [Comprehension and usability come first](../core/development-principles.md#1-comprehension-and-usability-come-first)  
+**Governing principle:** [P-001: People and machines can understand and use](../core/development-principles.md#p-001-we-will-create-software-that-people-and-machines-can-understand-and-use)
+
 **Default enforcement:** Documented
 
 ## Purpose

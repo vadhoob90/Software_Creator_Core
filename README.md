@@ -8,7 +8,7 @@ Shared definitions, composition contracts, controls, and optional execution harn
 
 ## Foundations
 
-1. [Development principles](docs/core/development-principles.md) — enduring decision rules describing why PDLC Core is built this way.
+1. [Development principles](docs/core/development-principles.md) — promises about the software PDLC helps teams create and the way that work is carried out.
 2. [Engineering standards](docs/standards/README.md) — enforceable requirements describing what must be true.
 3. [Core–Product Consumption Model](docs/architecture/README.md) — architectural contracts describing how Core and downstream product repositories compose and evolve.
 4. [Agent qualification gate](docs/agents/agent-qualification-gate.md) — mandatory evidence-based admission criteria for deciding whether a proposed responsibility should become an agent role.
