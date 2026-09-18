@@ -9,14 +9,15 @@ from urllib.parse import unquote
 
 LINK_PATTERN = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 EXTERNAL_PREFIXES = ("http://", "https://", "mailto:")
+GENERATED_DIRECTORIES = {".git", ".venv", "mutants", "dist", "build", "node_modules"}
 
 
 def markdown_files(root: Path) -> list[Path]:
-    """Return repository Markdown files, excluding Git internals."""
+    """Return source Markdown, excluding dependencies and generated outputs."""
     return sorted(
         path
         for path in root.rglob("*.md")
-        if ".git" not in path.parts
+        if not GENERATED_DIRECTORIES.intersection(path.relative_to(root).parts)
     )
 
 

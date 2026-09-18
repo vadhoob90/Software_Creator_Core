@@ -6,6 +6,14 @@
 
 Shared definitions, composition contracts, controls, and optional execution harnesses for building trustworthy products.
 
+An experimental Python implementation is now available in this checkout:
+versioned job and contribution contracts, five candidate role templates,
+Codex/Claude Code session handoffs, and a persisted implementation–verification–review
+workflow. Start with the [Core implementation guide](docs/core/implementation.md)
+or run `uv sync --frozen` followed by `uv run --no-sync python scripts/demo.py`.
+Product adoption and migration are separate future work; the role templates
+are not yet qualified agents.
+
 ## Foundations
 
 1. [Development principles](docs/core/development-principles.md) — promises about the software PDLC helps teams create and the way that work is carried out.
