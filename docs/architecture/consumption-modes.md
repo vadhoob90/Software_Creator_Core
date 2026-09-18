@@ -1,4 +1,4 @@
-# PDLC Core consumption modes
+# Software Creator Core consumption modes
 
 **Status:** Adopted initial architecture  
 **Effective:** 9 August 2026  
@@ -6,13 +6,13 @@
 
 ## Purpose
 
-PDLC Core supports products with different needs. One product may want a versioned role definition, another may want Core-composed agents inside its own orchestration, and another may want the complete reference harness.
+Software Creator Core supports products with different needs. One product may want a versioned role definition, another may want Core-composed agents inside its own orchestration, and another may want the complete reference harness.
 
 These are supported consumption modes, not stages in a mandatory maturity ladder. A product should adopt the smallest set of Core capabilities that solves its problem while making the resulting responsibilities and assurance claims explicit.
 
 ## Decision
 
-PDLC Core capabilities are independently consumable through stable public contracts.
+Software Creator Core capabilities are independently consumable through stable public contracts.
 
 - The complete reference harness is optional.
 - A product-owned or third-party harness is a supported integration.
@@ -25,10 +25,10 @@ PDLC Core capabilities are independently consumable through stable public contra
 
 | Mode | Core provides | Product provides | Boundary contract | Permitted claim |
 | --- | --- | --- | --- | --- |
-| **Definitions only** | Versioned definitions such as principles, standards, role contracts, patterns, and output expectations | Selection, adaptation, execution, enforcement, and product context | The product records the exact Core artifact and version it consumed | “Uses PDLC Core definition _X_ at version _Y_” |
-| **Composed agents** | Core professional baseline, composition rules, conflict semantics, and provenance requirements | Product specialism, repository knowledge, task context, tools, authority, and execution environment | Composition produces a resolved agent definition and source manifest | “Uses a PDLC Core-composed _role_” for the named role and version |
-| **Controls and evidence** | Applicable controls, evidence contracts, outcome semantics, and validation requirements | Workflow orchestration, CI, tool adapters, evidence production, storage, and approvals | The custom harness emits evidence that conforms to the selected Core contracts | “Evaluates named PDLC Core controls” with the relevant results; it does not claim use of the Core harness |
-| **Reference harness** | Definitions, agent composition, control evaluation contracts, routing, lifecycle state, evidence handling, and the first-party execution harness | Product configuration, domain policy, specialist context, adapters, credentials, and deployment decisions | The product pins the harness and supplies configuration through supported extension points | “Uses the PDLC Core reference harness” at the named version and for the stated workflow |
+| **Definitions only** | Versioned definitions such as principles, standards, role contracts, patterns, and output expectations | Selection, adaptation, execution, enforcement, and product context | The product records the exact Core artifact and version it consumed | “Uses Software Creator Core definition _X_ at version _Y_” |
+| **Composed agents** | Core professional baseline, composition rules, conflict semantics, and provenance requirements | Product specialism, repository knowledge, task context, tools, authority, and execution environment | Composition produces a resolved agent definition and source manifest | “Uses a Software Creator Core-composed _role_” for the named role and version |
+| **Controls and evidence** | Applicable controls, evidence contracts, outcome semantics, and validation requirements | Workflow orchestration, CI, tool adapters, evidence production, storage, and approvals | The custom harness emits evidence that conforms to the selected Core contracts | “Evaluates named Software Creator Core controls” with the relevant results; it does not claim use of the Core harness |
+| **Reference harness** | Definitions, agent composition, control evaluation contracts, routing, lifecycle state, evidence handling, and the first-party execution harness | Product configuration, domain policy, specialist context, adapters, credentials, and deployment decisions | The product pins the harness and supplies configuration through supported extension points | “Uses the Software Creator Core reference harness” at the named version and for the stated workflow |
 
 A product can combine modes. For example, it may use a Core-composed implementer agent inside its own harness while adopting only selected Core evidence contracts.
 
@@ -36,7 +36,7 @@ A product can combine modes. For example, it may use a Core-composed implementer
 
 Choosing a broader mode does not transfer product accountability to Core.
 
-PDLC Core always owns:
+Software Creator Core always owns:
 
 - the meaning and compatibility of the Core artifacts it publishes
 - the integrity of Core-owned contracts and default behaviours
@@ -54,7 +54,7 @@ The product always owns:
 
 ## Conformance is capability-scoped
 
-There is no undifferentiated claim of “PDLC Core compliant.”
+There is no undifferentiated claim of “Software Creator Core compliant.”
 
 A conformance statement must identify:
 

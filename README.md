@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/branding/pdlc-core-banner-v2.png" alt="PDLC Core — conversation forged into production-grade software" width="100%">
+  <img src="assets/branding/software-creator-core-banner.png" alt="Software Creator Core — conversation forged into production-grade software" width="100%">
 </p>
 
-# PDLC Core
+# Software Creator Core
 
 Shared definitions, composition contracts, controls, and optional execution harnesses for building trustworthy products.
 
@@ -20,7 +20,7 @@ Shared definitions, composition contracts, controls, and optional execution harn
 
 ## Licence
 
-PDLC Core is free and open-source software licensed under the
+Software Creator Core is free and open-source software licensed under the
 [GNU Affero General Public License, version 3 or later](LICENSE.md)
 (`AGPL-3.0-or-later`). Commercial use is permitted subject to the licence
 terms. See [Licensing](LICENSING.md) for a plain-language overview.

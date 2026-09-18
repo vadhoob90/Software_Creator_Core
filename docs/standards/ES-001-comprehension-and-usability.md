@@ -7,11 +7,11 @@
 
 ## Purpose
 
-PDLC Core must minimise the effort required for a human or machine to discover, understand, use, and safely change a capability. Readability is a system property covering code, schemas, prompts, repository structure, commands, errors, documentation, and generated artifacts.
+Software Creator Core must minimise the effort required for a human or machine to discover, understand, use, and safely change a capability. Readability is a system property covering code, schemas, prompts, repository structure, commands, errors, documentation, and generated artifacts.
 
 ## Applicability
 
-This standard applies to hand-authored implementation code, agent and routing definitions, public contracts, configuration, documentation, examples, and generated interfaces maintained by PDLC Core.
+This standard applies to hand-authored implementation code, agent and routing definitions, public contracts, configuration, documentation, examples, and generated interfaces maintained by Software Creator Core.
 
 ## Requirements
 
@@ -62,7 +62,7 @@ Documentation and examples MUST change with the behaviour they describe. Broken 
 
 A public capability MUST provide stable machine-readable structure and a concise human-readable representation. Commands MUST provide actionable help and stable exit semantics. Errors MUST identify what failed, why it matters, and what the consumer can do next without exposing sensitive implementation detail.
 
-Where PDLC Core creates or governs a user interface, applicable accessibility requirements are release requirements.
+Where Software Creator Core creates or governs a user interface, applicable accessibility requirements are release requirements.
 
 ### ES-001-08: Necessary abstraction
 

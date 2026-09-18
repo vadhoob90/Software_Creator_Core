@@ -4,7 +4,7 @@
 **Effective:** 9 August 2026  
 **Governed by:** [Development principles](../core/development-principles.md) and [Engineering standards](../standards/README.md)
 
-PDLC Core is a modular product-development foundation. A downstream product repository may consume one or more immutable Core definitions, composed agents, controls and evidence contracts, or the optional reference harness. It owns its domain decisions, product artifacts, specialist behaviour, and learning.
+Software Creator Core is a modular product-development foundation. A downstream product repository may consume one or more immutable Core definitions, composed agents, controls and evidence contracts, or the optional reference harness. It owns its domain decisions, product artifacts, specialist behaviour, and learning.
 
 The architecture separates durable Core capabilities from product-specific policy. Consumers select only the capabilities they need through supported public contracts; adopting one capability does not activate or imply conformance with the others.
 
@@ -23,7 +23,7 @@ These documents are normative architectural constraints. Commands, file layouts,
 
 ```mermaid
 flowchart LR
-    C["PDLC Core<br/>versioned definitions, composition,<br/>controls and reference harness"]
+    C["Software Creator Core<br/>versioned definitions, composition,<br/>controls and reference harness"]
     P["Product repository<br/>domain policy, specialist agents,<br/>learning and product artifacts"]
     S["Explicit capability selection<br/>pinned versions and scope"]
     D["Definitions only"]
@@ -83,7 +83,7 @@ Definitions-only consumption does not imply that this resolution occurred. It es
 
 The first canonical agent must prove the smallest supported consumption mode with a role that passes the [agent qualification gate](../agents/agent-qualification-gate.md) and an exact build evaluated under the [agent evaluation and qualification protocol](../agents/agent-evaluation-and-qualification-protocol.md).
 
-PDLC Core does not yet publish a qualified agent definition. The first
+Software Creator Core does not yet publish a qualified agent definition. The first
 candidate must own a recurring, bounded outcome; require distinguishable
 expertise; define measurable success and independent evaluation; carry
 immutable version and provenance; and remain consumable without installing a

@@ -1,5 +1,5 @@
 ---
-id: pdlc-core.agent-qualification-gate
+id: software-creator-core.agent-qualification-gate
 kind: governance-gate
 gate_version: 0.1.0
 status: adopted
@@ -10,11 +10,11 @@ effective: 2026-08-09
 
 **Governed by:** [Development principles](../core/development-principles.md) and [Engineering standards](../standards/README.md)
 
-**Applies to:** Every proposed new or materially changed PDLC Core agent role
+**Applies to:** Every proposed new or materially changed Software Creator Core agent role
 
 ## Purpose
 
-PDLC Core creates an agent only when a recurring team responsibility needs an accountable, independently evaluable role. The gate prevents workflow phases, tools, permissions, product specialisms, and generic professional behaviour from being disguised as agents.
+Software Creator Core creates an agent only when a recurring team responsibility needs an accountable, independently evaluable role. The gate prevents workflow phases, tools, permissions, product specialisms, and generic professional behaviour from being disguised as agents.
 
 The governing smell test is:
 

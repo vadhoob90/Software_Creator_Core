@@ -4,26 +4,26 @@
 
 **Consumption mode:** [Definitions only](../../docs/architecture/consumption-modes.md#supported-modes)
 
-PDLC Core agent definitions are versioned, platform-neutral professional baselines. A product may consume a definition directly, augment it with product specialism, and execute it using its own agent platform or harness.
+Software Creator Core agent definitions are versioned, platform-neutral professional baselines. A product may consume a definition directly, augment it with product specialism, and execute it using its own agent platform or harness.
 
-No resolver, router, package, or PDLC Core runtime is required. Consuming a definition establishes provenance for that definition only; it does not show that agent composition, Core controls, lifecycle routing, or the reference harness ran.
+No resolver, router, package, or Software Creator Core runtime is required. Consuming a definition establishes provenance for that definition only; it does not show that agent composition, Core controls, lifecycle routing, or the reference harness ran.
 
 ## Admission gate
 
-A proposed role must pass the [agent qualification gate](../../docs/agents/agent-qualification-gate.md) before it becomes a canonical PDLC Core agent. The gate requires a recurring accountable outcome, distinguishable expertise, measurable success, explicit boundaries, and retained competence evidence. Any competence or experience claim must then be demonstrated for an exact agent build under the [agent evaluation and qualification protocol](../../docs/agents/agent-evaluation-and-qualification-protocol.md).
+A proposed role must pass the [agent qualification gate](../../docs/agents/agent-qualification-gate.md) before it becomes a canonical Software Creator Core agent. The gate requires a recurring accountable outcome, distinguishable expertise, measurable success, explicit boundaries, and retained competence evidence. Any competence or experience claim must then be demonstrated for an exact agent build under the [agent evaluation and qualification protocol](../../docs/agents/agent-evaluation-and-qualification-protocol.md).
 
 Candidate artifacts must not be represented as qualified roles until their qualification record passes every mandatory gate.
 
 ## Available definitions
 
-PDLC Core does not currently publish a qualified agent definition. The first
+Software Creator Core does not currently publish a qualified agent definition. The first
 candidate added here must pass the qualification gate and retain its evidence
 before being listed as available for consumption.
 
 ## Direct consumption
 
 1. Select an explicitly versioned definition file.
-2. Pin the PDLC Core Git tag or commit that contains it. Do not consume a moving branch.
+2. Pin the Software Creator Core Git tag or commit that contains it. Do not consume a moving branch.
 3. Record the repository, pinned ref, artifact path, and declared artifact version in the downstream product.
 4. Keep product specialism separate and attributable.
 5. Supply current-job authority, inputs, tools, and resource limits at execution time.
@@ -32,7 +32,7 @@ A minimal consumer record may look like this:
 
 ```yaml
 core_definition:
-  repository: https://github.com/vadhoob90/PDLC_Core
+  repository: https://github.com/vadhoob90/Software_Creator_Core
   ref: <immutable-tag-or-commit>
   path: definitions/agents/<role>/v<version>.md
   artifact_version: <semantic-version>

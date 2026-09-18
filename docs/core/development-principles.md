@@ -7,7 +7,7 @@
 **Revised:** 10 August 2026
 
 These principles are promises about the software PDLC helps people create and
-the way that work is carried out. They guide the design of PDLC Core, its
+the way that work is carried out. They guide the design of Software Creator Core, its
 definitions, agents, optional execution harnesses, public contracts, generated
 products, and product-development workflows.
 

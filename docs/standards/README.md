@@ -4,7 +4,7 @@
 **Effective:** 9 August 2026  
 **Derived from:** [Development principles](../core/development-principles.md)
 
-Engineering standards are the second layer of PDLC Core governance. The principles explain why the system is built in a particular way; these standards state what must be true in design, implementation, and verification.
+Engineering standards are the second layer of Software Creator Core governance. The principles explain why the system is built in a particular way; these standards state what must be true in design, implementation, and verification.
 
 The standards are intentionally independent of any agent, programming language, or CI provider. Humans, agents, linters, test harnesses, reviewers, and release gates must all apply the same requirements.
 
@@ -54,7 +54,7 @@ These standards apply to:
 - Hand-authored source code and configuration.
 - Prompts, agent definitions, routing rules, and tool policies.
 - Schemas, commands, APIs, and public contracts.
-- Generated artifacts for which PDLC Core is responsible.
+- Generated artifacts for which Software Creator Core is responsible.
 - Tests, fixtures, migrations, release automation, and enforcement code.
 - Applicable operational-readiness, outcome, deprecation, and retirement
   artifacts.

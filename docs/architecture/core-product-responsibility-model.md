@@ -5,11 +5,11 @@
 
 ## Purpose
 
-This document defines the authority and ownership boundary between PDLC Core and a downstream product repository. The boundary prevents reusable mechanisms from becoming entangled with one product while allowing product teams to specialise behaviour deliberately.
+This document defines the authority and ownership boundary between Software Creator Core and a downstream product repository. The boundary prevents reusable mechanisms from becoming entangled with one product while allowing product teams to specialise behaviour deliberately.
 
 ## Core responsibility
 
-PDLC Core owns reusable mechanisms and non-negotiable contracts, including:
+Software Creator Core owns reusable mechanisms and non-negotiable contracts, including:
 
 - Principles, engineering standards, and their identifiers.
 - Common product-development terminology and schemas.
