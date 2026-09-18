@@ -2,7 +2,7 @@
 
 ## Current licence
 
-The current version of PDLC Core is licensed under the
+The current version of Software Creator Core is licensed under the
 [GNU Affero General Public License, version 3 or (at your option) any later
 version](LICENSE.md), expressed by the SPDX identifier `AGPL-3.0-or-later`.
 
@@ -14,7 +14,7 @@ users interact with remotely over a network.
 The AGPL applies to the covered program and works based on it. Whether another
 component forms part of a covered work or is an independent work depends on the
 facts and applicable law. This repository does not claim that every program,
-service, integration, or infrastructure component used alongside PDLC Core
+service, integration, or infrastructure component used alongside Software Creator Core
 automatically becomes covered by the AGPL.
 
 ## Alternative licensing

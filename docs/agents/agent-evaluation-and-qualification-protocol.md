@@ -1,5 +1,5 @@
 ---
-id: pdlc-core.agent-evaluation-and-qualification-protocol
+id: software-creator-core.agent-evaluation-and-qualification-protocol
 kind: governance-protocol
 protocol_version: 0.1.0
 status: adopted
@@ -10,7 +10,7 @@ effective: 2026-08-09
 
 **Governed by:** [Development principles](../core/development-principles.md), [Engineering standards](../standards/README.md), and the [agent qualification gate](agent-qualification-gate.md)
 
-**Applies to:** Every PDLC Core agent build presented as qualified, competent, experienced, recommended, or suitable for a stated product context
+**Applies to:** Every Software Creator Core agent build presented as qualified, competent, experienced, recommended, or suitable for a stated product context
 
 ## Purpose
 
@@ -18,7 +18,7 @@ An agent must earn competence claims through reproducible evidence. A convincing
 
 The interview is a useful metaphor: the candidate must explain, create, diagnose, verify, refuse, escalate, and hand off work under representative conditions. The actual product of the process is not an interview transcript or a single score. It is an attributable evaluation record showing what an exact agent build could do, how reliably it did it, where it failed, and which claims the evidence supports.
 
-This protocol prevents PDLC Core from confusing prompt quality with professional competence or allowing one language model to validate its own unsupported claims.
+This protocol prevents Software Creator Core from confusing prompt quality with professional competence or allowing one language model to validate its own unsupported claims.
 
 ## Two separate qualification decisions
 
@@ -272,7 +272,7 @@ agent_qualification:
   outcome: passed
   role: <role-id@version>
   evaluated_build_id: <immutable-build-id>
-  protocol: pdlc-core.agent-evaluation-and-qualification-protocol@0.1.0
+  protocol: software-creator-core.agent-evaluation-and-qualification-protocol@0.1.0
   evaluation_portfolio: [<suite-id@version>]
   evaluated_at: <ISO-8601-timestamp>
 
@@ -327,7 +327,7 @@ When evidence is invalidated, the visible card MUST stop showing **passed**. His
 
 ## Initial implementation boundary
 
-This version defines the protocol and evidence contract. It does not yet claim that PDLC Core has:
+This version defines the protocol and evidence contract. It does not yet claim that Software Creator Core has:
 
 - selected the first replacement role for `implementer`
 - created a competency contract or evaluation suite for that role

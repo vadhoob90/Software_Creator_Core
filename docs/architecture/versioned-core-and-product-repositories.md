@@ -5,7 +5,7 @@
 
 ## Purpose
 
-A product repository consumes PDLC Core as an immutable, versioned dependency. The product remains thin, portable, and independently owned while Core can release improvements through an explicit compatibility and upgrade lifecycle.
+A product repository consumes Software Creator Core as an immutable, versioned dependency. The product remains thin, portable, and independently owned while Core can release improvements through an explicit compatibility and upgrade lifecycle.
 
 Names and commands in this document are **conceptual** until an implementation is released.
 
@@ -173,7 +173,7 @@ Deprecation begins before removal and includes:
 
 ## Release and downstream validation flow
 
-1. Implement and validate a reusable change in PDLC Core.
+1. Implement and validate a reusable change in Software Creator Core.
 2. Produce an immutable release and provenance.
 3. Run the reference-product compatibility suite.
 4. Publish the release and migration guidance.
