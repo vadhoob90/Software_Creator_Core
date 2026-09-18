@@ -19,6 +19,12 @@ The architecture separates durable Core capabilities from product-specific polic
 
 These documents are normative architectural constraints. Commands, file layouts, and schemas labelled **conceptual** describe intended future interfaces; their presence here does not claim that an implementation exists.
 
+The [0.1.0a1 Core foundation](../core/implementation.md) implements a bounded
+delivery subset with experimental contracts and session handoffs. Its supported
+behaviour and limitations are documented separately. The broader consumer
+lifecycle below remains the architectural target, not a claim that adoption,
+migration, arbitrary routing or agent qualification is complete.
+
 ## System model
 
 ```mermaid

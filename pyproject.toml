@@ -1,0 +1,82 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "software-creator-core"
+version = "0.1.0a1"
+description = "Portable engineering contracts and a bounded, evidence-led software-change harness"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "AGPL-3.0-or-later"
+dependencies = ["pydantic>=2.11,<3"]
+
+[project.scripts]
+software-creator = "software_creator_core.cli:main"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-cov>=6,<7",
+  "hypothesis>=6,<7",
+  "ruff>=0.11,<1",
+  "mypy>=1.15,<2",
+  "radon==6.0.1",
+  "cognitive-complexity==1.3.0",
+  "bandit>=1.8,<2",
+  "build>=1.2,<2",
+  "pip-audit>=2.9,<3",
+  "mutmut>=3,<4",
+  "detect-secrets==1.5.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/software_creator_core"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src", "/tests", "/scripts", "/examples", "/docs", "/.github", "/definitions",
+  "/assets/branding/software-creator-core-banner.png", "/.gitignore",
+  "/pyproject.toml", "/uv.lock", "/quality-baseline.json", "/mutation-equivalents.json",
+  "/README.md", "/LICENSE.md", "/LICENSING.md", "/NOTICE",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = ["live: opt-in subscription-host smoke test (not part of the offline baseline)"]
+
+[tool.coverage.run]
+branch = true
+source = ["software_creator_core"]
+
+[tool.coverage.report]
+show_missing = true
+precision = 2
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "C90", "SIM"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src/software_creator_core"]
+
+[tool.mutmut]
+source_paths = ["src/software_creator_core"]
+only_mutate = [
+  "src/software_creator_core/policy.py", "src/software_creator_core/context.py",
+  "src/software_creator_core/files.py", "src/software_creator_core/evidence.py",
+  "src/software_creator_core/service.py", "src/software_creator_core/storage.py",
+  "src/software_creator_core/contracts.py",
+]
+also_copy = ["scripts/", ".github/scripts/", "examples/"]
+pytest_add_cli_args = ["-q", "-x"]
+pytest_add_cli_args_test_selection = ["tests/"]

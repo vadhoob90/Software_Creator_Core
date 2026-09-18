@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "job_id": "addition-example",
+  "brief": {
+    "request": "Implement integer addition in the isolated example workspace.",
+    "owner": "human-owner",
+    "problem": "The sample needs an addition function.",
+    "desired_outcome": "A correct, reviewable implementation and test evidence.",
+    "acceptance": ["adds positive and negative integers"],
+    "constraints": ["Use only the local synthetic workspace; no network or publication."],
+    "non_goals": ["No product adoption, deployment or unrelated changes."],
+    "evidence": ["This explicit sample request defines the intended behaviour."],
+    "stopping_conditions": ["Missing authority or unresolved acceptance criteria."]
+  },
+  "artifact_paths": ["calculator.py", "verification.txt", "review.md"]
+}

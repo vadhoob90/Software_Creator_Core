@@ -1,0 +1,146 @@
+{
+  "software_creator_core.context.x_packet__mutmut_34": {
+    "diff_sha256": "sha256:fbc82b387d9cdabdf66691b9261dae56de5136973dd18857263c58766176498c",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.context.x_resolve__mutmut_77": {
+    "diff_sha256": "sha256:cb07503cea83b0f69f0d1ae24f2e0009074b56b0feb416f8459aff418cd1e73f",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.context.x_resolve__mutmut_78": {
+    "diff_sha256": "sha256:94a7a5b98bb5b2e08761a5ec5b062c1ada1518943db3152a806e17026a3eb3d5",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.context.x_resolve__mutmut_79": {
+    "diff_sha256": "sha256:3be2b8d54d59db93a158a307ae41be3a4591c7aef6baffd5a3516f01e1cff7b9",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.context.x_resolve__mutmut_82": {
+    "diff_sha256": "sha256:59c901d6a060ecd23fc64cf19cbaa63fa453e0db470b0ef36dbd0b74189d008f",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.context.x_resolve__mutmut_83": {
+    "diff_sha256": "sha256:ea62be5bc2389b80ee21c6fd2403f50acbf7916eb453bb7ac6626924a8985d48",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.context.x_resolve__mutmut_84": {
+    "diff_sha256": "sha256:34168eb6d650a00cfed3c97555d9029b377161f7ce2bc9b6eba83053ce1bd1a0",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.context.x_source_layers__mutmut_53": {
+    "diff_sha256": "sha256:37915bfe13d272b7d53a56bd93fcaf6234e61c2d670b2a8b0460786ca0a8b496",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.context.x_source_layers__mutmut_54": {
+    "diff_sha256": "sha256:9abc92f2cf234a74f687ec34000622beacf89209d6dba1057555cfae0286fad9",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.context.x_source_layers__mutmut_55": {
+    "diff_sha256": "sha256:84666f8f8628f50b91ecb1dc48a51bd54874faf377cb7dcd53ffa14d0b57cb39",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.files.x_digest__mutmut_9": {
+    "diff_sha256": "sha256:38aed6ef58a61b08be8136e29ab158c493b000c6e38d4ae31911d3936c78c972",
+    "reason": "Omitting ensure_ascii=True uses the identical json.dumps default True. Unicode canonical-digest tests pin the byte representation."
+  },
+  "software_creator_core.files.x_read_artifact__mutmut_65": {
+    "diff_sha256": "sha256:43c7e5b46c29056fa814b30d28afc010741e40a9f53351bb7d3f36f3e45324e0",
+    "reason": "Reading MAX_FILE_BYTES+2 instead of +1 remains bounded and rejects exactly the same oversized files. The extra sentinel byte changes no accepted content or authority; size and bounded-read tests cover both limits."
+  },
+  "software_creator_core.service.x__serialize__mutmut_1": {
+    "diff_sha256": "sha256:caacbd24197ddc30fd9af697e30100032716692aa07406c42bae4dbf2e885619",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.service.x__serialize__mutmut_2": {
+    "diff_sha256": "sha256:7791b42b8a06ba6cf4294e18a56601f4c4b9a2a27b0f317222b666e466e0b804",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.service.x__serialize__mutmut_3": {
+    "diff_sha256": "sha256:365b336d31425bdcaa4e08eedf8a2022b6558211ae9c0a8b1b2b75d768776413",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.service.xǁWorkflowǁ_save__mutmut_2": {
+    "diff_sha256": "sha256:ac1507deccd12a5a7eb2557681781c89b0f107a40e2aeb359eb2bf471955496b",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.service.xǁWorkflowǁ_save__mutmut_3": {
+    "diff_sha256": "sha256:631c186fe121b62801079153e56ca9807e76612af8668e1c483e99d573510f25",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.service.xǁWorkflowǁ_save__mutmut_4": {
+    "diff_sha256": "sha256:a327028d0b879b2ad08805dfcde753c50e69a3071a82fece618f149ca035ffe5",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.storage.x_job_digest__mutmut_2": {
+    "diff_sha256": "sha256:b8f6d928af8ddacfe9a90baa46eb0f3ab0aec561f52543f623e7e0c75ff802ea",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.storage.x_job_digest__mutmut_3": {
+    "diff_sha256": "sha256:7c83c50ee7a0dc32ad4327fe1c48eff92cebc9d2900ad0ea51b16485ba87c880",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.storage.x_job_digest__mutmut_4": {
+    "diff_sha256": "sha256:dd6ab0f33b3ba719733bed5e42039d0379f62d582d2d926638f6e6c3735a71bf",
+    "reason": "For the current strict schemas, str enums and tuples serialize identically through canonical JSON in either dump mode. Persisted snapshots, manifests and digests are unchanged; reviewed JSON wire-contract tests cover these paths."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_11": {
+    "diff_sha256": "sha256:8ce2f27cc8bb7a460f5514ae54d45b58d03063d096328a541f8d228406ab27fa",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_12": {
+    "diff_sha256": "sha256:1f2d5523339c63920d27ae6f82e223b908568b3388cfcc2e08e393590e81b0ec",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_14": {
+    "diff_sha256": "sha256:5e414bb073a6f211ea5d57c4ae632cf3083760bb6f6c9563e598228c7c74f134",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_15": {
+    "diff_sha256": "sha256:7ba253754d206f680ee7e5e1c57918610fca82f8983cd3386fd3cccfd1b14583",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_22": {
+    "diff_sha256": "sha256:628a77ce019bc43290a49bacafdebd8be0ff5a5fba164a72c299b02c4d691245",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_23": {
+    "diff_sha256": "sha256:0ffb90b2a62d2a42d696cb82b66f7e4f742fbd69d2f29226f91023f860e3a8fb",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_5": {
+    "diff_sha256": "sha256:0243892d4bc7d973bdf2144f84c3421d0df15ddfd73fc606af725c8d0ff07a15",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_54": {
+    "diff_sha256": "sha256:c06ca23ef46330dd8a7a45e77a2c46d3567dd31dfcce92b4547f6c833e0754a5",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_55": {
+    "diff_sha256": "sha256:1dad98e2906ffa810d299bdffa6b6568ea3d31fcbc0f23ed1df47c9adb9cb4ec",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_8": {
+    "diff_sha256": "sha256:0209eee30e037a97057d50ac51e7b35535008e4af6212a135a5614988e449b3d",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁappend__mutmut_9": {
+    "diff_sha256": "sha256:3ea0b7ae91bbdd5ee7e85713526da7e626d545997c74726cbad354fdfba28daf",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁload__mutmut_10": {
+    "diff_sha256": "sha256:d14c2e03d2c843edcfd4bc340a1eae9e490c1cdba799fc27bf32d0c34144c076",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁload__mutmut_11": {
+    "diff_sha256": "sha256:bd95b36a731e589955e9e774a2d148e82e48355ed97f722e57ce4f34f4ce5698",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁload__mutmut_7": {
+    "diff_sha256": "sha256:388fb48b2c5f8976d2c409f7f389335b42e804a6bad2b22e04bbed34f7eba9bb",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  },
+  "software_creator_core.storage.xǁStoreǁload__mutmut_8": {
+    "diff_sha256": "sha256:064a0dd88e03d67e6761b2124e7d67f1e1561521b75b8cc1344868790230ae7a",
+    "reason": "Only SQL keyword or internal identifier case changes. SQLite resolves these case-insensitively; transaction boundaries, bound parameters, selected records and persisted job content are unchanged."
+  }
+}
